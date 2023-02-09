@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { navLink } from "./navbarLink.js";
+import Modal from "../popup/Modal";
 export const Navbar = () => {
   console.log(navLink);
+  const [isOpen, setIsOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div className="bg-white fixed left-0 right-0 z-10 pb-4 px-4 pt-4 border-b-2 border-gray-200">
       <div className="container mx-auto flex justify-between items-center">
@@ -38,21 +41,25 @@ export const Navbar = () => {
           </div>
           <nav className="flex items-center md:mr-auto py-1 pl-4 text-base">
             {navLink.map((item) => (
-              <Link to={item.href} className="mr-5 text-base text-gray-600 hover:text-gray-700">
+              <Link to={item.href} key={item.href} className="mr-5 text-base text-gray-600 hover:text-gray-700">
                 {item.name}
               </Link>
             ))}
           </nav>
         </div>
         <div>
-          <button className="text-f11 font-bold inline-flex items-center bg-white border border-gray-300 mr-2 uppercase py-2 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-            <span className="f13">Sign in</span>
+          <button
+            onClick={() => setOpenModal(true)}
+            className="text-f11 font-bold inline-flex items-center bg-white border border-gray-300 mr-2 uppercase py-2 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+          >
+            <span className="f11">Sign in</span>
           </button>
           <button className="primary text-f11 font-bold uppercase inline-flex text-white items-center bg-orange border-0 py-2 px-3 focus:outline-none hover:opacity-70 rounded text-base mt-4 md:mt-0">
-            <span className="f13">Sign up</span>
+            <span className="f11">Sign up</span>
           </button>
         </div>
       </div>
+      <Modal open={openModal} onClose={() => setOpenModal(false)} />
     </div>
   );
 };
