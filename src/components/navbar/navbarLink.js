@@ -5,16 +5,6 @@ export const navLink = [
     others: [{}],
   },
   {
-    name: "Community",
-    href: "#",
-    others: [{}],
-  },
-  {
-    name: "Marketplace",
-    href: "#",
-    others: [{}],
-  },
-  {
     name: "Jobs",
     href: "#",
     others: [{}],

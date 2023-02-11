@@ -2,28 +2,25 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { navLink } from "./navbarLink.js";
 import Modal from "../popup/Modal";
+
 export const Navbar = () => {
   console.log(navLink);
   const [isOpen, setIsOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   return (
-    <div className="bg-white fixed left-0 right-0 z-10 pb-4 px-4 pt-4 border-b-2 border-gray-200">
-      <div className="container mx-auto flex justify-between items-center">
+    <div className="bg-white fixed left-0 right-0 z-10 p-[20px]">
+      <div className="w-[85%] mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <Link to={"/"} className="mr-3">
-            <img
-              className="h-8 w-8"
-              src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-              alt="Workflow"
-            />
+          <Link to={"/"} className="mr-5">
+            <img className="h-fit w-8" src="logo.png" alt="BindUP logo" />
           </Link>
-          <div className="relative w-full">
+          <div className="relative w-[250px] mr-[40px]">
             <input
-              className="text-f13 pl-10 xl:w-80 rounded  focus:bg-transparent border border-gray-300 focus:border-grey-500 outline-none placeholder-gray-600 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
-              placeholder="Discover your next favorite thing ..."
+              className="text-f13 px-[10px] py-[15px] pr-[35px] w-full rounded border border-gray-200 focus:border-grey-500 outline-none placeholder:text-gray-400 transition-colors duration-200 ease-in-out"
+              placeholder="Discover innovative projects ..."
               type={"text"}
             />
-            <div className="absolute inset-15">
+            <div className="absolute right-[10px] top-1/2 -translate-y-1/2">
               <svg
                 width="15"
                 height="15"
@@ -33,29 +30,31 @@ export const Navbar = () => {
               >
                 <path
                   d="M9.383 10.347a5.796 5.796 0 11.965-.964L15 14.036l-.964.964-4.653-4.653zm-3.588-.12a4.432 4.432 0 100-8.863 4.432 4.432 0 000 8.863z"
-                  fill="#BBB"
+                  fill="#e0e5eb"
                   fillRule="evenodd"
                 ></path>
               </svg>
             </div>
           </div>
-          <nav className="flex items-center md:mr-auto py-1 pl-4 text-base">
-            {navLink.map((item) => (
-              <Link to={item.href} key={item.href} className="mr-5 text-base text-gray-600 hover:text-gray-700">
-                {item.name}
-              </Link>
-            ))}
+          <nav className="flex items-center md:mr-auto ">
+            {
+              navLink.map((item) => (
+                <Link to={item.href} key={item.href} className="mr-[40px] text-lg font-medium text-gray-400 hover:text-[#1939FF]">
+                  {item.name}
+                </Link>
+              ))
+            }
           </nav>
         </div>
         <div>
           <button
             onClick={() => setOpenModal(true)}
-            className="text-f11 font-bold inline-flex items-center bg-white border border-gray-300 mr-2 uppercase py-2 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+            className="inline-flex items-center mr-[20px] py-2 px-3 focus:outline-none hover:bg-gray-100 rounded text-base mt-4 md:mt-0"
           >
             <span className="f11">Sign in</span>
           </button>
-          <button className="primary text-f11 font-bold uppercase inline-flex text-white items-center bg-orange border-0 py-2 px-3 focus:outline-none hover:opacity-70 rounded text-base mt-4 md:mt-0">
-            <span className="f11">Sign up</span>
+          <button className="inline-flex text-white items-center bg-[#1984ff] hover:bg-[#1168da] border-0 py-2 px-3 rounded text-base md:mt-0">
+            <span className="">Sign up</span>
           </button>
         </div>
       </div>
