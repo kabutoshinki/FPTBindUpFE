@@ -49,12 +49,15 @@ export const Navbar = () => {
         <div>
           <button
             onClick={() => setOpenModal(true)}
-            className="inline-flex items-center mr-[20px] py-2 px-3 focus:outline-none hover:bg-gray-100 rounded text-base mt-4 md:mt-0"
+            className="inline-flex font-medium items-center mr-[20px] py-2 px-3 focus:outline-none hover:bg-gray-100 rounded text-base mt-4 md:mt-0"
           >
             <span className="f11">Sign in</span>
           </button>
-          <button className="inline-flex text-white items-center bg-[#1984ff] hover:bg-[#1168da] border-0 py-2 px-3 rounded text-base md:mt-0">
+          <button className="inline-flex font-medium text-white items-center bg-[#1984ff] hover:bg-[#1168da] border-0 py-2 px-3 rounded text-base md:mt-0">
             <span className="">Sign up</span>
+            <svg className="w-3 h-3 fill-current text-white flex-shrink-0 ml-2 -mr-1" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.707 5.293L7 .586 5.586 2l3 3H0v2h8.586l-3 3L7 11.414l4.707-4.707a1 1 0 000-1.414z" fillRule="nonzero" />
+            </svg>
           </button>
         </div>
       </div>

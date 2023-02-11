@@ -1,6 +1,6 @@
 export const navLink = [
   {
-    name: "Products",
+    name: "Projects",
     href: "#",
     others: [{}],
   },
