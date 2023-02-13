@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import { auth } from "../../utils/firebase";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Modal = ({ open, onClose }) => {
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
   };
+  const googleProvider = new GoogleAuthProvider();
+  const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  const GoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      console.log(result.user);
+      window.localStorage.setItem("authenticate", "true");
+      onClose();
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      console.log(user);
+      onClose();
+    } else {
+      console.log("login");
+    }
+  }, [user]);
   if (!open) return null;
 
   return (
@@ -28,7 +56,9 @@ const Modal = ({ open, onClose }) => {
             >
               <FcGoogle className="ml-4" />
               <div className="ml-4">
-                <p className="font-bold text-sm md:text-base text-grey-darker">Sign in with Google</p>
+                <p className="font-bold text-sm md:text-base text-grey-darker" onClick={GoogleLogin}>
+                  Sign in with Google
+                </p>
               </div>
             </Link>
           </div>

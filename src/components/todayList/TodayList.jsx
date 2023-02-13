@@ -17,8 +17,8 @@ const TodayList = () => {
       <div className="flex bg-white rounded shadow overflow-hidden sm:flex items-center mb-6">
         <div className="flex w-full">
           <ul className="w-full">
-            {todayListData.map((item) => (
-              <li>
+            {todayListData.map((item, index) => (
+              <li key={index}>
                 <div className="flex pl-5 pr-24 pt-5 pb-5 relative border-b border-gray-200">
                   <div>
                     <img className="w-20 h-20" src={item.img} alt="product hunt" />

@@ -9,8 +9,8 @@ const Hiring = () => {
         <span className="text-f13 ml-2 text-gray-500 font-normal">Powered by Ship</span>
       </div>
       <div className="bg-white rounded shadow ">
-        {hiringData.map((item) => (
-          <div className="overflow-hidden sm:flex justify-between pr-5 pl-5 pt-6 pb-1 items-center">
+        {hiringData.map((item, index) => (
+          <div className="overflow-hidden sm:flex justify-between pr-5 pl-5 pt-6 pb-1 items-center" key={index}>
             <div>
               <span className="text-f13 font-bold text-gray-900 mb-2 block">{item.name}</span>
               <div className="text-f13 text-gray-500">{item.major}</div>

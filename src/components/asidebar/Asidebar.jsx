@@ -22,8 +22,11 @@ const Asidebar = () => {
           <span className="text-f13 ml-2 text-gray-500 font-normal">Powered by Ship</span>
         </div>
         <div className="bg-white rounded shadow ">
-          {asidebarData.map((item) => (
-            <div className="border-b border-gray-200 overflow-hidden sm:flex justify-between p-5 items-center">
+          {asidebarData.map((item, index) => (
+            <div
+              className="border-b border-gray-200 overflow-hidden sm:flex justify-between p-5 items-center"
+              key={index}
+            >
               <div>
                 <span className="text-f13 font-bold text-gray-900 mb-2 block">{item.title}</span>
                 <div className="text-f13 text-gray-500">{item.description}</div>

@@ -8,8 +8,8 @@ const Favorite = () => {
       <div className="flex bg-white rounded shadow overflow-hidden sm:flex items-center mb-6">
         <div className="flex w-full">
           <ul className="w-full">
-            {favoriteList.map((item) => (
-              <li>
+            {favoriteList.map((item, index) => (
+              <li key={index}>
                 <div className="flex pl-5 pr-24 pt-5 pb-5 relative border-b border-gray-200">
                   <div>
                     <img src={item.img} alt="hunt" />
