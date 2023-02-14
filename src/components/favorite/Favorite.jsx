@@ -14,10 +14,10 @@ const Favorite = () => {
                   <div>
                     <img src={item.img} alt="hunt" />
                   </div>
-                  <div className="ml-2">
+                  <Link to={"/project"} className="ml-2">
                     <h3 className="text-base font-bold text-gray-900">{item.title}</h3>
                     <p className="text-f13 font-normal">
-                      <Link to={"#"}>{item.description}</Link>
+                      <span>{item.description}</span>
                     </p>
                     <div>
                       <span className="inline-flex items-center mt-3 border border-grey-100 rounded pl-2 pb-1 pt-1 pr-2">
@@ -32,7 +32,7 @@ const Favorite = () => {
                         <p className="text-f11 uppercase ml-1 font-medium"> {item.comment}</p>
                       </span>
                     </div>
-                  </div>
+                  </Link>
                   <div className="absolute top-25 right-40 border border-gray-200 rounded">
                     <div className="flex-col align-center items-center pl-2 pr-2 pt-4 pb-4 inset-y-3">
                       <svg

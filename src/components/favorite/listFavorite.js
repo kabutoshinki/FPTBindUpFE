@@ -4,7 +4,7 @@ import imageThree from "../../assets/imageThree.gif";
 
 export const favoriteList = [
   {
-    title: "Audioblogs",
+    title: "WebWave",
     img: imageOne,
     description: "A better way to build community online",
     comment: "123",
