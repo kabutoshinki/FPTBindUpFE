@@ -21,11 +21,13 @@ const UserNavbar = ({ user }) => {
           alt="User dropdown"
           onClick={() => setIsOpen(!isOpen)}
         />
+
         {isOpen && (
           <div
             id="userDropdown"
-            className={`z-10 absolute bg-slate-50 divide-y divide-gray-100 rounded-lg shadow w-[220px] top-[100%] right-0 ${isOpen ? "transition ease-out duration-100" : "hidden"
-              }`}
+            className={`z-10 absolute bg-slate-50 divide-y divide-gray-100 rounded-lg shadow w-[220px] top-[100%] right-0 ${
+              isOpen ? "transition ease-out duration-100" : "hidden"
+            }`}
             style={{ transform: "translateX(40%)" }}
           >
             <div className="px-4 py-3 text-sm text-gray-900">
@@ -34,10 +36,7 @@ const UserNavbar = ({ user }) => {
             </div>
             <ul className="py-2 text-md text-gray-700" aria-labelledby="avatarButton">
               <li>
-                <Link
-                  to={"#"}
-                  className="text-center block px-4 py-2 hover:bg-gray-100"
-                >
+                <Link to={"/profile"} className="text-center block px-4 py-2 hover:bg-gray-100">
                   Profile
                 </Link>
               </li>
