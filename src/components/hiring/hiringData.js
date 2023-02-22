@@ -1,4 +1,4 @@
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/icons/logo.svg";
 import Sidetwo from "../../assets/sideTwo.jpeg";
 import Sidethree from "../../assets/sideThree.png";
 

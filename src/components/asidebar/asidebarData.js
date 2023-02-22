@@ -1,7 +1,7 @@
 import Sideone from "../../assets/sideOne.jpeg";
 import Sidetwo from "../../assets/sideTwo.jpeg";
 import Sidethree from "../../assets/sideThree.png";
-import Plusicon from "../../assets/plus.svg";
+import Plusicon from "../../assets/icons/plus.svg";
 
 export const asidebarData = [
   {

@@ -12,7 +12,7 @@ export const Navbar = () => {
   const [user, loading] = useAuthState(auth);
 
   return (
-    <div className="bg-white fixed left-0 right-0 z-10 p-[20px]">
+    <div className="bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt]">
       <div className="w-[85%] mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link to={"/"} className="mr-5">

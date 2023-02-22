@@ -10,6 +10,11 @@ export const navLink = [
     others: [{}],
   },
   {
+    name: "Topics",
+    href: "#",
+    others: [{}],
+  },
+  {
     name: "About",
     href: "#",
     others: [{}],
