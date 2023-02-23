@@ -5,18 +5,19 @@ import Modal from "../popup/Modal";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebase";
 import UserNavbar from "./UserNavbar.jsx";
+import logo from "../../assets/logo.png";
 
 export const Navbar = () => {
-  const [authenticate, setAuthenticate] = useState(false || window.localStorage.getItem("authenticate") === "true");
+  // const [authenticate, setAuthenticate] = useState(false || window.localStorage.getItem("authenticate") === "true");
   const [openModal, setOpenModal] = useState(false);
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   return (
     <div className="bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt]">
       <div className="w-[85%] mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link to={"/"} className="mr-5">
-            <img className="h-fit w-8" src="logo.png" alt="BindUP logo" />
+            <img className="h-fit w-8" src={logo} alt="BindUP logo" />
           </Link>
           <div className="relative w-[250px] mr-[40px]">
             <input

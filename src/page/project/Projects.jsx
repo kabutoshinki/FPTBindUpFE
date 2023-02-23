@@ -1,9 +1,8 @@
 import React from "react";
-import ProjectInfo from "../../components/project_info/ProjectInfo";
-import Footer from "../../partials/Footer";
 import { Navbar } from "../../components/navbar/Navbar";
+import ProjectList from "../../components/project_info/ProjectList";
 
-const ProjectDetail = () => {
+const Projects = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden ">
       <header className="body-font">
@@ -12,11 +11,10 @@ const ProjectDetail = () => {
 
       <div className="pt-[60pt] flex-grow mx-auto relative w-full">
         <div className="absolute bg-gradient-to-b from-blue-100 w-full h-[40pt]"></div>
-        <ProjectInfo rating={3} />
+        <ProjectList />
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default ProjectDetail;
+export default Projects;

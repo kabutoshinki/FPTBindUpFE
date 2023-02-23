@@ -11,7 +11,7 @@ const Modal = ({ open, onClose }) => {
     if (e.target.id === "container") onClose();
   };
   const googleProvider = new GoogleAuthProvider();
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const navigate = useNavigate();
 
   const GoogleLogin = async () => {

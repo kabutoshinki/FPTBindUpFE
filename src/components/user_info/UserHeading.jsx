@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { auth } from "../../utils/firebase";
 const UserHeading = () => {
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [openTab, setOpenTab] = useState(1);
-  const navigate = useNavigate();
 
   return (
     <div className="container mx-auto px-2">

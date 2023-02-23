@@ -2,15 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { FormControl } from "@mui/material";
-const FormUserDetail = () => {
-  const [user, loading] = useAuthState(auth);
-  const [imageURL, setImageURL] = useState(user?.photoURL);
-  const fileInputRef = useRef(null);
 
+import axios from "axios";
+const FormUserDetail = () => {
+  const [user] = useAuthState(auth);
+  const [imageURL, setImageURL] = useState(user?.photoURL);
+  const [image, setImage] = useState("");
+  const fileInputRef = useRef(null);
   useEffect(() => {
     if (user?.photoURL) {
       setImageURL(user.photoURL);
+    } else {
+      // navigate("/");
     }
   }, [user]);
 
@@ -19,11 +22,26 @@ const FormUserDetail = () => {
   };
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
+
+    setImage(event.target.files[0]);
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       setImageURL(reader.result);
     };
+  };
+  const handleButtonClickAPI = async (e) => {
+    const formData = new FormData();
+    formData.append("imageFile", image);
+    await axios
+      .postForm("http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/p/upload-image", formData)
+      .then((response) => {
+        console.log("Upload Success");
+        console.log(response);
+      })
+      .catch((err) => {
+        console.log("Upload fail ", err);
+      });
   };
 
   return (
@@ -87,7 +105,7 @@ const FormUserDetail = () => {
               />
             </div>
           </div>
-          <button className="bg-orange-500 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+          <button className="bg-orange-500 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-5">
             Save
           </button>
         </form>
@@ -114,6 +132,14 @@ const FormUserDetail = () => {
                   onChange={handleFileInputChange}
                 />
                 <span className="mt-3">Recommended size: 400x400px</span>
+              </div>
+              <div>
+                <button
+                  className="bg-orange-500 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                  onClick={handleButtonClickAPI}
+                >
+                  Test Upload Image API
+                </button>
               </div>
             </div>
           </div>

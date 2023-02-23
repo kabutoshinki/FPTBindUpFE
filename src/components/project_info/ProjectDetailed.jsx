@@ -4,27 +4,28 @@ import { Link } from "react-router-dom";
 import ProjectAboutSection from "./ProjectAboutSection";
 import ProjectReview from "./ProjectReviewSection";
 import { asidebarData } from "../../components/asidebar/asidebarData";
-
-export const ProjectInfo = ({ rating }) => {
+import useFetch from "../../hooks/useFetch";
+export const ProjectDetailed = ({ rating, id }) => {
   const [openTab, setOpenTab] = useState(1);
-
+  const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
+  console.log(data.data?.id);
   return (
     <div className="left-0 right-0 z-10 p-[20px] w-[67%] mx-auto">
       <div className="mx-auto flex flex-col justify-between items-start pt-[40px] ">
         <div className="w-full flex justify-between">
           <div className="flex items-center">
             <Link to={"/"} className="mr-5 rounded ">
-              <img className="object-cover rounded-lg h-16 w-16" src="/project-logo.png" alt="BindUP logo" />
+              <img className="object-cover rounded-lg h-16 w-16" src={data.data?.logo} alt="BindUP logo" />
             </Link>
             <div>
               <div className="flex items-center">
-                <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">WebWave</h3>
+                <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{data.data?.name}</h3>
                 {/* <span class="bg-blue-50 text-blue-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Upcoming</span> */}
                 <span className="bg-emerald-50 text-emerald-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
                   Launching
                 </span>
               </div>
-              <p className="text-slate-500">The true drag and drop website builder</p>
+              <p className="text-slate-500">{data.data?.summary}</p>
             </div>
           </div>
           <div className="flex items-center">
@@ -41,7 +42,7 @@ export const ProjectInfo = ({ rating }) => {
                 <path d="M8 20.695l7.997-11.39L24 20.695z" />
               </svg>
               <p>
-                Upvote <span> (568)</span>{" "}
+                Upvote <span> {data.data?.voteQuantity}</span>{" "}
               </p>
             </button>
             <button
@@ -82,12 +83,12 @@ export const ProjectInfo = ({ rating }) => {
           >
             Follow
           </button>
-          <button
-            type="button"
+          <Link
+            to={data.data?.source}
             className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700"
           >
             Visit website
-          </button>
+          </Link>
           <button
             type="button"
             className="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
@@ -124,7 +125,7 @@ export const ProjectInfo = ({ rating }) => {
         <div className="my-[30px] w-full flex">
           <div className="py-[20px] mt-4 w-[75%] mr-[20px]">
             <div className={openTab === 1 ? "block" : "hidden"}>
-              <ProjectAboutSection />
+              <ProjectAboutSection data={data} />
             </div>
             <div className={openTab === 2 ? "block" : "hidden"}>
               <ProjectReview />
@@ -169,4 +170,4 @@ export const ProjectInfo = ({ rating }) => {
   );
 };
 
-export default ProjectInfo;
+export default ProjectDetailed;
