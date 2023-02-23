@@ -63,7 +63,9 @@ export const ProjectInfo = ({ rating }) => {
         {/* <div className="">
           <p className="">Ditch the grids, create websites like you design graphics</p>
         </div> */}
-        <div className="my-[30px] flex justify-between items-center text-slate-500 font-[400]">
+
+        {/* Statistics */}
+        {/* <div className="my-[30px] flex justify-between items-center text-slate-500 font-[400]">
           <div className="flex items-center">
             <Rating className="read-only" value={rating} readOnly />
             <span className="ml-[5px] inline-flex text-lg font-[500]"> 67 </span> reviews
@@ -74,7 +76,7 @@ export const ProjectInfo = ({ rating }) => {
           <div>
             <span className="ml-[15px] inline-flex text-lg font-[500]">3450 </span> followers
           </div>
-        </div>
+        </div> */}
         <div>
           <button
             type="button"

@@ -57,14 +57,16 @@ export const ProjectDetailed = ({ rating, id }) => {
               >
                 <path d="M26.996 12.898c-.064-2.207-1.084-4.021-2.527-5.13-1.856-1.428-4.415-1.69-6.542-.132-.702.516-1.359 1.23-1.927 2.168-.568-.938-1.224-1.652-1.927-2.167-2.127-1.559-4.685-1.297-6.542.132-1.444 1.109-2.463 2.923-2.527 5.13-.035 1.172.145 2.48.788 3.803 1.01 2.077 5.755 6.695 10.171 10.683l.035.038.002-.002.002.002.036-.038c4.415-3.987 9.159-8.605 10.17-10.683.644-1.323.822-2.632.788-3.804z" />
               </svg>
-              <p>Love</p>
+              <p>Visit website</p>
             </button>
           </div>
         </div>
         {/* <div className="">
           <p className="">Ditch the grids, create websites like you design graphics</p>
         </div> */}
-        <div className="my-[30px] flex justify-between items-center text-slate-500 font-[400]">
+
+        {/* Statistics */}
+        {/* <div className="my-[30px] flex justify-between items-center text-slate-500 font-[400]">
           <div className="flex items-center">
             <Rating className="read-only" value={rating} readOnly />
             <span className="ml-[5px] inline-flex text-lg font-[500]"> 67 </span> reviews
@@ -75,8 +77,9 @@ export const ProjectDetailed = ({ rating, id }) => {
           <div>
             <span className="ml-[15px] inline-flex text-lg font-[500]">3450 </span> followers
           </div>
-        </div>
-        <div>
+        </div> */}
+
+        {/* <div>
           <button
             type="button"
             className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
@@ -95,31 +98,49 @@ export const ProjectDetailed = ({ rating, id }) => {
           >
             Share
           </button>
-        </div>
-        <div className="mt-[20pt] flex space-x-[50px] text-lg font-[500] w-full">
+        </div> */}
+
+        <div className="mt-[30pt] flex space-x-[50px] text-lg font-[500] w-full">
           <div
             onClick={() => setOpenTab(1)}
-            className={` ${
-              openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            className={` ${openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span className="">About</span>
           </div>
           <div
             onClick={() => setOpenTab(2)}
-            className={` ${
-              openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            className={` ${openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span>Reviews</span>
           </div>
           <div
             onClick={() => setOpenTab(3)}
-            className={` ${
-              openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            className={` ${openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"} cursor-pointer inline-block `}
           >
             <span>Jobs</span>
+          </div>
+          <div
+            onClick={() => setOpenTab(4)}
+            className={` ${openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
+          >
+            <span>Members</span>
+          </div>
+          <div
+            onClick={() => setOpenTab(5)}
+            className={` ${openTab === 5 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
+          >
+            <span>Mentor</span>
+          </div>
+          <div
+            onClick={() => setOpenTab(6)}
+            className={` ${openTab === 6 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
+          >
+            <span>Change logs</span>
           </div>
         </div>
         <div className="my-[30px] w-full flex">

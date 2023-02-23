@@ -22,20 +22,38 @@ const ProjectList = () => {
   };
 
   return (
-    <div>
-      <div className=" mb-3 flex flex-row justify-between items-center">
-        <h2 className="text-f20 text-left text-gray-900 text-xl lg:text-1xl font-bold">Project List</h2>
-        <span className="text-f11 uppercase font-medium">
-          <a className="mr-2" href="javascript.void(0)">
-            popular
-          </a>
-          <a className="mr-2" href="javascript.void(0)">
-            newest
-          </a>
-        </span>
+    <div className="w-[75%] mx-auto">
+
+      <div className=" mt-[70px] mb-[20px]">
+        <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">Browse more projects!</h3>
+        <p className="text-slate-500">Discover the best projects of your friends, teammates, or colleagues.</p>
       </div>
+      <ReactPaginate
+        className=""
+        previousLabel={"<"}
+        breakLabel={"..."}
+        nextLabel={">"}
+        pageCount={3}
+        onPageChange={handlePageClick}
+        containerClassName={"inline-flex -space-x-px mb-4"}
+        pageLinkClassName={
+          "px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
+        }
+        previousLinkClassName={
+          "px-3 py-2 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+        }
+        nextLinkClassName={
+          "px-3 py-2 leading-tight text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
+        }
+        breakLinkClassName={
+          "px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
+        }
+        activeLinkClassName={
+          "px-3 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+        }
+      />
       {loading ? (
-        <Loading />
+        <Loading className="mx-auto"/>
       ) : (
         <div className="flex bg-white rounded shadow overflow-hidden sm:flex items-center mb-6">
           <div className="flex w-full">
@@ -43,9 +61,9 @@ const ProjectList = () => {
               {projects.data?.map((item, index) => (
                 <li key={index}>
                   <Link to={`/project/${item.id}`}>
-                    <div className="flex pl-5 pr-24 pt-5 pb-5 relative border-b border-gray-200">
+                    <div className="flex items-center pl-5 pr-24 pt-5 pb-5 relative hover:bg-gradient-to-bl hover:from-blue-50">
                       <div>
-                        <img className="w-20 h-20" src={item.logo || img_default} alt="product hunt" />
+                        <img className="w-14 h-14" src={item.logo || img_default} alt="product hunt" />
                       </div>
                       <div className="ml-2">
                         <h3 className="text-base font-bold text-gray-900">{item.name}</h3>
@@ -54,7 +72,7 @@ const ProjectList = () => {
                         </p>
                       </div>
                       <div className="absolute top-25 right-40 border border-gray-200 rounded">
-                        <div className="flex-col align-center items-center pl-2 pr-2 pt-4 pb-4 inset-y-3">
+                        <div className="flex-col align-center items-center pl-4 pr-4 pt-3 pb-3 inset-y-3">
                           <svg
                             className="m-auto"
                             width="12"
@@ -79,29 +97,7 @@ const ProjectList = () => {
           </div>
         </div>
       )}
-      <ReactPaginate
-        previousLabel={"previous"}
-        breakLabel={"..."}
-        nextLabel={"next"}
-        pageCount={3}
-        onPageChange={handlePageClick}
-        containerClassName={"inline-flex -space-x-px mb-4"}
-        pageLinkClassName={
-          "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        }
-        previousLinkClassName={
-          "px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        }
-        nextLinkClassName={
-          "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        }
-        breakLinkClassName={
-          "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        }
-        activeLinkClassName={
-          "px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-        }
-      />
+
     </div>
   );
 };
