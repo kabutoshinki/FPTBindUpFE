@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Rating } from "@mui/material";
 import { Link } from "react-router-dom";
 import ProjectAboutSection from "./ProjectAboutSection";
 import ProjectReview from "./ProjectReviewSection";

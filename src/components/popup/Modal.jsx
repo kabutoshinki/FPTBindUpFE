@@ -44,8 +44,8 @@ const Modal = ({ open, onClose }) => {
     >
       <div className="md:w-[600px] w-[600px] mx-auto flex flex-col">
         <div className="bg-white p-8 rounded-sm flex flex-col">
-          <img src="logo.png" className="h-14 w-14 mx-auto mt-2" alt="logo" />
-          <h1 className="font-bold text-center mt-2 mb-3 text-xl md:text-2xl">Sign up on Product Hunt</h1>
+          <img src="logo.png" className="h-fit w-14 mx-auto mt-2" alt="logo" />
+          <h1 className="font-bold text-center mt-2 mb-3 text-xl md:text-2xl">Sign up on BindUP</h1>
           <p className="text-gray-600 text-center text-base md:text-lg">
             Join our community of friendly folks discovering and sharing the latest ideas.
           </p>

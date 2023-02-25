@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { navLink } from "./navbarLink.js";
 import Modal from "../popup/Modal";
@@ -11,9 +11,18 @@ export const Navbar = () => {
   // const [authenticate, setAuthenticate] = useState(false || window.localStorage.getItem("authenticate") === "true");
   const [openModal, setOpenModal] = useState(false);
   const [user] = useAuthState(auth);
+  const [top, setTop] = useState(true);
+
+  useEffect(() => {
+    const scrollHandler = () => {
+      window.pageYOffset > 10 ? setTop(false) : setTop(true)
+    };
+    window.addEventListener('scroll', scrollHandler);
+    return () => window.removeEventListener('scroll', scrollHandler);
+  }, [top]);
 
   return (
-    <div className="bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt]">
+    <div className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${!top && `bg-white border-b-[1px] border-b-slate-200`}`}>
       <div className="w-[85%] mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link to={"/"} className="mr-5">

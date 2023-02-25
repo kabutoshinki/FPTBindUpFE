@@ -1,21 +1,12 @@
 import React from "react";
 // import Hiring from "./Hiring";
 // import Newsletter from "./Newsletter";
-import Kittycard from "../../assets/kitty-card.png";
 import Hiring from "../hiring/Hiring";
 import Newsletter from "../newsletter/NewLetter";
 import { asidebarData } from "./asidebarData";
 const Asidebar = () => {
   return (
     <aside>
-      <div className="relative">
-        <img src={Kittycard} alt="" />
-        <div className="absolute bottom-25 left-25">
-          <button className="bg-white text-f11 font-bold uppercase items-center inline-flex border border-gray-300 mr-2 py-2 px-3 rounded mt-4 md:mt-0">
-            <span className="f13 text-hunt">Winner announced</span>
-          </button>
-        </div>
-      </div>
       <div>
         <div className="mt-3 text-base font-bold mb-3 text-gray-900">
           Upcomming Products

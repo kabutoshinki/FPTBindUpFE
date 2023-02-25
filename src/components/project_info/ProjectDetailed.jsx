@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Rating } from "@mui/material";
 import { Link } from "react-router-dom";
 import ProjectAboutSection from "./ProjectAboutSection";
 import ProjectReview from "./ProjectReviewSection";
 import { asidebarData } from "../../components/asidebar/asidebarData";
 import useFetch from "../../hooks/useFetch";
+
 export const ProjectDetailed = ({ rating, id }) => {
   const [openTab, setOpenTab] = useState(1);
   const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
   console.log(data.data?.id);
+  
   return (
     <div className="left-0 right-0 z-10 p-[20px] w-[67%] mx-auto">
       <div className="mx-auto flex flex-col justify-between items-start pt-[40px] ">
@@ -21,9 +22,21 @@ export const ProjectDetailed = ({ rating, id }) => {
               <div className="flex items-center">
                 <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{data.data?.name}</h3>
                 {/* <span class="bg-blue-50 text-blue-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Upcoming</span> */}
-                <span className="bg-emerald-50 text-emerald-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
-                  Launching
-                </span>
+                {data.data?.milestone === 0 &&
+                  <span className="bg-orange-50 text-orange-500 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-orange-400">
+                    Idea
+                  </span>
+                }
+                {data.data?.milestone === 1 &&
+                  <span className="bg-emerald-50 text-emerald-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
+                    Upcoming
+                  </span>
+                }
+                {data.data?.milestone === 2 &&
+                  <span className="bg-emerald-50 text-emerald-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
+                    Launching
+                  </span>
+                }
               </div>
               <p className="text-slate-500">{data.data?.summary}</p>
             </div>
@@ -31,7 +44,7 @@ export const ProjectDetailed = ({ rating, id }) => {
           <div className="flex items-center">
             <button
               type="button"
-              className="flex text-slate-400 border border-slate-400 hover:text-rose-500 hover:border-rose-500 font-medium rounded text-md px-5 py-2.5 mr-2"
+              className="flex text-white bg-gradient-to-tr from-rose-400 to-rose-600 hover:text-rose-100 font-medium rounded text-md px-5 py-2.5 mr-[5px]"
             >
               <svg
                 fill="currentColor"
@@ -42,23 +55,20 @@ export const ProjectDetailed = ({ rating, id }) => {
                 <path d="M8 20.695l7.997-11.39L24 20.695z" />
               </svg>
               <p>
-                Upvote <span> {data.data?.voteQuantity}</span>{" "}
+                Upvote <span> ({data.data?.voteQuantity})</span>{" "}
               </p>
             </button>
-            <button
-              type="button"
-              className="flex text-slate-400 border border-slate-400 hover:text-rose-500 hover:border-rose-500 font-medium rounded text-md px-5 py-2.5 mr-2"
-            >
-              <svg
-                fill="currentColor"
-                className="w-7 h-7 mr-[10px]"
-                viewBox="0 0 32 32"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M26.996 12.898c-.064-2.207-1.084-4.021-2.527-5.13-1.856-1.428-4.415-1.69-6.542-.132-.702.516-1.359 1.23-1.927 2.168-.568-.938-1.224-1.652-1.927-2.167-2.127-1.559-4.685-1.297-6.542.132-1.444 1.109-2.463 2.923-2.527 5.13-.035 1.172.145 2.48.788 3.803 1.01 2.077 5.755 6.695 10.171 10.683l.035.038.002-.002.002.002.036-.038c4.415-3.987 9.159-8.605 10.17-10.683.644-1.323.822-2.632.788-3.804z" />
-              </svg>
-              <p>Visit website</p>
-            </button>
+            <Link to={data.data?.source} target="_blank">
+              <button
+                type="button"
+                className="flex text-slate-400 border border-slate-400 hover:text-rose-500 hover:border-rose-500 font-medium rounded text-md px-5 py-2.5 mr-2">
+                <svg className="w-7 h-7 mr-[10px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17.488 6.51196L5.98804 18.012" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M17.988 15.0121L17.988 6.35514C17.988 6.15239 17.8236 5.98804 17.6209 5.98804L8.98804 5.98804" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <p>Visit website</p>
+              </button>
+            </Link>
           </div>
         </div>
         {/* <div className="">

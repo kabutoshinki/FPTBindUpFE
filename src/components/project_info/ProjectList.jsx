@@ -6,6 +6,7 @@ import ReactPaginate from "react-paginate";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import LinearProgress from '@mui/material/LinearProgress';
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
@@ -22,73 +23,97 @@ const ProjectList = () => {
   };
 
   return (
-    <div className="w-[75%] mx-auto">
-
-      <div className=" mt-[70px] mb-[20px]">
-        <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">Browse more projects!</h3>
+    <div className="mx-auto">
+      <div className=" mt-[60px] mb-[25px]">
+        <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[15px]">Browse more projects!</h3>
+        {/* <p className="text-slate-500">There are <span className="font-[600] text-slate-600"> {projects.data?.length} projects</span> out there!</p> */}
         <p className="text-slate-500">Discover the best projects of your friends, teammates, or colleagues.</p>
       </div>
-      <ReactPaginate
-        className=""
-        previousLabel={"<"}
-        breakLabel={"..."}
-        nextLabel={">"}
-        pageCount={3}
-        onPageChange={handlePageClick}
-        containerClassName={"inline-flex -space-x-px mb-4"}
-        pageLinkClassName={
-          "px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
-        }
-        previousLinkClassName={
-          "px-3 py-2 ml-0 leading-tight text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
-        }
-        nextLinkClassName={
-          "px-3 py-2 leading-tight text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
-        }
-        breakLinkClassName={
-          "px-3 py-2 leading-tight text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
-        }
-        activeLinkClassName={
-          "px-3 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-        }
-      />
+      <div className="flex items-center justify-between mb-[10px]">
+        <div className="relative w-[250px] mr-[40px]">
+          <input
+            className="text-f13 px-[10px] py-[10px] pr-[35px] w-full rounded border border-slate-200 focus:border-grey-500 outline-none placeholder:text-slate-400 transition-colors duration-200 ease-in-out"
+            placeholder="Search by name ..."
+            type={"text"}
+          />
+          <div className="absolute right-[10px] top-1/2 -translate-y-1/2">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              xmlns="http://www.w3.org/2000/svg"
+              className="styles_searchIcon__1g65n"
+            >
+              <path
+                d="M9.383 10.347a5.796 5.796 0 11.965-.964L15 14.036l-.964.964-4.653-4.653zm-3.588-.12a4.432 4.432 0 100-8.863 4.432 4.432 0 000 8.863z"
+                fill="#e0e5eb"
+                fillRule="evenodd"
+              ></path>
+            </svg>
+          </div>
+        </div>
+
+        <ReactPaginate
+          className=""
+          previousLabel={"<"}
+          breakLabel={"..."}
+          nextLabel={">"}
+          pageCount={3}
+          onPageChange={handlePageClick}
+          containerClassName={"inline-flex -space-x-px mb-4"}
+          pageLinkClassName={
+            "px-3 py-2  text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
+          }
+          previousLinkClassName={
+            "px-3 py-2 ml-0 tight text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+          }
+          nextLinkClassName={
+            "px-3 py-2  text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
+          }
+          breakLinkClassName={
+            "px-3 py-2 text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
+          }
+          activeLinkClassName={
+            "px-3 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
+          }
+        />
+      </div>
       {loading ? (
-        <Loading className="mx-auto"/>
+        // <Loading className="mx-auto" />
+        <LinearProgress />
       ) : (
-        <div className="flex bg-white rounded shadow overflow-hidden sm:flex items-center mb-6">
+        <div className="flex bg-white rounded overflow-hidden sm:flex items-center mb-6">
           <div className="flex w-full">
             <ul className="w-full">
               {projects.data?.map((item, index) => (
                 <li key={index}>
                   <Link to={`/project/${item.id}`}>
-                    <div className="flex items-center pl-5 pr-24 pt-5 pb-5 relative hover:bg-gradient-to-bl hover:from-blue-50">
+                    <div className="flex items-center px-[20px] py-[25px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-blue-50 hover:via-white hover:to-white">
                       <div>
                         <img className="w-14 h-14" src={item.logo || img_default} alt="product hunt" />
                       </div>
-                      <div className="ml-2">
+                      <div className="ml-[30px]">
                         <h3 className="text-base font-bold text-gray-900">{item.name}</h3>
                         <p className="text-f13 font-normal">
                           <a href="javascript.void(0)">{item.summary}</a>
                         </p>
                       </div>
-                      <div className="absolute top-25 right-40 border border-gray-200 rounded">
-                        <div className="flex-col align-center items-center pl-4 pr-4 pt-3 pb-3 inset-y-3">
+                      <button className="absolute bg-white my-auto right-40 border border-slate-200 group hover:border-blue-600 rounded">
+                        <div className="flex-col align-center items-center px-5 py-2 inset-y-3 text-slate-400 group-hover:text-blue-600">
                           <svg
-                            className="m-auto"
-                            width="12"
-                            height="11"
+                            className="w-[12px] h-[12px] m-auto"
                             viewBox="0 0 26 22"
-                            fill="none"
+                            fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
                               d="M12.134 0.499999C12.5189 -0.166668 13.4811 -0.166667 13.866 0.5L25.1244 20C25.5093 20.6667 25.0281 21.5 24.2583 21.5H1.74167C0.971868 21.5 0.490744 20.6667 0.875644 20L12.134 0.499999Z"
-                              fill="black"
+                              fill="currentColor"
                             />
                           </svg>
                           <span className="text-f13 font-semibold mt-1 block text-center">{item.voteQuantity}</span>
                         </div>
-                      </div>
+                      </button>
                     </div>
                   </Link>
                 </li>

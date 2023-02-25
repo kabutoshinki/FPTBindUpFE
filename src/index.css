@@ -5,8 +5,8 @@
 
 :root {
   --grey: #f7f7f7;
-  --hunt: #cc4d29;
-  --huntdark: #cd0001;
+  --blue: #00B1FF;
+  --deepblue: #1939FF;
 }
 
 body {
@@ -15,7 +15,7 @@ body {
     "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--grey);
+  background-color: #ffffff;
 }
 
 .bg-orange {
