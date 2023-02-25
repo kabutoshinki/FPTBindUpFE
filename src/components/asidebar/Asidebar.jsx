@@ -10,7 +10,6 @@ const Asidebar = () => {
       <div>
         <div className="mt-3 text-base font-bold mb-3 text-gray-900">
           Upcomming Products
-          <span className="text-f13 ml-2 text-gray-500 font-normal">Powered by Ship</span>
         </div>
         <div className="bg-white rounded shadow ">
           {asidebarData.map((item, index) => (

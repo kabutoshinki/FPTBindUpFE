@@ -6,7 +6,6 @@ const Hiring = () => {
     <div>
       <div className="mt-4 text-base font-bold mb-3 text-gray-900">
         Hiring now
-        <span className="text-f13 ml-2 text-gray-500 font-normal">Powered by Ship</span>
       </div>
       <div className="bg-white rounded shadow ">
         {hiringData.map((item, index) => (

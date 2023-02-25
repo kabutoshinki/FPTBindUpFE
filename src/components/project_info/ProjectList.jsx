@@ -82,24 +82,24 @@ const ProjectList = () => {
         // <Loading className="mx-auto" />
         <LinearProgress />
       ) : (
-        <div className="flex bg-white rounded overflow-hidden sm:flex items-center mb-6">
+        <div className="flex bg-white overflow-hidden sm:flex items-center mb-6">
           <div className="flex w-full">
             <ul className="w-full">
               {projects.data?.map((item, index) => (
                 <li key={index}>
                   <Link to={`/project/${item.id}`}>
-                    <div className="flex items-center px-[20px] py-[25px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-blue-50 hover:via-white hover:to-white">
+                    <div className="flex items-center py-[25px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-blue-50 hover:via-white hover:to-white">
                       <div>
                         <img className="w-14 h-14" src={item.logo || img_default} alt="product hunt" />
                       </div>
                       <div className="ml-[30px]">
-                        <h3 className="text-base font-bold text-gray-900">{item.name}</h3>
-                        <p className="text-f13 font-normal">
+                        <h3 className="text-base font-bold text-slate-700">{item.name}</h3>
+                        <p className="text-[0.9rem] font-normal text-slate-500">
                           <a href="javascript.void(0)">{item.summary}</a>
                         </p>
                       </div>
-                      <button className="absolute bg-white my-auto right-40 border border-slate-200 group hover:border-blue-600 rounded">
-                        <div className="flex-col align-center items-center px-5 py-2 inset-y-3 text-slate-400 group-hover:text-blue-600">
+                      <button className="absolute bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded">
+                        <div className="flex-col align-center items-center px-[10px] py-2 inset-y-3 text-slate-500 group-hover:text-blue-600">
                           <svg
                             className="w-[12px] h-[12px] m-auto"
                             viewBox="0 0 26 22"
@@ -111,7 +111,7 @@ const ProjectList = () => {
                               fill="currentColor"
                             />
                           </svg>
-                          <span className="text-f13 font-semibold mt-1 block text-center">{item.voteQuantity}</span>
+                          <span className="text-[0.8rem] font-semibold mt-1 block text-center">{item.voteQuantity}</span>
                         </div>
                       </button>
                     </div>
