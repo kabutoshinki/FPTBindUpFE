@@ -6,18 +6,19 @@ import ReactPaginate from "react-paginate";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearProgress from "@mui/material/LinearProgress";
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  // const [numOfPages, setNumOfPages] = useState(0);
   const { data, loading } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=id`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=voteQuantity`
   );
+
   useEffect(() => {
     setProjects(data);
   }, [data]);
-
   const handlePageClick = async (data) => {
     setCurrentPage(data.selected);
   };
@@ -58,24 +59,16 @@ const ProjectList = () => {
           previousLabel={"<"}
           breakLabel={"..."}
           nextLabel={">"}
-          pageCount={3}
+          pageCount={projects.data?.numOfPages}
           onPageChange={handlePageClick}
           containerClassName={"inline-flex -space-x-px mb-4"}
-          pageLinkClassName={
-            "px-3 py-2  text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
-          }
+          pageLinkClassName={"px-3 py-2  text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
           previousLinkClassName={
             "px-3 py-2 ml-0 tight text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
           }
-          nextLinkClassName={
-            "px-3 py-2  text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
-          }
-          breakLinkClassName={
-            "px-3 py-2 text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"
-          }
-          activeLinkClassName={
-            "px-3 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"
-          }
+          nextLinkClassName={"px-3 py-2  text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700"}
+          breakLinkClassName={"px-3 py-2 text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
+          activeLinkClassName={"px-3 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"}
         />
       </div>
       {loading ? (
@@ -85,7 +78,7 @@ const ProjectList = () => {
         <div className="flex bg-white overflow-hidden sm:flex items-center mb-6">
           <div className="flex w-full">
             <ul className="w-full">
-              {projects.data?.map((item, index) => (
+              {projects.data?.projectDTOList?.map((item, index) => (
                 <li key={index}>
                   <Link to={`/project/${item.id}`}>
                     <div className="flex items-center py-[25px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-blue-50 hover:via-white hover:to-white">
@@ -111,7 +104,9 @@ const ProjectList = () => {
                               fill="currentColor"
                             />
                           </svg>
-                          <span className="text-[0.8rem] font-semibold mt-1 block text-center">{item.voteQuantity}</span>
+                          <span className="text-[0.8rem] font-semibold mt-1 block text-center">
+                            {item.voteQuantity}
+                          </span>
                         </div>
                       </button>
                     </div>
@@ -122,7 +117,6 @@ const ProjectList = () => {
           </div>
         </div>
       )}
-
     </div>
   );
 };

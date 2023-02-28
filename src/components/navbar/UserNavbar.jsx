@@ -5,7 +5,7 @@ import { auth } from "../../utils/firebase";
 
 const UserNavbar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  console.log(user?.photoURL);
   return (
     <div className="flex items-center justify-end relative">
       <div className="cursor-pointer mr-5 text-lg font-medium text-[#00B1FF] hover:text-[#1939FF]">Submit</div>
@@ -18,7 +18,7 @@ const UserNavbar = ({ user }) => {
           id="avatarButton"
           className="w-10 h-fit rounded-full cursor-pointer"
           src={user?.photoURL}
-          alt="User dropdown"
+          alt="Avatar User"
           onClick={() => setIsOpen(!isOpen)}
         />
 
