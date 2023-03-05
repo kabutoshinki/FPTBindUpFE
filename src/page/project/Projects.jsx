@@ -6,7 +6,7 @@ import { topics } from "../../components/topic/topics";
 import Footer from "../../partials/Footer";
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
 const Projects = () => {
@@ -18,25 +18,24 @@ const Projects = () => {
       </header>
 
       <div className="w-[65%] pt-[60pt] mx-auto mb-[50px]">
-
         <div className="flex ">
           <div className="w-[25%] border-r-[1px] border-r-slate-200 mt-[60px]">
             <div className="sort-project pb-[30px] mr-[40px] border-b-[1px] border-b-slate-200 ">
               <h3 className="mb-[20px] font-[600] text-[0.9rem] text-slate-600 uppercase">Sort project by</h3>
               <div className="flex flex-col space-y-2 text-[1rem]">
-                <a href="/" className={classNames(
-                  currentOpt ? "font-medium text-[#1939FF]" : "font-normal text-slate-400",
-                  ""
-                )}>
+                <Link
+                  to={"/"}
+                  className={classNames(currentOpt ? "font-medium text-[#1939FF]" : "font-normal text-slate-400", "")}
+                >
                   Newest
-                </a>
-                {currentOpt = false}
-                <a href="/" className={classNames(
-                  currentOpt ? "font-medium text-[#1939FF]" : "font-normal text-slate-400",
-                  ""
-                )}>
+                </Link>
+                {(currentOpt = false)}
+                <Link
+                  to={"/"}
+                  className={classNames(currentOpt ? "font-medium text-[#1939FF]" : "font-normal text-slate-400", "")}
+                >
                   Most Votes
-                </a>
+                </Link>
               </div>
             </div>
             <div className="filter-project">
@@ -47,26 +46,66 @@ const Projects = () => {
               <ul className="w-full text-sm font-medium ">
                 <li className="w-full group hover:bg-slate-50">
                   <div className="flex items-center">
-                    <input id="idea-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent" />
-                    <label for="idea-checkbox" className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600">Idea</label>
+                    <input
+                      id="idea-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
+                    />
+                    <label
+                      for="idea-checkbox"
+                      className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
+                    >
+                      Idea
+                    </label>
                   </div>
                 </li>
                 <li className="w-full group hover:bg-slate-50">
                   <div className="flex items-center">
-                    <input id="upcoming-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent" />
-                    <label for="upcoming-checkbox" className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600">Upcoming</label>
+                    <input
+                      id="upcoming-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
+                    />
+                    <label
+                      for="upcoming-checkbox"
+                      className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
+                    >
+                      Upcoming
+                    </label>
                   </div>
                 </li>
                 <li className="w-full group hover:bg-slate-50">
                   <div className="flex items-center">
-                    <input id="launching-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent" />
-                    <label for="launching-checkbox" className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600">Launching</label>
+                    <input
+                      id="launching-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
+                    />
+                    <label
+                      for="launching-checkbox"
+                      className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
+                    >
+                      Launching
+                    </label>
                   </div>
                 </li>
                 <li className="w-full group hover:bg-slate-50">
                   <div className="flex items-center">
-                    <input id="finished-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent" />
-                    <label for="finished-checkbox" className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600">Finished</label>
+                    <input
+                      id="finished-checkbox"
+                      type="checkbox"
+                      value=""
+                      className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
+                    />
+                    <label
+                      for="finished-checkbox"
+                      className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
+                    >
+                      Finished
+                    </label>
                   </div>
                 </li>
               </ul>
@@ -75,11 +114,7 @@ const Projects = () => {
               <h3 className="my-[20px] font-[600] text-[0.9rem] text-slate-600 uppercase">Topics</h3>
               <div className="flex flex-col justify-start space-y-2">
                 {topics.map((item, index) => (
-                  <Link
-                    to="#"
-                    key={index}
-                    className="text-[1rem] font-normal text-slate-400 hover:text-blue-600"
-                  >
+                  <Link to="#" key={index} className="text-[1rem] font-normal text-slate-400 hover:text-blue-600">
                     {item.name}
                   </Link>
                 ))}

@@ -2,13 +2,30 @@ import React, { useState } from "react";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/firebase";
-
+import PostModal from "../popup/PostModal";
+import * as authService from "../../services/authenService";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
 const UserNavbar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(user?.photoURL);
+  const [openModal, setOpenModal] = useState(false);
+  const { dispatch } = useContext(AuthContext);
+
+  const signOut = () => {
+    console.log("logout success");
+    auth.signOut();
+    authService.logout();
+    dispatch({ type: "LOGOUT" });
+  };
   return (
     <div className="flex items-center justify-end relative">
-      <div className="cursor-pointer mr-5 text-lg font-medium text-[#00B1FF] hover:text-[#1939FF]">Submit</div>
+      <div
+        className="cursor-pointer mr-5 text-lg font-medium text-[#00B1FF] hover:text-[#1939FF]"
+        onClick={() => setOpenModal(true)}
+      >
+        Submit
+      </div>
+
       <div className="cursor-pointer flex items-center mr-5">
         <IoNotificationsOutline size={"1.5rem"} className="mr-1 text-gray-600" />
         <span className="text-xl text-gray-600">0</span>
@@ -42,16 +59,14 @@ const UserNavbar = ({ user }) => {
               </li>
             </ul>
             <div className="py-1 w-full">
-              <button
-                onClick={() => auth.signOut()}
-                className="w-full block px-4 py-2 text-md text-gray-700 hover:bg-gray-100"
-              >
+              <button onClick={signOut} className="w-full block px-4 py-2 text-md text-gray-700 hover:bg-gray-100">
                 Sign out
               </button>
             </div>
           </div>
         )}
       </div>
+      <PostModal open={openModal} onClose={() => setOpenModal(false)} />
     </div>
   );
 };

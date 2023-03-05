@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import HeroImage from "../../src/assets/images/hero-image.png";
 
@@ -48,12 +49,12 @@ function HeroHome() {
                 data-aos="zoom-y-out"
                 data-aos-delay="300"
               >
-                <a
+                <Link
                   className="btn px-[30px] py-[10px] rounded font-medium text-[20px] text-white bg-[#1984ff] hover:bg-[#1168da] w-full mb-4 sm:w-auto sm:mb-0"
-                  href="#0"
+                  to={"#0"}
                 >
                   Get started{" "}
-                </a>
+                </Link>
               </div>
             </div>
           </div>

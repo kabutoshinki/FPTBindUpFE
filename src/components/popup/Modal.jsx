@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/firebase";
@@ -6,23 +6,37 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import logo from "../../assets/logo.png";
+import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import * as authenService from "../../services/authenService";
+
 const Modal = ({ open, onClose }) => {
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
   };
   const googleProvider = new GoogleAuthProvider();
   const [user] = useAuthState(auth);
+  const [credential, setCredential] = useState({ username: undefined, password: undefined });
+  const { loading, error, dispatch } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const GoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, googleProvider);
-      console.log(result.user);
-      window.localStorage.setItem("authenticate", "true");
+      await authenService.googleLogin(result.user.accessToken);
+      // window.localStorage.setItem("authenticate", "true");
       onClose();
+      dispatch({ type: "LOGIN_START" });
+      const user = await authenService.getCurrentUser();
+      dispatch({ type: "LOGIN_SUCCESS", payload: user.jti });
+      toast.success("Login Success.");
       navigate("/");
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+      toast.error("Login Fail");
     }
   };
 

@@ -4,41 +4,47 @@ import ProjectAboutSection from "./ProjectAboutSection";
 import ProjectReview from "./ProjectReviewSection";
 import { asidebarData } from "../../components/asidebar/asidebarData";
 import useFetch from "../../hooks/useFetch";
+import * as projectService from "../../services/projectService";
+import { useEffect } from "react";
 
 export const ProjectDetailed = ({ rating, id }) => {
   const [openTab, setOpenTab] = useState(1);
   const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
-  console.log(data.data?.id);
-  
+  const [project, setProject] = useState([]);
+
+  useEffect(() => {
+    setProject(data);
+  }, [data]);
+
   return (
     <div className="left-0 right-0 z-10 p-[20px] w-[67%] mx-auto">
       <div className="mx-auto flex flex-col justify-between items-start pt-[40px] ">
         <div className="w-full flex justify-between">
           <div className="flex items-center">
             <Link to={"/"} className="mr-5 rounded ">
-              <img className="object-cover rounded-lg h-16 w-16" src={data.data?.logo} alt="BindUP logo" />
+              <img className="object-cover rounded-lg h-16 w-16" src={project?.data?.logo} alt="BindUP logo" />
             </Link>
             <div>
               <div className="flex items-center">
-                <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{data.data?.name}</h3>
+                <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{project?.data?.name}</h3>
                 {/* <span class="bg-blue-50 text-blue-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Upcoming</span> */}
-                {data.data?.milestone === 0 &&
+                {project?.data?.milestone === 0 && (
                   <span className="bg-orange-50 text-orange-500 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-orange-400">
                     Idea
                   </span>
-                }
-                {data.data?.milestone === 1 &&
+                )}
+                {project?.data?.milestone === 1 && (
                   <span className="bg-emerald-50 text-emerald-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
                     Upcoming
                   </span>
-                }
-                {data.data?.milestone === 2 &&
+                )}
+                {project?.data?.milestone === 2 && (
                   <span className="bg-emerald-50 text-emerald-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
                     Launching
                   </span>
-                }
+                )}
               </div>
-              <p className="text-slate-500">{data.data?.summary}</p>
+              <p className="text-slate-500">{project?.data?.summary}</p>
             </div>
           </div>
           <div className="flex items-center">
@@ -55,16 +61,29 @@ export const ProjectDetailed = ({ rating, id }) => {
                 <path d="M8 20.695l7.997-11.39L24 20.695z" />
               </svg>
               <p>
-                Upvote <span> ({data.data?.voteQuantity})</span>{" "}
+                Upvote <span> ({project?.data?.voteQuantity})</span>{" "}
               </p>
             </button>
-            <Link to={data.data?.source} target="_blank">
+            <Link to={project?.data?.source} target="_blank">
               <button
                 type="button"
-                className="flex text-slate-400 border border-slate-400 hover:text-rose-500 hover:border-rose-500 font-medium rounded text-md px-5 py-2.5 mr-2">
+                className="flex text-slate-400 border border-slate-400 hover:text-rose-500 hover:border-rose-500 font-medium rounded text-md px-5 py-2.5 mr-2"
+              >
                 <svg className="w-7 h-7 mr-[10px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M17.488 6.51196L5.98804 18.012" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                  <path d="M17.988 15.0121L17.988 6.35514C17.988 6.15239 17.8236 5.98804 17.6209 5.98804L8.98804 5.98804" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                  <path
+                    d="M17.488 6.51196L5.98804 18.012"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <path
+                    d="M17.988 15.0121L17.988 6.35514C17.988 6.15239 17.8236 5.98804 17.6209 5.98804L8.98804 5.98804"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
                 <p>Visit website</p>
               </button>
@@ -113,42 +132,49 @@ export const ProjectDetailed = ({ rating, id }) => {
         <div className="mt-[30pt] flex space-x-[50px] text-lg font-[500] w-full">
           <div
             onClick={() => setOpenTab(1)}
-            className={` ${openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span className="">About</span>
           </div>
           <div
             onClick={() => setOpenTab(2)}
-            className={` ${openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Reviews</span>
           </div>
           <div
             onClick={() => setOpenTab(3)}
-            className={` ${openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"} cursor-pointer inline-block `}
+            className={` ${
+              openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Jobs</span>
           </div>
           <div
             onClick={() => setOpenTab(4)}
-            className={` ${openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Members</span>
           </div>
           <div
             onClick={() => setOpenTab(5)}
-            className={` ${openTab === 5 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 5 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Mentor</span>
           </div>
           <div
             onClick={() => setOpenTab(6)}
-            className={` ${openTab === 6 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 6 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Change logs</span>
           </div>
@@ -156,7 +182,7 @@ export const ProjectDetailed = ({ rating, id }) => {
         <div className="my-[30px] w-full flex">
           <div className="py-[20px] mt-4 w-[75%] mr-[20px]">
             <div className={openTab === 1 ? "block" : "hidden"}>
-              <ProjectAboutSection data={data} />
+              <ProjectAboutSection data={project} />
             </div>
             <div className={openTab === 2 ? "block" : "hidden"}>
               <ProjectReview />

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { todayListData } from "./todayListData";
 const TodayList = () => {
   return (
@@ -6,12 +7,12 @@ const TodayList = () => {
       <div className=" mb-3 flex flex-row justify-between items-center">
         <h2 className="text-f20 text-left text-gray-900 text-xl lg:text-1xl font-bold">Today</h2>
         <span className="text-f11 uppercase font-medium">
-          <a className="mr-2" href="javascript.void(0)">
+          <Link className="mr-2" to={"javascript.void(0)"}>
             popular
-          </a>
-          <a className="mr-2" href="javascript.void(0)">
+          </Link>
+          <Link className="mr-2" to={"javascript.void(0)"}>
             newest
-          </a>
+          </Link>
         </span>
       </div>
       <div className="flex bg-white overflow-hidden sm:flex items-center mb-6">

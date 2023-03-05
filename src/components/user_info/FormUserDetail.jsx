@@ -30,9 +30,11 @@ const FormUserDetail = () => {
       setImageURL(reader.result);
     };
   };
+
   const handleButtonClickAPI = async (e) => {
     const formData = new FormData();
     formData.append("imageFile", image);
+    console.log(formData);
     await axios
       .postForm("http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/p/upload-image", formData)
       .then((response) => {

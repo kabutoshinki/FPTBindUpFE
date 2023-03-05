@@ -4,6 +4,7 @@ import { Rating } from "@mui/material";
 import { ReactComponent as HelpfulIcon } from "../../assets/icons/helpful.svg";
 import { ReactComponent as ReplyIcon } from "../../assets/icons/reply.svg";
 import { ReactComponent as ReportIcon } from "../../assets/icons/report.svg";
+import { Link } from "react-router-dom";
 
 export const Comment = ({ commentItem }) => {
   return (
@@ -13,9 +14,9 @@ export const Comment = ({ commentItem }) => {
         <div className="font-medium w-full flex justify-between items-center">
           <div>
             <p>{commentItem.user}</p>
-            <a href="/" className="font-sm text-slate-400 font-normal italic">
+            <Link to={"/"} className="font-sm text-slate-400 font-normal italic">
               {commentItem.username}
-            </a>
+            </Link>
           </div>
           <div className="text-sm text-gray-500 ">{commentItem.postedDate}</div>
         </div>

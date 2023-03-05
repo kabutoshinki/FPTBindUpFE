@@ -6,6 +6,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../../utils/firebase";
 import UserNavbar from "./UserNavbar.jsx";
 import logo from "../../assets/logo.png";
+import { toast } from "react-toastify";
+import * as projectService from "../../services/projectService";
 
 export const Navbar = () => {
   // const [authenticate, setAuthenticate] = useState(false || window.localStorage.getItem("authenticate") === "true");
@@ -15,14 +17,18 @@ export const Navbar = () => {
 
   useEffect(() => {
     const scrollHandler = () => {
-      window.pageYOffset > 10 ? setTop(false) : setTop(true)
+      window.pageYOffset > 10 ? setTop(false) : setTop(true);
     };
-    window.addEventListener('scroll', scrollHandler);
-    return () => window.removeEventListener('scroll', scrollHandler);
+    window.addEventListener("scroll", scrollHandler);
+    return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
 
   return (
-    <div className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${!top && `bg-white border-b-[1px] border-b-slate-200`}`}>
+    <div
+      className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${
+        !top && `bg-white border-b-[1px] border-b-slate-200`
+      }`}
+    >
       <div className="w-[85%] mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <Link to={"/"} className="mr-5">

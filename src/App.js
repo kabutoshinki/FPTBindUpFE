@@ -1,19 +1,19 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./page/home/Home";
-import ProjectDetail from "./page/project/ProjectDetail";
 import Profile from "./page/user/Profile";
 import EditProfile from "./page/user/EditProfile";
 import Projects from "./page/project/Projects";
 import ProjectInfo from "./page/project/ProjectInfo";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/project" element={<ProjectDetail />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/project/:id" element={<ProjectInfo />} />
         <Route path="/mydetail" element={<EditProfile />} />
