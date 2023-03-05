@@ -22,6 +22,7 @@ const PostModal = ({ open, onClose }) => {
   };
 
   if (localStorage.getItem("user") !== null) {
+    console.log(localStorage.getItem("user"));
     initialFormData.founderId = localStorage.getItem("user").replace(/"/g, "");
   }
 
@@ -33,6 +34,7 @@ const PostModal = ({ open, onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      console.log(formData);
       const res = await projectService.createProject(formData);
       toast.success("Post Success");
       onClose();
