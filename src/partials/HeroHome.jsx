@@ -87,7 +87,7 @@ function HeroHome() {
                       <stop stopColor="#4FD1C5" offset="0%" />
                       <stop stopColor="#81E6D9" offset="25.871%" />
                       <stop stopColor="#338CF5" offset="100%" />
-                    </radialGradient>
+                    </radialGradient> 
                     <circle id="hero-ill-d" cx="384" cy="216" r="64" />
                   </defs>
                   <g fill="none" fillRule="evenodd">
