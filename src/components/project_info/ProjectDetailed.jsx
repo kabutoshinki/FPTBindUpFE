@@ -139,14 +139,6 @@ export const ProjectDetailed = ({ rating, id }) => {
             <span className="">About</span>
           </div>
           <div
-            onClick={() => setOpenTab(2)}
-            className={` ${
-              openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
-          >
-            <span>Reviews</span>
-          </div>
-          <div
             onClick={() => setOpenTab(3)}
             className={` ${
               openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
@@ -163,17 +155,9 @@ export const ProjectDetailed = ({ rating, id }) => {
             <span>Members</span>
           </div>
           <div
-            onClick={() => setOpenTab(5)}
-            className={` ${
-              openTab === 5 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
-          >
-            <span>Mentor</span>
-          </div>
-          <div
             onClick={() => setOpenTab(6)}
             className={` ${
-              openTab === 6 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              openTab === 5 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
             } cursor-pointer inline-block `}
           >
             <span>Change logs</span>
@@ -192,7 +176,6 @@ export const ProjectDetailed = ({ rating, id }) => {
           <div className="py-[20px] mt-4 float-right">
             <div className="mt-3 text-base font-bold mb-3 text-gray-900">
               Upcomming Products
-              <span className="text-f13 ml-2 text-gray-500 font-normal">Powered by Ship</span>
             </div>
             <div className="bg-white rounded shadow ">
               {asidebarData.map((item, index) => (
