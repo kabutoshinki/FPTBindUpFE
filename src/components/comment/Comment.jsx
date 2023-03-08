@@ -14,7 +14,7 @@ export const Comment = ({ commentItem }) => {
         <div className="font-medium w-full flex justify-between items-center">
           <div>
             <p>{commentItem.user}</p>
-            <Link to={"/"} className="font-sm text-slate-400 font-normal italic">
+            <Link to={"/"} className="text-sm text-slate-400 font-normal italic">
               {commentItem.username}
             </Link>
           </div>

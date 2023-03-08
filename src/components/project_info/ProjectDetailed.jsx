@@ -6,9 +6,11 @@ import { asidebarData } from "../../components/asidebar/asidebarData";
 import useFetch from "../../hooks/useFetch";
 import * as projectService from "../../services/projectService";
 import { useEffect } from "react";
+import ProjectChangelogDetail from "./ProjectChangelogDetail";
+import ProjectMemberDetail from "./ProjectMemberDetail";
 
-export const ProjectDetailed = ({ rating, id }) => {
-  const [openTab, setOpenTab] = useState(1);
+export const ProjectDetailed = ({ rating, id, openTabId }) => {
+  const [openTab, setOpenTab] = useState(openTabId);
   const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
   const [project, setProject] = useState([]);
 
@@ -22,7 +24,10 @@ export const ProjectDetailed = ({ rating, id }) => {
         <div className="w-full flex justify-between">
           <div className="flex items-center">
             <Link to={"/"} className="mr-5 rounded ">
-              <img className="object-cover rounded-lg h-16 w-16" src={project?.data?.logo} alt="BindUP logo" />
+              <img className="object-cover rounded-lg h-16 w-16" src="/no_img.png" onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src = "/no_img.png";
+              }} alt="BindUP logo" />
             </Link>
             <div>
               <div className="flex items-center">
@@ -132,33 +137,29 @@ export const ProjectDetailed = ({ rating, id }) => {
         <div className="mt-[30pt] flex space-x-[50px] text-lg font-[500] w-full">
           <div
             onClick={() => setOpenTab(1)}
-            className={` ${
-              openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            className={` ${openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span className="">About</span>
           </div>
           <div
-            onClick={() => setOpenTab(3)}
-            className={` ${
-              openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            onClick={() => setOpenTab(2)}
+            className={` ${openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span>Jobs</span>
           </div>
           <div
-            onClick={() => setOpenTab(4)}
-            className={` ${
-              openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            onClick={() => setOpenTab(3)}
+            className={` ${openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span>Members</span>
           </div>
           <div
-            onClick={() => setOpenTab(6)}
-            className={` ${
-              openTab === 5 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            onClick={() => setOpenTab(4)}
+            className={` ${openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span>Change logs</span>
           </div>
@@ -171,7 +172,12 @@ export const ProjectDetailed = ({ rating, id }) => {
             <div className={openTab === 2 ? "block" : "hidden"}>
               <ProjectReview />
             </div>
-            <div className={openTab === 3 ? "block" : "hidden"}>Tab 3</div>
+            <div className={openTab === 3 ? "block" : "hidden"}>
+              <ProjectMemberDetail />
+            </div>
+            <div className={openTab === 4 ? "block" : "hidden"}>
+              <ProjectChangelogDetail />
+            </div>
           </div>
           <div className="py-[20px] mt-4 float-right">
             <div className="mt-3 text-base font-bold mb-3 text-gray-900">
