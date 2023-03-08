@@ -13,7 +13,7 @@ const ProjectList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   // const [numOfPages, setNumOfPages] = useState(0);
   const { data, loading } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=voteQuantity`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=id&statusType=0`
   );
 
   useEffect(() => {

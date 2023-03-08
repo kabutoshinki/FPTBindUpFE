@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useRef } from "react";
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import { Editor } from '@tinymce/tinymce-react';
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import { Editor } from "@tinymce/tinymce-react";
 // import '../..node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import * as projectService from "../../services/projectService";
 import { toast } from "react-toastify";
@@ -20,7 +20,6 @@ const initialFormData = {
 };
 
 const PostModal = ({ open, onClose }) => {
-
   const [formData, setFormData] = useState(initialFormData);
   const [showModal, setShowModal] = useState(false);
   const handleOnClose = (e) => {
@@ -33,12 +32,12 @@ const PostModal = ({ open, onClose }) => {
   }
 
   const handleDescChange = (content, editor) => {
-    console.log('desc:', content);
-    setFormData({ ...formData, ['description']: content})
+    console.log("desc:", content);
+    setFormData({ ...formData, ["description"]: content });
   };
 
   const handleMilestoneChange = (event) => {
-    setFormData({ ...formData, ['milestone']: event.target.value})
+    setFormData({ ...formData, ["milestone"]: event.target.value });
   };
 
   const handleInputChange = (event) => {
@@ -164,36 +163,45 @@ const PostModal = ({ open, onClose }) => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
               ></textarea> */}
               <Editor
-                apiKey='n4wo29pfipl3fr4n3e29mh6yokcj1nt0cigd7rz76twvvswg'
+                apiKey="n4wo29pfipl3fr4n3e29mh6yokcj1nt0cigd7rz76twvvswg"
                 id="description"
                 name="description"
                 value={formData.description}
                 onEditorChange={handleDescChange}
                 initialValue="<p>Describe your project here...</p>"
                 init={{
-                  selector: 'textarea',
+                  selector: "textarea",
                   height: 350,
                   menubar: false,
                   resize: false,
                   plugins: [
-                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
-                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
-                    'insertdatetime', 'media', 'table', 'code',
+                    "advlist",
+                    "autolink",
+                    "lists",
+                    "link",
+                    "image",
+                    "charmap",
+                    "preview",
+                    "anchor",
+                    "searchreplace",
+                    "visualblocks",
+                    "code",
+                    "fullscreen",
+                    "insertdatetime",
+                    "media",
+                    "table",
+                    "code",
                   ],
-                  toolbar: 'undo redo | blocks | ' +
-                    'bold italic forecolor | alignleft aligncenter ' +
-                    'alignright alignjustify | bullist numlist outdent indent | ' +
-                    'removeformat | help',
-                  content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                  toolbar:
+                    "undo redo | blocks | " +
+                    "bold italic forecolor | alignleft aligncenter " +
+                    "alignright alignjustify | bullist numlist outdent indent | " +
+                    "removeformat | help",
+                  content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
                 }}
               />
             </div>
           </div>
-
-
-
-
-
 
           {/* <div className="mb-4">
               <label htmlFor="voteQuantity" className="block text-gray-700 font-bold mb-2">
@@ -208,7 +216,6 @@ const PostModal = ({ open, onClose }) => {
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
               />
             </div> */}
-
 
           <div className="flex items-center justify-between">
             <button
