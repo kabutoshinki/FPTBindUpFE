@@ -73,16 +73,11 @@ export const ProjectDesc = ({ rating, data }) => {
       <div className="mt-[30pt]">
         <h3 className="font-[500] text-slate-700">Mentors</h3>
         <div className="my-[10px] flex justify-start flex-wrap">
-          <div class="flex items-center space-x-4">
-            <img class="w-10 h-10 rounded-full" src="/no_img.png" alt="" />
-            <div className="font-medium w-full flex justify-between items-center">
-              <div>
-                <span>Jese Loes  </span>
-                <Link to={"/"} className="text-sm text-slate-400 font-normal italic">
-                  @jese_loes
-                </Link>
-                <p className="text-sm text-blue-700 font-medium">CEO of WebWave</p>
-              </div>
+          <div className="flex items-center space-x-4">
+            <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" />
+            <div className="font-medium dark:text-white">
+              <div>Jese Leos</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
             </div>
           </div>
         </div>
