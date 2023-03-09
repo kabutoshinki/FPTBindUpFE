@@ -1,5 +1,6 @@
 import React from "react";
 import ImageGallery from "react-image-gallery";
+import { Link } from "react-router-dom";
 
 const images = [
   {
@@ -20,8 +21,7 @@ export const ProjectDesc = ({ rating, data }) => {
   return (
     <>
       <ImageGallery items={images} />
-
-      <p>{data.data?.description}</p>
+      <div dangerouslySetInnerHTML={{ __html: data.data?.description }} />
       <div className="mt-[20px] grid gap-4 grid-cols-4 grid-rows-8">
         <p className="col-span-1 font-medium">Website</p>
         <p className="col-span-3">{data.data?.name}</p>
@@ -74,11 +74,16 @@ export const ProjectDesc = ({ rating, data }) => {
         <h3 className="font-[500] text-slate-700">Mentors</h3>
         <div className="my-[10px] flex justify-start flex-wrap">
           <div class="flex items-center space-x-4">
-            <img class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt=""/>
-              <div class="font-medium dark:text-white">
-                <div>Jese Leos</div>
-                <div class="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
+            <img class="w-10 h-10 rounded-full" src="/no_img.png" alt="" />
+            <div className="font-medium w-full flex justify-between items-center">
+              <div>
+                <span>Jese Loes  </span>
+                <Link to={"/"} className="text-sm text-slate-400 font-normal italic">
+                  @jese_loes
+                </Link>
+                <p className="text-sm text-blue-700 font-medium">CEO of WebWave</p>
               </div>
+            </div>
           </div>
         </div>
       </div>

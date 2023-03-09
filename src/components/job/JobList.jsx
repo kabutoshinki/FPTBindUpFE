@@ -99,24 +99,31 @@ const JobList = () => {
                 {jobData.map((item, index) => (
                   <li key={index}>
                     <Link to={`/job/1`}>
-                      <div className="flex justify-between items-center border-[1px] border-slate-200 rounded px-[20px] py-[15px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-[#e6f7ff] hover:via-white hover:to-white">
-                        <div className="flex items-center">
-                          <div>
-                            <img className="w-14 h-14" src={item.projectLogo} onError={({ currentTarget }) => {
-                              currentTarget.onerror = null; // prevents looping
-                              currentTarget.src = "/no_img.png";
-                            }} alt={item.project + ' logo'} />
-                          </div>
-                          <div className="ml-[30px]">
-                            <h3 className="text-base font-bold text-slate-700">{item.title}</h3>
-                            <p className="text-[0.9rem] font-normal text-slate-500 mb-[15px]">{item.project}</p>
-                            <p className="text-[0.9rem] font-[500] text-slate-400 flex items-center">
-                              <svg className="w-5 h-5 mr-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 8V12L15 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                                <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
-                              </svg>
-                              {item.dueDate}
-                            </p>
+                      <div className="flex justify-between items-center h-[110px] border-[1px] border-slate-200 rounded px-[20px] py-[15px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-[#e6f7ff] hover:via-white hover:to-white">
+                        <div className="flex items-center h-full">
+                          <img className="w-14 h-14 my-auto" src={item.projectLogo} onError={({ currentTarget }) => {
+                            currentTarget.onerror = null; // prevents looping
+                            currentTarget.src = "/no_img.png";
+                          }} alt={item.project + ' logo'} />
+                          <div className="ml-[30px] h-full flex flex-col justify-between">
+                            {/* vote quantity of project is placed in the bracket */}
+                            <p className="text-[0.9rem] font-[500] text-slate-500">{item.project}</p>
+                            <h3 className="text-[1.3rem] font-bold text-slate-700">{item.title}</h3>
+                            <div className="flex items-center space-x-[20px]">
+                              <p className="text-[0.8rem] font-[500] text-slate-400 flex items-center">
+                                <svg className="w-4 h-4 mr-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M12 8V12L15 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                                  <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
+                                </svg>
+                                {item.dueDate}
+                              </p>
+                              <p className="text-[0.8rem] font-[500] text-slate-400 flex items-center">
+                                <svg className="w-4 h-4 mr-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M11 11H6.2C5.07989 11 4.51984 11 4.09202 11.218C3.71569 11.4097 3.40973 11.7157 3.21799 12.092C3 12.5198 3 13.0799 3 14.2V21M21 21V6.2C21 5.0799 21 4.51984 20.782 4.09202C20.5903 3.71569 20.2843 3.40973 19.908 3.21799C19.4802 3 18.9201 3 17.8 3H14.2C13.0799 3 12.5198 3 12.092 3.21799C11.7157 3.40973 11.4097 3.71569 11.218 4.09202C11 4.51984 11 5.0799 11 6.2V21M22 21H2M14.5 7H17.5M14.5 11H17.5M14.5 15H17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                </svg>
+                                {item.location}
+                              </p>
+                            </div>
                           </div>
                         </div>
                         <div className="p-0 m-0 h-full flex flex-col items-end justify-between">

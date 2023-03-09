@@ -161,7 +161,7 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
             className={` ${openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
               } cursor-pointer inline-block `}
           >
-            <span>Change logs</span>
+            <span>Changelog</span>
           </div>
         </div>
         <div className="my-[30px] w-full flex">
