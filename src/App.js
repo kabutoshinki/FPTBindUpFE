@@ -7,6 +7,7 @@ import Projects from "./page/project/Projects";
 import ProjectInfo from "./page/project/ProjectInfo";
 import ProjectChangeLog from "./page/project/ProjectChangeLog";
 import ProjectMember from "./page/project/ProjectMember";
+import CreateProject from "./page/project/CreateProject";
 import Jobs from "./page/job/Jobs";
 import JobDetail from "./page/job/JobDetail";
 import { ToastContainer } from "react-toastify";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/project/new" element={<CreateProject />} />
         <Route path="/project/:id" element={<ProjectInfo />} />
         <Route path="/project/1/changelog" element={<ProjectChangeLog />} />
         <Route path="/project/1/members" element={<ProjectMember />} />

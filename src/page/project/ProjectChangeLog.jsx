@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { Navbar } from "../../components/navbar/Navbar";
-import ProjectDetailed from "../../components/project_info/ProjectDetailed";
+import ProjectDetailed from "../../components/project/ProjectDetailed";
 import Footer from "../../partials/Footer";
 
 const ProjectChangeLog = () => {

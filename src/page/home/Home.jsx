@@ -6,7 +6,7 @@ import FeaturesHome from "../../partials/Features";
 import Footer from "../../partials/Footer";
 import { Navbar } from "../../components/navbar/Navbar";
 import TodayList from "../../components/todayList/TodayList";
-import ProjectList from "../../components/project_info/ProjectList";
+import ProjectList from "../../components/project/ProjectList";
 
 const Home = () => {
   return (

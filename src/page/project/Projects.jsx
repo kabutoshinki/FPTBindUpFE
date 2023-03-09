@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "../../components/navbar/Navbar";
-import ProjectList from "../../components/project_info/ProjectList";
+import ProjectList from "../../components/project/ProjectList";
 import { topics } from "../../components/topic/topics";
 import Footer from "../../partials/Footer";
 
