@@ -6,7 +6,6 @@ import Footer from "../../partials/Footer";
 
 const ProjectInfo = () => {
   let param = useParams();
-  console.log(param.id);
 
   return (
     <div className="flex flex-col min-h-screen overflow-hidden ">

@@ -13,11 +13,11 @@ const options = {
 };
 
 export async function getChangeLogById(id) {
-  return axios.get(apiEndpoint + `/api/v1/changelog/${id}`, options);
+  return axios.get(apiEndpoint + `api/v1/changelog/${id}`, options);
 }
 
 export async function addChangeLog(formData) {
-  return axios.post(apiEndpoint + `/api/v1/changelog/`, formData, options);
+  return axios.post(apiEndpoint + `api/v1/changelog/`, formData, options);
 }
 
 export async function updateChangeLog(formData) {

@@ -13,7 +13,7 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
   const [openTab, setOpenTab] = useState(openTabId);
   const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
   const [project, setProject] = useState([]);
-
+  document.documentElement.scrollTop = 0;
   useEffect(() => {
     setProject(data);
   }, [data]);
@@ -24,10 +24,15 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
         <div className="w-full flex justify-between">
           <div className="flex items-center">
             <Link to={"/"} className="mr-5 rounded ">
-              <img className="object-cover rounded-lg h-16 w-16" src="/no_img.png" onError={({ currentTarget }) => {
-                currentTarget.onerror = null; // prevents looping
-                currentTarget.src = "/no_img.png";
-              }} alt="BindUP logo" />
+              <img
+                className="object-cover rounded-lg h-16 w-16"
+                src="/no_img.png"
+                onError={({ currentTarget }) => {
+                  currentTarget.onerror = null; // prevents looping
+                  currentTarget.src = "/no_img.png";
+                }}
+                alt="BindUP logo"
+              />
             </Link>
             <div>
               <div className="flex items-center">
@@ -137,29 +142,33 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
         <div className="mt-[30pt] flex space-x-[50px] text-lg font-[500] w-full">
           <div
             onClick={() => setOpenTab(1)}
-            className={` ${openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span className="">About</span>
           </div>
           <div
             onClick={() => setOpenTab(2)}
-            className={` ${openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Jobs</span>
           </div>
           <div
             onClick={() => setOpenTab(3)}
-            className={` ${openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Members</span>
           </div>
           <div
             onClick={() => setOpenTab(4)}
-            className={` ${openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Change logs</span>
           </div>
@@ -180,9 +189,7 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
             </div>
           </div>
           <div className="py-[20px] mt-4 float-right">
-            <div className="mt-3 text-base font-bold mb-3 text-gray-900">
-              Upcomming Products
-            </div>
+            <div className="mt-3 text-base font-bold mb-3 text-gray-900">Upcomming Products</div>
             <div className="bg-white rounded shadow ">
               {asidebarData.map((item, index) => (
                 <div

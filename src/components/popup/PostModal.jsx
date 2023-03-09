@@ -27,7 +27,6 @@ const PostModal = ({ open, onClose }) => {
   };
 
   if (localStorage.getItem("user") !== null) {
-    console.log(localStorage.getItem("user"));
     initialFormData.founderId = localStorage.getItem("user").replace(/"/g, "");
   }
 
@@ -202,20 +201,6 @@ const PostModal = ({ open, onClose }) => {
               />
             </div>
           </div>
-
-          {/* <div className="mb-4">
-              <label htmlFor="voteQuantity" className="block text-gray-700 font-bold mb-2">
-                Vote Quantity:
-              </label>
-              <input
-                type="number"
-                id="voteQuantity"
-                name="voteQuantity"
-                value={formData.voteQuantity}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-              />
-            </div> */}
 
           <div className="flex items-center justify-between">
             <button

@@ -13,7 +13,8 @@ const options = {
 };
 
 export async function getMembersProject(id) {
-  return axios.get(apiEndpoint + `/api/v1/member/?projectId=${id}`, options);
+  console.log(id);
+  return axios.get(apiEndpoint + `api/v1/member/?projectId=${id}`, options);
 }
 
 export async function getMemberProjectById(id) {

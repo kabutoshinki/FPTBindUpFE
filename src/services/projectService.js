@@ -31,12 +31,12 @@ export async function getImageProject(id) {
 
 export async function createProject(projectInfo) {
   console.log(projectInfo);
-  return axios.post(apiEndpoint + "/api/v1/project/", projectInfo, options);
+  return axios.post(apiEndpoint + "api/v1/project/", projectInfo, options);
 }
 
 export async function updateProject(projectInfo) {
   console.log(projectInfo);
-  return axios.post(apiEndpoint + `/api/v1/project/`, projectInfo, options);
+  return axios.post(apiEndpoint + `api/v1/project/`, projectInfo, options);
 }
 
 export async function uploadImageProject(id, imageFile) {
