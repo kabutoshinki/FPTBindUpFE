@@ -17,6 +17,10 @@ export function getProjects(currentPage) {
   return axios.get(apiEndpoint + `api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=voteQuantity`);
 }
 
+export function getProjectsUser(id) {
+  return axios.get(apiEndpoint + `api/v1/user/${id}`);
+}
+
 export async function getProjectById(id) {
   console.log(id);
   const { data } = await axios.get(apiEndpoint + `api/v1/project/${id}`);
