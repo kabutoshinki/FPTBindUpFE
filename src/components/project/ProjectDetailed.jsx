@@ -10,14 +10,17 @@ import ProjectChangelogDetail from "./ProjectChangelogDetail";
 import ProjectMemberDetail from "./ProjectMemberDetail";
 
 export const ProjectDetailed = ({ rating, id, openTabId }) => {
-  const [openTab, setOpenTab] = useState(openTabId);
-  const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
+  const [openTab, setOpenTab] = useState(openTabId || 1);
   const [project, setProject] = useState([]);
+  const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
+  console.log(data);
+
   document.documentElement.scrollTop = 0;
   useEffect(() => {
     setProject(data);
   }, [data]);
-
+  console.log("project");
+  console.log(project);
   return (
     <div className="left-0 right-0 z-10 p-[20px] w-[67%] mx-auto">
       <div className="mx-auto flex flex-col justify-between items-start pt-[40px] ">
@@ -26,7 +29,7 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
             <Link to={"/"} className="mr-5 rounded ">
               <img
                 className="object-cover rounded-lg h-16 w-16"
-                src="/no_img.png"
+                src={project?.data?.logo || "/no_img.png"}
                 onError={({ currentTarget }) => {
                   currentTarget.onerror = null; // prevents looping
                   currentTarget.src = "/no_img.png";
@@ -100,7 +103,7 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
             </Link>
           </div>
         </div>
-      
+
         <div className="mt-[30pt] flex space-x-[50px] text-lg font-[500] w-full">
           <div
             onClick={() => setOpenTab(1)}

@@ -17,9 +17,8 @@ const initialFormData = {
   founderId: "",
 };
 
-export const CreateGeneralInfo = ({ }) => {
+export const CreateGeneralInfo = ({}) => {
   const [formData, setFormData] = useState(initialFormData);
-
 
   if (localStorage.getItem("user") !== null) {
     initialFormData.founderId = localStorage.getItem("user").replace(/"/g, "");
@@ -44,8 +43,9 @@ export const CreateGeneralInfo = ({ }) => {
     try {
       console.log(formData);
       const res = await projectService.createProject(formData);
-      toast.success("Add general info successfully!");
-      console.log(res);
+      toast.success("Add info successfully!");
+      // console.log(res?.data?.data);
+      localStorage.setItem("newProjectId", res?.data?.data);
     } catch (err) {
       toast.warning("Add general info fail");
       console.log(err);
@@ -54,7 +54,9 @@ export const CreateGeneralInfo = ({ }) => {
 
   return (
     <div className="w-full h-content mx-[40px] flex flex-col mb-[40px]">
-      <h3 className="font-semibold text-slate-500 text-[1.3rem] mb-[20px]">Update your project main info (if necessary)</h3>
+      <h3 className="font-semibold text-slate-500 text-[1.3rem] mb-[20px]">
+        Update your project main info (if necessary)
+      </h3>
       <form onSubmit={handleSubmit} className="">
         <div className="">
           {/* Project Name */}
@@ -120,7 +122,6 @@ export const CreateGeneralInfo = ({ }) => {
           </div>
 
           <div className="mb-[30px] w-[80%]">
-
             <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
               Description
             </label>
