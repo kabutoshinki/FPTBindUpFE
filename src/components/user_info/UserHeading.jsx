@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/firebase";
+import * as projectService from "../../services/projectService";
 const UserHeading = () => {
   const [user] = useAuthState(auth);
   const [openTab, setOpenTab] = useState(1);
-
+  const [projects, setProjects] = useState([]);
+  const ListUserProjects = async () => {
+    const userId = localStorage.getItem("user").replace(/"/g, "");
+    const { data } = await projectService.getProjectsUser(userId);
+    setProjects(data?.data?.projects);
+  };
+  useEffect(() => {
+    ListUserProjects();
+  }, []);
   return (
     <div className="container mx-auto px-2">
       <div className="sm:space-x-4 sm:px-4 my-10 justify-center items-center" id="userInfo">
