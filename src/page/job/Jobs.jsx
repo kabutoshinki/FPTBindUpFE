@@ -34,7 +34,7 @@ const Jobs = () => {
                                                 className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
                                             />
                                             <label
-                                                for={'string' + item.name.toLowerCase() + '-checkbox'}
+                                                htmlFor={'string' + item.name.toLowerCase() + '-checkbox'}
                                                 className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
                                             >
                                                 {item.name}
@@ -48,15 +48,15 @@ const Jobs = () => {
                             <h3 className="mt-[20px] mb-[10px] font-[600] text-[0.9rem] text-slate-600 uppercase">SORT JOBS BY</h3>
                             <ul className="w-full text-sm font-medium">
                                 <li className="w-full group hover:bg-slate-50">
-                                    <div class="flex items-center">
-                                        <input checked id="default-radio-2" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 border-slate-400 focus:ring-transparent" />
-                                        <label for="default-radio-2" class="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600">Due date descending</label>
+                                    <div className="flex items-center">
+                                        <input checked id="default-radio-2" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 border-slate-400 focus:ring-transparent" />
+                                        <label htmlFor="default-radio-2" className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600">Due date descending</label>
                                     </div>
                                 </li>
                                 <li className="w-full group hover:bg-slate-50">
-                                    <div class="flex items-center mb-4">
-                                        <input id="default-radio-1" type="radio" value="" name="default-radio" class="w-4 h-4 text-blue-600 border-slate-400 focus:ring-transparent" />
-                                        <label for="default-radio-1" class="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600">Due date ascending</label>
+                                    <div className="flex items-center mb-4">
+                                        <input id="default-radio-1" type="radio" value="" name="default-radio" className="w-4 h-4 text-blue-600 border-slate-400 focus:ring-transparent" />
+                                        <label htmlFor="default-radio-1" className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600">Due date ascending</label>
                                     </div>
                                 </li>
                             </ul>

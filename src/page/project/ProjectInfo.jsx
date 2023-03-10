@@ -15,7 +15,7 @@ const ProjectInfo = () => {
 
       <div className="pt-[60pt] flex-grow mx-auto relative w-full">
         <div className="absolute bg-gradient-to-b from-blue-100 w-full h-[40pt]"></div>
-        <ProjectDetailed rating={3} id={param.id} />
+        <ProjectDetailed id={param.id} />
       </div>
       <Footer />
     </div>

@@ -168,10 +168,10 @@ const JobList = () => {
                       </div>
                       <div className="p-0 m-0 h-full flex flex-col items-end justify-between">
                         <div className="mb-[20px]">
-                          <span class="bg-indigo-50 text-indigo-700 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
+                          <span className="bg-indigo-50 text-indigo-700 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
                             #engineer
                           </span>
-                          <span class="bg-indigo-50 text-indigo-700 text-xs font-medium px-2.5 py-0.5 rounded ">
+                          <span className="bg-indigo-50 text-indigo-700 text-xs font-medium px-2.5 py-0.5 rounded ">
                             #data
                           </span>
                         </div>

@@ -36,18 +36,18 @@ const AddMemberModal = ({ open, onClose, onCreateSuccess }) => {
   return (
     <div
       id="container"
-      className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+      className="fixed inset-0 rounded bg-black bg-opacity-50 flex justify-center items-center z-50"
       onClick={handleOnClose}
     >
-      <div className="md:w-[600px] w-[600px] mx-auto flex flex-col">
-        <div className="bg-white p-8 rounded-sm flex flex-col">
-          <h1 className="font-bold text-center mt-2 mb-3 text-xl md:text-2xl">Add Member</h1>
-          <p className="text-gray-600 text-center text-base md:text-lg">
-            Join our community of friendly folks discovering and sharing the latest ideas.
+      <div className="w-[500px] mx-auto flex flex-col">
+        <div className="bg-white p-[30px] rounded-sm flex flex-col">
+          <h1 className="font-bold text-center mb-[10px] text-xl md:text-2xl">New Member</h1>
+          <p className="text-gray-600 text-center text-base mb-[20px]">
+            Join our community
           </p>
           <form onSubmit={handleFormSubmit}>
             <div className="justify-center ">
-              <div className="mb-6 w-[60%]">
+              <div className="mb-[20px] w-full">
                 <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
                   Name
                 </label>
@@ -60,8 +60,7 @@ const AddMemberModal = ({ open, onClose, onCreateSuccess }) => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                 />
               </div>
-              <br />
-              <div className="mb-6 w-[60%]">
+              <div className="mb-[20px] w-full">
                 <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
                   Title
                 </label>
@@ -74,8 +73,7 @@ const AddMemberModal = ({ open, onClose, onCreateSuccess }) => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                 />
               </div>
-              <br />
-              <div className="mb-6 w-[60%]">
+              <div className="mb-[20px] w-full">
                 <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
                   Role
                 </label>
@@ -88,8 +86,8 @@ const AddMemberModal = ({ open, onClose, onCreateSuccess }) => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                 />
               </div>
-              <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Submit
+              <button type="submit" className="mt-[20px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Add
               </button>
             </div>
           </form>

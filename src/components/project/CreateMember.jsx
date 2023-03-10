@@ -1,59 +1,13 @@
 import React, { useState } from "react";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import AddMemberModal from "../popup/AddMemberModal";
-import { Button } from "@mui/material";
 import * as projectMemberService from "../../services/projectMemberService";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium,
-  };
-}
 export const CreateMember = () => {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [members, setMembers] = useState([]);
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
+
   const ProjectMembers = async () => {
     const projectId = localStorage.getItem("newProjectId");
     const { data } = await projectMemberService.getMembersProject(projectId);
@@ -76,36 +30,22 @@ export const CreateMember = () => {
         <p className="font-[400] text-slate-700 text-[1rem] mb-[20px]">
           You can add another user as member of the project
         </p>
-
         <div>
-          <FormControl sx={{ width: 300 }}>
-            <InputLabel id="demo-multiple-name-label">User</InputLabel>
-            <Select
-              labelId="demo-multiple-name-label"
-              id="demo-multiple-name"
-              multiple
-              value={personName}
-              onChange={handleChange}
-              input={<OutlinedInput label="Name" />}
-              MenuProps={MenuProps}
-            >
-              {names.map((name) => (
-                <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
-                  {name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
           <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="flex items-center border border-slate-500 text-slate-500 hover:border-blue-700 hover:text-blue-500 py-2 px-4 rounded"
             onClick={() => setOpenModal(true)}
           >
+            <svg className="w-6 h-6 mr-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 19C3.69137 16.6928 5.46998 16 9.5 16C13.53 16 15.3086 16.6928 16 19" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+              <path d="M13 9.5C13 11.433 11.433 13 9.5 13C7.567 13 6 11.433 6 9.5C6 7.567 7.567 6 9.5 6C11.433 6 13 7.567 13 9.5Z" stroke="currentColor" strokeWidth="1.3" />
+              <path d="M15 6H21" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M18 3L18 9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
             Add Member
           </button>
         </div>
         <div>
-          <h1>List Member</h1>
-          <div className="mt-[20pt] pb-[20pt] border-b-2 border-b-slate-200 grid grid-cols-3 gap-[20px]">
+          <div className="mt-[20pt] pb-[20pt] grid grid-cols-3 gap-[20px]">
             {members.length !== 0 ? (
               members?.map((member, index) => (
                 <div className="flex items-center space-x-4" key={index}>
@@ -122,7 +62,7 @@ export const CreateMember = () => {
                 </div>
               ))
             ) : (
-              <div className="font-bold text-center">List Member Is Empty</div>
+              <div className="font-normal text-center">List Member Is Empty</div>
             )}
           </div>
         </div>
@@ -134,7 +74,7 @@ export const CreateMember = () => {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
         >
-          Next step: Extras
+          Submit my project
         </button>
       </div>
     </div>

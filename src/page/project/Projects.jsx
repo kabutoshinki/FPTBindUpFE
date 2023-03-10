@@ -53,7 +53,7 @@ const Projects = () => {
                       className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
                     />
                     <label
-                      for="idea-checkbox"
+                      htmlFor="idea-checkbox"
                       className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
                     >
                       Idea
@@ -69,7 +69,7 @@ const Projects = () => {
                       className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
                     />
                     <label
-                      for="upcoming-checkbox"
+                      htmlFor="upcoming-checkbox"
                       className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
                     >
                       Upcoming
@@ -85,7 +85,7 @@ const Projects = () => {
                       className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
                     />
                     <label
-                      for="launching-checkbox"
+                      htmlFor="launching-checkbox"
                       className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
                     >
                       Launching
@@ -101,7 +101,7 @@ const Projects = () => {
                       className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
                     />
                     <label
-                      for="finished-checkbox"
+                      htmlFor="finished-checkbox"
                       className="w-full py-3 ml-2 font-normal text-slate-500 group-hover:text-blue-600"
                     >
                       Finished

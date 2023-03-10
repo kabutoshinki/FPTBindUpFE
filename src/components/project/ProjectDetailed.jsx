@@ -9,18 +9,18 @@ import { useEffect } from "react";
 import ProjectChangelogDetail from "./ProjectChangelogDetail";
 import ProjectMemberDetail from "./ProjectMemberDetail";
 
-export const ProjectDetailed = ({ rating, id, openTabId }) => {
+export const ProjectDetailed = ({ id, openTabId }) => {
   const [openTab, setOpenTab] = useState(openTabId || 1);
   const [project, setProject] = useState([]);
   const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
-  console.log(data);
+  // console.log(data);
 
   document.documentElement.scrollTop = 0;
   useEffect(() => {
     setProject(data);
   }, [data]);
-  console.log("project");
-  console.log(project);
+  // console.log("project"); console.log(project);
+
   return (
     <div className="left-0 right-0 z-10 p-[20px] w-[67%] mx-auto">
       <div className="mx-auto flex flex-col justify-between items-start pt-[40px] ">
@@ -40,7 +40,6 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
             <div>
               <div className="flex items-center">
                 <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{project?.data?.name}</h3>
-                {/* <span class="bg-blue-50 text-blue-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">Upcoming</span> */}
                 {project?.data?.milestone === 0 && (
                   <span className="bg-orange-50 text-orange-500 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-orange-400">
                     Idea
@@ -107,33 +106,29 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
         <div className="mt-[30pt] flex space-x-[50px] text-lg font-[500] w-full">
           <div
             onClick={() => setOpenTab(1)}
-            className={` ${
-              openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            className={` ${openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span className="">About</span>
           </div>
           <div
             onClick={() => setOpenTab(2)}
-            className={` ${
-              openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            className={` ${openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span>Jobs</span>
           </div>
           <div
             onClick={() => setOpenTab(3)}
-            className={` ${
-              openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            className={` ${openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span>Members</span>
           </div>
           <div
             onClick={() => setOpenTab(4)}
-            className={` ${
-              openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-            } cursor-pointer inline-block `}
+            className={` ${openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block `}
           >
             <span>Changelog</span>
           </div>
@@ -153,8 +148,8 @@ export const ProjectDetailed = ({ rating, id, openTabId }) => {
               <ProjectChangelogDetail />
             </div>
           </div>
-          <div className="py-[20px] mt-4 float-right">
-            <div className="mt-3 text-base font-bold mb-3 text-gray-900">Upcomming Products</div>
+          <div className="border-l border-l-slate-200 px-[20px] mt-4 float-right">
+            <div className="text-base font-bold mb-3 text-gray-900">Newest projects</div>
             <div className="bg-white rounded shadow ">
               {asidebarData.map((item, index) => (
                 <div

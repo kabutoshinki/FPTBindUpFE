@@ -61,13 +61,13 @@ export const JobDescription = ({ rating, id, openTabId }) => {
                     Thu Duc City
                   </p>
                 </div>
-                <button type="button" class="w-full flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 font-[500] rounded text-[1rem] px-5 py-2.5 mr-2 mb-2">
+                <button type="button" className="w-full flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 font-[500] rounded text-[1rem] px-5 py-2.5 mr-2 mb-2">
                   Send
                   <svg className="w-5 h-5 ml-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 14L13 21L20 4L3 11L6.5 12.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </button>
-                <button type="button" class="w-full flex items-center justify-center text-blue-600 border border-blue-700 hover:border-blue-800 font-[500] rounded text-[1rem] px-5 py-2.5 mr-2 mb-2">
+                <button type="button" className="w-full flex items-center justify-center text-blue-600 border border-blue-700 hover:border-blue-800 font-[500] rounded text-[1rem] px-5 py-2.5 mr-2 mb-2">
                   Visit project
                   <svg className="w-7 h-7 mr-[10px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

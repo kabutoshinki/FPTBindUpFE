@@ -5,35 +5,56 @@ import { Link } from "react-router-dom";
 const images = [
   {
     original: "https://picsum.photos/id/1018/1000/600/",
-    thumbnail: "https://picsum.photos/id/1018/250/150/",
+    thumbnail: "https://picsum.photos/id/1018/1000/600/",
+    sizes: "600x400",
   },
   {
     original: "https://picsum.photos/id/1015/1000/600/",
-    thumbnail: "https://picsum.photos/id/1015/250/150/",
+    thumbnail: "https://picsum.photos/id/1015/1000/600/",
+    sizes: "600x400",
   },
   {
     original: "https://picsum.photos/id/1019/1000/600/",
-    thumbnail: "https://picsum.photos/id/1019/250/150/",
+    thumbnail: "https://picsum.photos/id/1019/1000/600/",
+    sizes: "600x400",
   },
 ];
 
 export const ProjectDesc = ({ rating, data }) => {
+  // console.log("Image:", data?.data?.images);
+  const arr = data?.data?.images;
+  let imagesArr = [];
+  if (arr) {
+    console.log("url", arr);
+    arr.forEach(element => {
+      if (element) {
+        console.log("el: ", element.directory);
+        imagesArr.push({
+          "original": element.directory,
+          "thumbnail": element.directory,
+          "originalHeight": 400,
+          "originalWidth": 600,
+        })
+      }
+    });
+  }
   return (
     <>
-      <ImageGallery items={data?.data?.images?.directory || images} />
+
+      {arr && <ImageGallery items={imagesArr} />}
       <div dangerouslySetInnerHTML={{ __html: data.data?.description }} />
       <div className="mt-[20px] grid gap-4 grid-cols-4 grid-rows-8">
-        <p className="col-span-1 font-medium">Website</p>
-        <p className="col-span-3">{data.data?.name}</p>
+        {/* <p className="col-span-1 font-medium">Website</p>
+        <p className="col-span-3">{data.data?.name}</p> */}
 
-        <p className="col-span-1 font-medium">Makers</p>
-        <p className="col-span-3">Ewelina Wróbel, Monika Buchelt, Maciej Czajkowski, Janusz Mirowski</p>
+        {/* <p className="col-span-1 font-medium">Makers</p>
+        <p className="col-span-3">Ewelina Wróbel, Monika Buchelt, Maciej Czajkowski, Janusz Mirowski</p> */}
 
-        <p className="col-span-1 font-medium">Pricing</p>
-        <p className="col-span-3">This product requires payment but also offers a free trial or version</p>
+        {/* <p className="col-span-1 font-medium">Pricing</p>
+        <p className="col-span-3">This product requires payment but also offers a free trial or version</p> */}
 
-        <p className="col-span-1 font-medium">Platforms</p>
-        <p className="col-span-3">Web</p>
+        {/* <p className="col-span-1 font-medium">Platforms</p>
+        <p className="col-span-3">Web</p> */}
       </div>
       <div className="mt-[30pt]">
         <h3 className="font-[500] text-slate-700">Related topics</h3>

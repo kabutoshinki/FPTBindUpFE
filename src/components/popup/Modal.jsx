@@ -42,10 +42,10 @@ const Modal = ({ open, onClose }) => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
+      // console.log(user);
       onClose();
     } else {
-      console.log("login");
+      // console.log("login");
     }
   }, [user]);
   if (!open) return null;
