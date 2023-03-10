@@ -17,7 +17,7 @@ const initialFormData = {
   founderId: "",
 };
 
-export const CreateGeneralInfo = ({}) => {
+export const CreateGeneralInfo = ({ setOpenTab }) => {
   const [formData, setFormData] = useState(initialFormData);
 
   if (localStorage.getItem("user") !== null) {
@@ -43,11 +43,17 @@ export const CreateGeneralInfo = ({}) => {
     try {
       console.log(formData);
       const res = await projectService.createProject(formData);
-      toast.success("Add info successfully!");
+      toast.success("Add info successfully!", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
       // console.log(res?.data?.data);
       localStorage.setItem("newProjectId", res?.data?.data);
+      setOpenTab(2);
+      document.documentElement.scrollTop = 0;
     } catch (err) {
-      toast.warning("Add general info fail");
+      toast.warning("Add general info fail", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
       console.log(err);
     }
   };
@@ -171,6 +177,7 @@ export const CreateGeneralInfo = ({}) => {
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            // onClick={() => setOpenTab(2)}
           >
             Next step: Logo & Images
           </button>
