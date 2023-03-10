@@ -20,7 +20,7 @@ const images = [
 export const ProjectDesc = ({ rating, data }) => {
   return (
     <>
-      <ImageGallery items={images} />
+      <ImageGallery items={data?.data?.images?.directory || images} />
       <div dangerouslySetInnerHTML={{ __html: data.data?.description }} />
       <div className="mt-[20px] grid gap-4 grid-cols-4 grid-rows-8">
         <p className="col-span-1 font-medium">Website</p>
