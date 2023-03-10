@@ -9,7 +9,7 @@ import logo from "../../assets/logo.png";
 import { toast } from "react-toastify";
 import * as projectService from "../../services/projectService";
 
-export const Navbar = () => {
+export const Navbar = ({ borderNavBar }) => {
   // const [authenticate, setAuthenticate] = useState(false || window.localStorage.getItem("authenticate") === "true");
   const [openModal, setOpenModal] = useState(false);
   const [user] = useAuthState(auth);
@@ -25,9 +25,7 @@ export const Navbar = () => {
 
   return (
     <div
-      className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${
-        !top && `bg-white border-b-[1px] border-b-slate-200`
-      }`}
+      className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${(!top || borderNavBar) && `bg-white border-b-[1px] border-b-slate-200`}`}
     >
       <div className="w-[85%] mx-auto flex justify-between items-center">
         <div className="flex items-center">

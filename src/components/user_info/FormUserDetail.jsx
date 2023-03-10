@@ -47,8 +47,36 @@ const FormUserDetail = () => {
   };
 
   return (
-    <div className="pt-6 grid grid-cols-1 lg:grid-cols-6 lg:gap-6">
-      <div className="col-span-4 sm:col-span-4 lg:col-span-4">
+    <div className="pt-6 w-[60%] mx-auto">
+      <div className="col-span-2">
+        <aside>
+          <div className="flex">
+            <div>
+              <img className="rounded w-[120px] h-[120px]" src={imageURL} alt="error" />
+            </div>
+            <div className="mt-3 ml-3">
+              <div className="flex flex-col">
+                <button
+                  onClick={handleButtonClick}
+                  className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+                >
+                  Upload new avatar
+                </button>
+                <input
+                  type="file"
+                  accept=".jpg,.jpeg,.png"
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                  onChange={handleFileInputChange}
+                />
+                <span className="mt-3">Recommended size: 400x400px</span>
+              </div>
+
+            </div>
+          </div>
+        </aside>
+      </div>
+      <div className="col-span-4">
         <main>
           <div className="lg:col-span-3 flex justify-between items-center">
             <div className="text-[24px] font-semibold">My details</div>
@@ -107,46 +135,12 @@ const FormUserDetail = () => {
               />
             </div>
           </div>
-          <button className="bg-orange-500 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow mb-5">
-            Save
+          <button className="text-slate-500 border border-slate-500 hover:text-blue-600 hover:border-blue-500 font-semibold py-2 px-[2rem] rounded">
+            Save changes
           </button>
         </form>
       </div>
-      <div className="col-span-2 lg:col-span-2">
-        <aside>
-          <div className="flex">
-            <div>
-              <img className="rounded-md w-32 h-24" src={imageURL} alt="error" />
-            </div>
-            <div className="mt-3 ml-3">
-              <div className="flex flex-col">
-                <button
-                  onClick={handleButtonClick}
-                  className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                >
-                  Upload new avatar
-                </button>
-                <input
-                  type="file"
-                  accept=".jpg,.jpeg,.png"
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                  onChange={handleFileInputChange}
-                />
-                <span className="mt-3">Recommended size: 400x400px</span>
-              </div>
-              <div>
-                <button
-                  className="bg-orange-500 text-white font-semibold py-2 px-4 border border-gray-400 rounded shadow"
-                  onClick={handleButtonClickAPI}
-                >
-                  Test Upload Image API
-                </button>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </div>
+
     </div>
   );
 };

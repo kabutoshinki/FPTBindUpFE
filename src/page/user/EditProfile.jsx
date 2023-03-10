@@ -6,7 +6,7 @@ const EditProfile = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       <header className="body-font">
-        <Navbar />
+        <Navbar borderNavBar={true}/>
       </header>
       <div className="pt-20 flex-grow mx-auto w-[75%]">
         <FormUserDetail />

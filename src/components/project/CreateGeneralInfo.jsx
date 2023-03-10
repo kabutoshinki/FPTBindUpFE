@@ -44,8 +44,10 @@ export const CreateGeneralInfo = ({ }) => {
     try {
       console.log(formData);
       const res = await projectService.createProject(formData);
+      toast.success("Add general info successfully!");
       console.log(res);
     } catch (err) {
+      toast.warning("Add general info fail");
       console.log(err);
     }
   };

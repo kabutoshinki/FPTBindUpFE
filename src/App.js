@@ -10,6 +10,7 @@ import ProjectMember from "./page/project/ProjectMember";
 import CreateProject from "./page/project/CreateProject";
 import Jobs from "./page/job/Jobs";
 import JobDetail from "./page/job/JobDetail";
+import UserDashboard from "./page/dashboard/UserDashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/mydetail" element={<EditProfile />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/job/1" element={<JobDetail />} />
+        <Route path="/user_dashboard" element={<UserDashboard />} />
       </Routes>
     </BrowserRouter>
   );
