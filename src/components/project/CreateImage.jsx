@@ -197,7 +197,7 @@ export const CreateImage = ({ setOpenTab }) => {
             document.documentElement.scrollTop = 0;
           }}
         >
-          Next step: Members
+          Add Members
         </button>
       </div>
     </div>

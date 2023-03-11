@@ -32,7 +32,7 @@ const ReadMore = ({ children }) => {
   );
 };
 
-export const ProjectChangelogDetail = ({ rating }) => {
+export const ProjectChangelogDetail = ({ project }) => {
   const param = useParams();
   const [changelogs, setChangelogs] = useState([]);
   const { data } = useFetch(
@@ -47,10 +47,12 @@ export const ProjectChangelogDetail = ({ rating }) => {
   return (
     <div className="w-full">
       <div className="">
+        <h3 className="text-slate-700 font-[700] text-[1.6rem] mb-[5pt]">Changes and development of {project?.data?.name}</h3>
+      </div>
+      <div>
         <ol className="relative border-l border-gray-200">
           {changelogs?.length !== 0 ? (
             changelogs?.map((changelog, index) => (
-
               <li className="mb-10 ml-4" key={index}>
                 <div className={(index === 0 ? 'bg-[#1939FF] ' : 'bg-slate-200 ') + "absolute w-3 h-3 rounded-full mt-1.5 -left-1.5 border border-white"}></div>
                 <time className={(index === 0 ? 'text-[#00B1FF] ' : 'text-slate-400 ') + "mb-1 text-md font-medium leading-none "}>{changelog.createdDate}</time>
@@ -63,7 +65,7 @@ export const ProjectChangelogDetail = ({ rating }) => {
               </li>
             ))
           ) : (
-            <div className="font-bold">Change Log Is Empty</div>
+            <div className="font-normal text-slate-400 ">Change Log Is Empty</div>
           )}
         </ol>
       </div>

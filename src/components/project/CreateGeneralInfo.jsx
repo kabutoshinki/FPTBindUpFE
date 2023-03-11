@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -61,7 +61,7 @@ export const CreateGeneralInfo = ({ setOpenTab }) => {
   return (
     <div className="w-full h-content mx-[40px] flex flex-col mb-[40px]">
       <h3 className="font-semibold text-slate-500 text-[1.3rem] mb-[20px]">
-        Update your project main info (if necessary)
+        Provide the main information about your project
       </h3>
       <form onSubmit={handleSubmit} className="">
         <div className="">
@@ -100,7 +100,7 @@ export const CreateGeneralInfo = ({ setOpenTab }) => {
               Link
             </label>
             <input
-              type="text"
+              type="url"
               id="source"
               name="source"
               value={formData.source}
@@ -179,7 +179,7 @@ export const CreateGeneralInfo = ({ setOpenTab }) => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             // onClick={() => setOpenTab(2)}
           >
-            Next step: Logo & Images
+            Create and move to the next step: Logo & Images
           </button>
         </div>
       </form>

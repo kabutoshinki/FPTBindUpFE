@@ -8,6 +8,7 @@ import * as projectService from "../../services/projectService";
 import { useEffect } from "react";
 import ProjectChangelogDetail from "./ProjectChangelogDetail";
 import ProjectMemberDetail from "./ProjectMemberDetail";
+import ProjectJob from "./ProjectJob";
 
 export const ProjectDetailed = ({ id, openTabId }) => {
   const [openTab, setOpenTab] = useState(openTabId || 1);
@@ -139,13 +140,13 @@ export const ProjectDetailed = ({ id, openTabId }) => {
               <ProjectAboutSection data={project} />
             </div>
             <div className={openTab === 2 ? "block" : "hidden"}>
-              <ProjectReview />
+              <ProjectJob project={project}/>
             </div>
             <div className={openTab === 3 ? "block" : "hidden"}>
-              <ProjectMemberDetail />
+              <ProjectMemberDetail project={project}/>
             </div>
             <div className={openTab === 4 ? "block" : "hidden"}>
-              <ProjectChangelogDetail />
+              <ProjectChangelogDetail project={project} />
             </div>
           </div>
           <div className="border-l border-l-slate-200 px-[20px] mt-4 float-right">
@@ -159,10 +160,6 @@ export const ProjectDetailed = ({ id, openTabId }) => {
                   <div>
                     <span className="text-f13 font-bold text-gray-900 mb-2 block">{item.title}</span>
                     <div className="text-f13 text-gray-500">{item.description}</div>
-                    <div className="flex text-f11 font-medium mt-3">
-                      <img className="mr-1" src={item.icon} alt="plus" />
-                      FOLLOW ({item.follow})
-                    </div>
                   </div>
                   <div>
                     <img src={item.img} alt="podcast" />

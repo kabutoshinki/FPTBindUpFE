@@ -4,13 +4,7 @@ import Footer from "../../partials/Footer";
 import HeadCreateProject from "../../components/project/HeadCreateProject";
 import BodyCreateProject from "../../components/project/BodyCreateProject";
 
-const project = {
-  "id": 1,
-  "name": "bindup",
-  "summary": "Wonders are made by collaboration",
-  "source": "https://fpt-bind-up-fe.vercel.app/",
-  milestone: 1,
-}
+
 const CreateProject = () => {
 
   document.documentElement.scrollTop = 0;
@@ -25,8 +19,8 @@ const CreateProject = () => {
       <div className="pt-[60pt] flex-grow mx-auto relative w-full">
         <div className="absolute bg-gradient-to-b from-blue-100 w-full h-[40pt] -z-1"></div>
         <div className="left-0 right-0 z-20 w-[65%] mx-auto pt-[30px]">
-          <HeadCreateProject project={project} />
-          <BodyCreateProject project={project} />
+          <HeadCreateProject />
+          <BodyCreateProject  />
         </div>
       </div>
       <Footer />

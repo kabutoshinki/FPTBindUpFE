@@ -4,7 +4,7 @@ import CreateImage from "./CreateImage";
 import CreateMember from "./CreateMember";
 import CreateExtras from "./CreateExtras";
 
-export const BodyCreateProject = ({ project }) => {
+export const BodyCreateProject = () => {
   const [openTab, setOpenTab] = useState(1);
  
   document.documentElement.scrollTop = 0;

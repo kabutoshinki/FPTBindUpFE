@@ -46,7 +46,7 @@ export const CreateMember = () => {
         </div>
         <div>
           <div className="mt-[20pt] pb-[20pt] grid grid-cols-3 gap-[20px]">
-            {members.length !== 0 ? (
+            {members ? (
               members?.map((member, index) => (
                 <div className="flex items-center space-x-4" key={index}>
                   <img className="w-10 h-10 rounded-full" src="/no_img.png" alt="" />
@@ -62,7 +62,7 @@ export const CreateMember = () => {
                 </div>
               ))
             ) : (
-              <div className="font-normal text-center">List Member Is Empty</div>
+              <div className="font-normal text-slate-400">List Member Is Empty</div>
             )}
           </div>
         </div>
@@ -70,12 +70,14 @@ export const CreateMember = () => {
       </div>
 
       <div className="flex items-center justify-between">
-        <button
-          type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-        >
-          Submit my project
-        </button>
+        <Link to={"/project/" + localStorage.getItem("newProjectId")}>
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            View my project 
+          </button>
+        </Link>
       </div>
     </div>
   );

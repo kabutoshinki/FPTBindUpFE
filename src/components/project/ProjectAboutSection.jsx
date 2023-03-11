@@ -69,12 +69,6 @@ export const ProjectDesc = ({ rating, data }) => {
             type="button"
             className="py-2 px-4 mb-[10pt] mr-[10pt] text-sm font-normal text-gray-900 bg-white rounded-full border border-gray-200 hover:border-blue-400 hover:text-blue-700 "
           >
-            Website Builder
-          </button>
-          <button
-            type="button"
-            className="py-2 px-4 mb-[10pt] mr-[10pt] text-sm font-normal text-gray-900 bg-white rounded-full border border-gray-200 hover:border-blue-400 hover:text-blue-700 "
-          >
             No-Code
           </button>
           <button
@@ -92,13 +86,17 @@ export const ProjectDesc = ({ rating, data }) => {
         </div>
       </div>
       <div className="mt-[30pt]">
-        <h3 className="font-[500] text-slate-700">Mentors</h3>
+        <h3 className="font-[500] text-slate-700 mb-[15px]">Mentors</h3>
         <div className="my-[10px] flex justify-start flex-wrap">
           <div className="flex items-center space-x-4">
-            <img className="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="" />
-            <div className="font-medium dark:text-white">
+            <img className="w-10 h-10 rounded-full" src="../../assets/user_avatar/ava_1.jpg" onError={({ currentTarget }) => {
+              currentTarget.onerror = null; // prevents looping
+              currentTarget.src = "/no_img.png";
+            }}
+              alt="" />
+            <div className="font-medium ">
               <div>Jese Leos</div>
-              <div className="text-sm text-gray-500 dark:text-gray-400">Joined in August 2014</div>
+              <div className="text-sm text-gray-500">Lecturer at FPTU</div>
             </div>
           </div>
         </div>
