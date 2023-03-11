@@ -21,17 +21,15 @@ const UserHeading = () => {
   // if (user) console.log("User:", user);
   if (projects) console.log("Projects:", projects);
   return (
-    <div className="container mx-auto px-2">
-      <div className="sm:space-x-4 sm:px-4 my-10 justify-center items-center" id="userInfo">
-        <div className="flex flex-col lg:flex-row sm:space-x-4 sm:px-4 my-10 justify-center items-center">
-          <div>
-            <img alt="avatar" className="rounded-full w-32 sm:w-40" src={user?.photoURL} />
-          </div>
-          <div>
-            <h1 className="font-semibold text-2xl sm:text-3xl">{user?.displayName}</h1>
+    <div className="w-[40%] mx-auto">
+      <div className="my-10" id="userInfo">
+        <div className="flex my-10 items-center justify-between">
+          <div className="flex items-center">
+            <img alt="avatar" className="rounded w-[70px] mr-[20px]" src={user?.photoURL} />
+            <h1 className="font-semibold text-[1.5rem]">{user?.displayName}</h1>
             {/* <div className="font-normal text-gray-600 mb-3 text-xl">Developer</div> */}
-
           </div>
+
           <div className="flex justify-center my-6">
             <Link
               to="/mydetail"
@@ -42,8 +40,8 @@ const UserHeading = () => {
             </Link>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-around mt-4 w-full mx-auto">
-          <div className="flex space-x-[50px] text-lg font-[500] w-[70%]">
+        <div className="flex flex-col mt-4 w-full mx-auto">
+          <div className="flex items-center space-x-[50px] text-lg font-[500]">
             <div
               onClick={() => setOpenTab(1)}
               className={` ${openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
@@ -67,7 +65,9 @@ const UserHeading = () => {
             </div>
           </div>
           <div className="py-[20px] mt-4 w-full ">
-            <div className={openTab === 1 ? "block" : "hidden"}>In progress</div>
+            <div className={"text-slate-500 " + (openTab === 1 ? "block" : "hidden")}>
+              <Link to="/mydetail" className="text-blue-500 hover:underline">Add a bio</Link> to help people get a better idea of you, your skills, history, and talents.
+            </div>
             <div className={openTab === 2 ? "block" : "hidden"}>
               {!projects && <div className="text-slate-400 ">You haven't create any projects yet.</div>}
               <div className="flex bg-white overflow-hidden sm:flex items-center mb-6">
@@ -110,7 +110,9 @@ const UserHeading = () => {
                 </div>
               </div>
             </div>
-            <div className={openTab === 3 ? "block" : "hidden"}>You have supported these projects</div>
+            <div className={"text-slate-500 " + (openTab === 3 ? "block" : "hidden")}>
+              You have supported these projects
+            </div>
           </div>
         </div>
       </div>

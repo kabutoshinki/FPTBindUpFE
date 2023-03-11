@@ -42,7 +42,10 @@ export const ProjectDesc = ({ rating, data }) => {
     <>
 
       {arr && <ImageGallery items={imagesArr} />}
-      <div dangerouslySetInnerHTML={{ __html: data.data?.description }} />
+      <div className="mt-[30px]">
+        <h3 className="font-[500] text-slate-700 mb-[20px]">Description</h3>
+      </div>
+      <div className="" dangerouslySetInnerHTML={{ __html: data.data?.description }} />
       <div className="mt-[20px] grid gap-4 grid-cols-4 grid-rows-8">
         {/* <p className="col-span-1 font-medium">Website</p>
         <p className="col-span-3">{data.data?.name}</p> */}

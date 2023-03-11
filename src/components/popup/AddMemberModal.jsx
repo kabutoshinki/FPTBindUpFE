@@ -24,7 +24,9 @@ const AddMemberModal = ({ open, onClose, onCreateSuccess }) => {
     e.preventDefault();
     try {
       await projectMemberService.createMemberProject(formData);
-      toast.success("Add Member Success");
+      toast.success("Add Member Success", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
       onCreateSuccess();
       onClose();
     } catch (error) {
@@ -54,20 +56,20 @@ const AddMemberModal = ({ open, onClose, onCreateSuccess }) => {
                 <input
                   type="text"
                   id="name"
-                  name="name"
+                  name="title"
                   value={formData.name}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
                 />
               </div>
               <div className="mb-[20px] w-full">
-                <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+                <label htmlFor="title" className="block text-gray-700 font-bold mb-2">
                   Title
                 </label>
                 <input
                   type="text"
                   id="title"
-                  name="title"
+                  name="name"
                   value={formData.title}
                   onChange={handleInputChange}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"

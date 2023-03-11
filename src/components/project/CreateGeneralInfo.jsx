@@ -43,7 +43,7 @@ export const CreateGeneralInfo = ({ setOpenTab }) => {
     try {
       console.log(formData);
       const res = await projectService.createProject(formData);
-      toast.success("Add info successfully!", {
+      toast.success("Create Project Success!", {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
       // console.log(res?.data?.data);
@@ -51,7 +51,7 @@ export const CreateGeneralInfo = ({ setOpenTab }) => {
       setOpenTab(2);
       document.documentElement.scrollTop = 0;
     } catch (err) {
-      toast.warning("Add general info fail", {
+      toast.warning("Create Project Fail!", {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
       console.log(err);

@@ -32,11 +32,15 @@ const Modal = ({ open, onClose }) => {
       dispatch({ type: "LOGIN_START" });
       const user = await authenService.getCurrentUser();
       dispatch({ type: "LOGIN_SUCCESS", payload: user.jti });
-      toast.success("Login Success.");
+      toast.success("Login Success.", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
       navigate("/");
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
-      toast.error("Login Fail");
+      toast.error("Login Fail", {
+        position: toast.POSITION.BOTTOM_RIGHT,
+      });
     }
   };
 
