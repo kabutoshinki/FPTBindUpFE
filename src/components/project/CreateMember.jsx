@@ -36,10 +36,25 @@ export const CreateMember = () => {
             onClick={() => setOpenModal(true)}
           >
             <svg className="w-6 h-6 mr-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 19C3.69137 16.6928 5.46998 16 9.5 16C13.53 16 15.3086 16.6928 16 19" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-              <path d="M13 9.5C13 11.433 11.433 13 9.5 13C7.567 13 6 11.433 6 9.5C6 7.567 7.567 6 9.5 6C11.433 6 13 7.567 13 9.5Z" stroke="currentColor" strokeWidth="1.3" />
+              <path
+                d="M3 19C3.69137 16.6928 5.46998 16 9.5 16C13.53 16 15.3086 16.6928 16 19"
+                stroke="currentColor"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+              />
+              <path
+                d="M13 9.5C13 11.433 11.433 13 9.5 13C7.567 13 6 11.433 6 9.5C6 7.567 7.567 6 9.5 6C11.433 6 13 7.567 13 9.5Z"
+                stroke="currentColor"
+                strokeWidth="1.3"
+              />
               <path d="M15 6H21" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-              <path d="M18 3L18 9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+              <path
+                d="M18 3L18 9"
+                stroke="currentColor"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             Add Member
           </button>
@@ -52,9 +67,9 @@ export const CreateMember = () => {
                   <img className="w-10 h-10 rounded-full" src="/no_img.png" alt="" />
                   <div className="font-medium w-full flex justify-between items-center">
                     <div>
-                      <span>{member.title} </span>
+                      <span>{member.name}</span>
                       <Link to={"/"} className="text-sm text-slate-400 font-normal italic">
-                        {member.name}
+                        {member.title}
                       </Link>
                       <p className="text-sm text-blue-700 font-medium">{member.role}</p>
                     </div>
@@ -75,7 +90,7 @@ export const CreateMember = () => {
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            View my project 
+            View my project
           </button>
         </Link>
       </div>

@@ -18,7 +18,9 @@ export const ProjectReview = ({ project }) => {
   return (
     <div className="w-full">
       <div className="">
-        <h3 className="text-slate-700 font-[700] text-[1.6rem] mb-[5pt]">People behind {project?.data?.name} project</h3>
+        <h3 className="text-slate-700 font-[700] text-[1.6rem] mb-[5pt]">
+          People behind {project?.data?.name} project
+        </h3>
         <p>Here are the founders, developers, designers and product people who worked at {project?.data?.name}</p>
       </div>
       <div className="mt-[20pt] pb-[20pt] grid grid-cols-3 gap-[20px]">
@@ -28,9 +30,11 @@ export const ProjectReview = ({ project }) => {
               <img className="w-10 h-10 rounded-full" src="/no_img.png" alt="" />
               <div className="font-medium w-full flex justify-between items-center">
                 <div>
-                  <span>{member.title}</span>
+                  <span>
+                    {member.name} <br />
+                  </span>
                   <Link to={"/"} className="text-sm text-slate-400 font-normal italic">
-                    {member.name}
+                    {member.title}
                   </Link>
                   <p className="text-sm text-slate-700 font-medium">{member.role}</p>
                 </div>
