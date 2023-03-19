@@ -4,7 +4,7 @@ import axios from "axios";
 import { async } from "@firebase/util";
 
 const apiEndpoint = config.apiEndpoint;
-console.log("Api: " + apiEndpoint);
+
 const accessToken = "Access-Token";
 
 export async function login(user) {

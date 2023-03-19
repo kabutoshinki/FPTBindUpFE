@@ -8,24 +8,34 @@ import UserNavbar from "./UserNavbar.jsx";
 import logo from "../../assets/logo.png";
 import { toast } from "react-toastify";
 import * as projectService from "../../services/projectService";
+import * as userService from "../../services/userService";
 
 export const Navbar = ({ borderNavBar }) => {
   // const [authenticate, setAuthenticate] = useState(false || window.localStorage.getItem("authenticate") === "true");
   const [openModal, setOpenModal] = useState(false);
   const [user] = useAuthState(auth);
   const [top, setTop] = useState(true);
+  const [userData, setUserData] = useState();
 
+  const User = async () => {
+    const userId = localStorage.getItem("user").replace(/"/g, "");
+    const { data } = await userService.findUserById(userId);
+    setUserData(data?.data);
+  };
   useEffect(() => {
     const scrollHandler = () => {
       window.pageYOffset > 10 ? setTop(false) : setTop(true);
     };
+    User();
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
 
   return (
     <div
-      className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${(!top || borderNavBar) && `bg-white border-b-[1px] border-b-slate-200`}`}
+      className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${
+        (!top || borderNavBar) && `bg-white border-b-[1px] border-b-slate-200`
+      }`}
     >
       <div className="w-[85%] mx-auto flex justify-between items-center">
         <div className="flex items-center">
@@ -67,7 +77,7 @@ export const Navbar = ({ borderNavBar }) => {
           </nav>
         </div>
         {user ? (
-          <UserNavbar user={user} />
+          <UserNavbar user={userData} />
         ) : (
           <div>
             <button

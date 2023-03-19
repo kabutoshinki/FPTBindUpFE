@@ -3,7 +3,7 @@ import axios from "axios";
 import { async } from "@firebase/util";
 
 const apiEndpoint = config.apiEndpoint;
-console.log("Api: " + apiEndpoint);
+
 let accessToken = localStorage.getItem("Access-Token");
 // Đặt quyền truy cập vào api
 const options = {

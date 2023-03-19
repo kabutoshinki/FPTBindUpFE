@@ -2,20 +2,47 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import * as userService from "../../services/userService";
+import logo from "../../assets/logo.png";
 import axios from "axios";
-const FormUserDetail = () => {
-  const [user] = useAuthState(auth);
-  const [imageURL, setImageURL] = useState(user?.photoURL);
+import { toast } from "react-toastify";
+
+const FormUserDetail = ({ user, onSuccess }) => {
+  const [imageURL, setImageURL] = useState();
   const [image, setImage] = useState("");
   const fileInputRef = useRef(null);
+
+  const [formData, setFormData] = useState({
+    id: "",
+    name: "",
+    gender: "",
+    headline: "",
+    description: "",
+    address: "",
+    phone: "",
+  });
+
   useEffect(() => {
-    if (user?.photoURL) {
-      setImageURL(user.photoURL);
-    } else {
-      // navigate("/");
+    if (user) {
+      setFormData({
+        id: user?.id || "",
+        name: user?.name || "",
+        gender: user?.gender || 0,
+        headline: user?.headline || "",
+        description: user?.description || "",
+        address: user?.address || "",
+        phone: user?.phone || "0123456789",
+      });
+      setImageURL(user?.avatar);
     }
   }, [user]);
+
+  console.log(formData);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -32,18 +59,26 @@ const FormUserDetail = () => {
   };
 
   const handleButtonClickAPI = async (e) => {
-    const formData = new FormData();
-    formData.append("imageFile", image);
-    console.log(formData);
-    await axios
-      .postForm("http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/p/upload-image", formData)
-      .then((response) => {
-        console.log("Upload Success");
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log("Upload fail ", err);
-      });
+    try {
+      const userId = localStorage.getItem("user").replace(/"/g, "");
+      const formData = new FormData();
+      formData.append("imageFile", image);
+      console.log(formData);
+      await userService.userImage(userId, formData);
+      toast.success("Upload Success");
+    } catch (error) {
+      toast.error("Upload Fail");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await userService.updateUserById(formData);
+      toast.success("Update success");
+    } catch (error) {
+      toast.error("Update fail");
+    }
   };
 
   return (
@@ -52,9 +87,9 @@ const FormUserDetail = () => {
         <aside>
           <div className="flex">
             <div>
-              <img className="rounded w-[120px] h-[120px]" src={imageURL} alt="error" />
+              <img className="rounded w-[100px] h-[100px]" src={imageURL || user?.avatar || logo} alt="error" />
             </div>
-            <div className="mt-3 ml-3">
+            <div className="mt-2 ml-3">
               <div className="flex flex-col">
                 <button
                   onClick={handleButtonClick}
@@ -71,7 +106,6 @@ const FormUserDetail = () => {
                 />
                 <span className="mt-3">Recommended size: 400x400px</span>
               </div>
-
             </div>
           </div>
         </aside>
@@ -86,9 +120,9 @@ const FormUserDetail = () => {
           </div>
         </main>
 
-        <form action="#" className="w-full mt-10">
-          <div className="flex flex-wrap -mx-3 mb-6 mt-10">
-            <div className="w-full px-3">
+        <form onSubmit={handleSubmit} className="w-full">
+          <div className="flex flex-wrap -mx-3 mb-2 mt-2">
+            <div className="w-full px-2">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                 htmlFor="grid-password"
@@ -99,11 +133,13 @@ const FormUserDetail = () => {
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-password"
                 type="text"
-                value={user?.displayName}
+                name="name"
+                value={formData?.name}
+                onChange={handleChange}
               />
             </div>
           </div>
-          <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="flex flex-wrap -mx-3 mb-2 mt-3">
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
@@ -115,23 +151,45 @@ const FormUserDetail = () => {
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-password"
                 type="text"
-                value={user?.displayName}
+                name="headline"
+                value={formData?.headline}
+                onChange={handleChange}
               />
             </div>
           </div>
-          <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="flex flex-wrap -mx-3 mb-2 mt-3">
             <div className="w-full px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                 htmlFor="grid-password"
               >
-                About
+                Description
               </label>
               <input
                 className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="grid-password"
                 type="text"
-                value={user?.displayName}
+                name="description"
+                value={formData?.description}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <div className="flex flex-wrap -mx-3 mb-2 mt-3">
+            <div className="w-full px-3">
+              <label
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+                htmlFor="grid-password"
+              >
+                Address
+              </label>
+              <input
+                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="grid-password"
+                type="text"
+                name="address"
+                value={formData?.address}
+                onChange={handleChange}
               />
             </div>
           </div>
@@ -140,7 +198,6 @@ const FormUserDetail = () => {
           </button>
         </form>
       </div>
-
     </div>
   );
 };

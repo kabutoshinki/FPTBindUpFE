@@ -7,12 +7,14 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
 import * as projectService from "../../services/projectService";
+import { click } from "@testing-library/user-event/dist/click";
+import { toast } from "react-toastify";
 
 const ProjectList = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   // const [numOfPages, setNumOfPages] = useState(0);
-  const { data, loading } = useFetch(
+  const { data, loading, reFetch } = useFetch(
     `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=id&statusType=0`
   );
 
@@ -21,6 +23,19 @@ const ProjectList = () => {
   }, [data]);
   const handlePageClick = async (data) => {
     setCurrentPage(data.selected);
+  };
+  const handleVote = async (e, projectId) => {
+    e.preventDefault();
+    try {
+      const userId = localStorage.getItem("user").replace(/"/g, "");
+      console.log(userId);
+      // await projectService.projectVote(projectId, userId);
+      // reFetch();
+      toast.success("vote success");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data);
+    }
   };
 
   return (
@@ -89,7 +104,10 @@ const ProjectList = () => {
                         <h3 className="text-base font-bold text-slate-700">{item.name}</h3>
                         <p className="text-[0.9rem] font-normal text-slate-500">{item.summary}</p>
                       </div>
-                      <button className="absolute bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded">
+                      <button
+                        className="absolute bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded"
+                        onClick={(e) => handleVote(e, item.id)}
+                      >
                         <div className="flex-col align-center items-center px-[10px] py-2 inset-y-3 text-slate-500 group-hover:text-blue-600">
                           <svg
                             className="w-[12px] h-[12px] m-auto"

@@ -53,6 +53,13 @@ export async function changeStatus(projectId, status) {
   return axios.put(apiEndpoint + `api/v1/project/${projectId}?projectStatus=${status}`, status, options);
 }
 
+export async function projectVote(projectId, userId) {
+  console.log(userId);
+  console.log(projectId);
+
+  return axios.post(apiEndpoint + `api/v1/project/${projectId}/vote`, userId, options);
+}
+
 export async function uploadLogoProject(projectId, imageFile) {
   console.log(options);
   console.log(projectId);

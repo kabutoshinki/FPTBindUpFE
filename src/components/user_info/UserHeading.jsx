@@ -3,20 +3,31 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { auth } from "../../utils/firebase";
 import * as projectService from "../../services/projectService";
+import * as userService from "../../services/userService";
 import img_default from "../../assets/images/no_img.png";
-
-
+import logo from "../../assets/logo.png";
 const UserHeading = () => {
   const [user] = useAuthState(auth);
   const [openTab, setOpenTab] = useState(1);
   const [projects, setProjects] = useState([]);
+  const [userData, setUserData] = useState();
   const ListUserProjects = async () => {
     const userId = localStorage.getItem("user").replace(/"/g, "");
     const { data } = await projectService.getProjectsUser(userId);
     setProjects(data?.data?.projects);
   };
+
+  const UserProfile = async () => {
+    const userId = localStorage.getItem("user").replace(/"/g, "");
+    const { data } = await userService.findUserById(userId);
+    console.log("data");
+    console.log(data);
+    setUserData(data?.data);
+  };
+
   useEffect(() => {
     ListUserProjects();
+    UserProfile();
   }, []);
   // if (user) console.log("User:", user);
   if (projects) console.log("Projects:", projects);
@@ -25,8 +36,8 @@ const UserHeading = () => {
       <div className="my-10" id="userInfo">
         <div className="flex my-10 items-center justify-between">
           <div className="flex items-center">
-            <img alt="avatar" className="rounded w-[70px] mr-[20px]" src={user?.photoURL} />
-            <h1 className="font-semibold text-[1.5rem]">{user?.displayName}</h1>
+            <img alt="avatar" className="rounded w-[70px] mr-[20px] w-24 h-24" src={userData?.avatar || logo} />
+            <h1 className="font-semibold text-[1.5rem]">{userData?.name}</h1>
             {/* <div className="font-normal text-gray-600 mb-3 text-xl">Developer</div> */}
           </div>
 
@@ -44,29 +55,35 @@ const UserHeading = () => {
           <div className="flex items-center space-x-[50px] text-lg font-[500]">
             <div
               onClick={() => setOpenTab(1)}
-              className={` ${openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-                } cursor-pointer inline-block mt-3`}
+              className={` ${
+                openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block mt-3`}
             >
               <span className="">About</span>
             </div>
             <div
               onClick={() => setOpenTab(2)}
-              className={` ${openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-                } cursor-pointer inline-block mt-3`}
+              className={` ${
+                openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block mt-3`}
             >
               <span>Projects</span>
             </div>
             <div
               onClick={() => setOpenTab(3)}
-              className={` ${openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-                } cursor-pointer inline-block mt-3`}
+              className={` ${
+                openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+              } cursor-pointer inline-block mt-3`}
             >
               <span>Upvotes</span>
             </div>
           </div>
           <div className="py-[20px] mt-4 w-full ">
             <div className={"text-slate-500 " + (openTab === 1 ? "block" : "hidden")}>
-              <Link to="/mydetail" className="text-blue-500 hover:underline">Add a bio</Link> to help people get a better idea of you, your skills, history, and talents.
+              <Link to="/mydetail" className="text-blue-500 hover:underline">
+                Add a bio
+              </Link>{" "}
+              to help people get a better idea of you, your skills, history, and talents.
             </div>
             <div className={openTab === 2 ? "block" : "hidden"}>
               {!projects && <div className="text-slate-400 ">You haven't create any projects yet.</div>}
