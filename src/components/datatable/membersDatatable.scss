@@ -1,6 +1,6 @@
-.datatable {
-  height: 600px;
-  padding: 20px;
+.datatableMember {
+  height: 400px;
+  padding: 10px;
   
   .datatableTitle{
     width: 100%;
@@ -95,6 +95,7 @@
         cursor: not-allowed;
       }
     }
+     
     .updateButton {
       padding: 2px 5px;
       border-radius: 5px;
@@ -107,7 +108,7 @@
         cursor: not-allowed;
       }
     }
-     
+    
   }
 
  

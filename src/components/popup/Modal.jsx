@@ -36,6 +36,7 @@ const Modal = ({ open, onClose }) => {
         position: toast.POSITION.BOTTOM_RIGHT,
       });
       navigate("/");
+      window.location.reload();
     } catch (err) {
       dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
       toast.error("Login Fail", {

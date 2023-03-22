@@ -13,6 +13,7 @@ import JobDetail from "./page/job/JobDetail";
 import UserDashboard from "./page/dashboard/UserDashboard";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProjectDetail from "./page/dashboard/ProjectDetail";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/job/1" element={<JobDetail />} />
         <Route path="/user_dashboard" element={<UserDashboard />} />
+        <Route path="/user_dashboard/project/:projectId" element={<ProjectDetail />} />
       </Routes>
     </BrowserRouter>
   );

@@ -1,7 +1,6 @@
 import config from "../config.json";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
-import { async } from "@firebase/util";
 
 const apiEndpoint = config.apiEndpoint;
 

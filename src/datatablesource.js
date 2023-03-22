@@ -41,7 +41,7 @@ export const projectColumns = [
   {
     field: "project",
     headerName: "Project Image",
-    width: 230,
+    width: 200,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
@@ -54,13 +54,13 @@ export const projectColumns = [
   {
     field: "name",
     headerName: "Name",
-    width: 230,
+    width: 200,
   },
 
   {
     field: "summary",
     headerName: "Summary",
-    width: 300,
+    width: 250,
   },
   {
     field: "voteQuantity",
@@ -78,16 +78,16 @@ export const projectColumns = [
 ];
 
 export const memberColumns = [
-  { field: "id", headerName: "ID", width: 250 },
+  // { field: "id", headerName: "ID", width: 250 },
   {
-    field: "project",
-    headerName: "Project Image",
+    field: "user_image",
+    headerName: "Members Image",
     width: 230,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
-          <img className="cellImg" src={params?.row?.logo} alt="avatar" />
-          {params?.row?.username}
+          <img className="cellImg" src={logo} alt="avatar" />
+          {/* {params?.row?.username} */}
         </div>
       );
     },
@@ -95,20 +95,116 @@ export const memberColumns = [
   {
     field: "name",
     headerName: "Name",
-    width: 230,
+    width: 300,
   },
-
   {
-    field: "voteQuantity",
-    headerName: "Vote",
+    field: "role",
+    headerName: "Role",
+    width: 200,
+  },
+  {
+    field: "title",
+    headerName: "Title",
+    width: 200,
+  },
+];
+
+export const changelogColumns = [
+  // { field: "id", headerName: "ID", width: 250 },
+  {
+    field: "title",
+    headerName: "Title",
+    width: 200,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 650,
+  },
+  {
+    field: "createdDate",
+    headerName: "Date",
     width: 100,
   },
+];
+export const topicColumns = [
+  // { field: "id", headerName: "ID", width: 250 },
   {
-    field: "status",
-    headerName: "Status",
-    width: 160,
+    field: "name",
+    headerName: "Name",
+    width: 200,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 500,
+  },
+  {
+    field: "shortName",
+    headerName: "Short Name",
+    width: 200,
+  },
+];
+
+export const mentorColumns = [
+  // { field: "id", headerName: "ID", width: 250 },
+  {
+    field: "user_image",
+    headerName: "Mentor Image",
+    width: 200,
     renderCell: (params) => {
-      return <div className={`cellWithStatus ${params?.row?.status}`}>{params?.row?.status}</div>;
+      return (
+        <div className="cellWithImg">
+          <img className="cellImg" src={logo} alt="avatar" />
+        </div>
+      );
     },
+  },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 200,
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    width: 200,
+  },
+  {
+    field: "major",
+    headerName: "Major",
+    width: 200,
+  },
+  {
+    field: "phone",
+    headerName: "Phone",
+    width: 200,
+  },
+];
+
+export const majorColumns = [
+  // { field: "id", headerName: "ID", width: 250 },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 300,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 700,
+  },
+];
+export const jobColumns = [
+  // { field: "id", headerName: "ID", width: 250 },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 300,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    width: 700,
   },
 ];

@@ -19,6 +19,7 @@ const UserNavbar = ({ user }) => {
     authService.logout();
     dispatch({ type: "LOGOUT" });
   };
+
   return (
     <div className="flex items-center justify-end relative">
       <Link to={"/project/new"}>

@@ -3,13 +3,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as projectMemberService from "../../services/projectMemberService";
-const initData = {
-  role: "",
-  title: "",
-  name: "",
-  projectId: localStorage.getItem("newProjectId"),
-};
-const AddMemberModal = ({ open, onClose, onCreateSuccess }) => {
+
+const AddMemberModal = ({ open, onClose, onCreateSuccess, projectId }) => {
+  const initData = {
+    role: "",
+    title: "",
+    name: "",
+    projectId: projectId || localStorage.getItem("newProjectId"),
+  };
+
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
   };

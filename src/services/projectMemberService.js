@@ -1,6 +1,5 @@
 import config from "../config.json";
 import axios from "axios";
-import { async } from "@firebase/util";
 
 const apiEndpoint = config.apiEndpoint;
 
@@ -26,7 +25,12 @@ export async function createMemberProject(formData) {
 }
 
 export async function updateMemberProject(formData) {
-  return axios.put(apiEndpoint + `/api/v1/member/`, formData, options);
+  return axios.put(
+    apiEndpoint +
+      `/api/v1/member/?id=${formData.id}&role=${formData.role}&title=${formData.title}&name=${formData.name}`,
+    formData,
+    options
+  );
 }
 
 export async function deleteMemberProjectById(id) {
