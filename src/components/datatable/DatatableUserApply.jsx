@@ -9,13 +9,12 @@ import { Button } from "@mui/material";
 import ModalAddJob from "../popup/ModalAddJob";
 import ModalDelete from "../popup/ModalDelete";
 import ModalUpdateJob from "../popup/ModalUpdateJob";
-const DatatableJobs = ({ id }) => {
+const DatatableUserApply = ({ id }) => {
   const [jobs, setJobs] = useState([]);
   const { data, reFetch } = useFetch(
     `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/job/${id}/`
   );
 
-  const [open, setOpen] = useState(false);
   const [openDel, setOpenDel] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const [job, setJob] = useState({});
@@ -66,20 +65,12 @@ const DatatableJobs = ({ id }) => {
     }
   };
 
-  const handleAdd = () => {
-    setOpen(true);
-  };
-
   return (
     <div className="datatableMember">
-      <ModalAddJob open={open} onClose={() => setOpen(false)} reFresh={reFetch} projectId={id} />
-      <div className="datatableTitle">
-        Jobs
-        <Button onClick={() => handleAdd()}>Add Job</Button>
-      </div>
+      <div className="datatableTitle">User Apply</div>
       <input
         type="text"
-        placeholder="Search Jobs..."
+        placeholder="Search Users..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         style={{
@@ -116,4 +107,4 @@ const DatatableJobs = ({ id }) => {
   );
 };
 
-export default DatatableJobs;
+export default DatatableUserApply;

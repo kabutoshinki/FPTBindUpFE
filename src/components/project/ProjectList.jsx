@@ -29,12 +29,12 @@ const ProjectList = () => {
     try {
       const userId = localStorage.getItem("user").replace(/"/g, "");
       console.log(userId);
-      // await projectService.projectVote(projectId, userId);
-      // reFetch();
+      await projectService.projectVote(projectId, userId);
+      reFetch();
       toast.success("vote success");
     } catch (error) {
       console.log(error);
-      toast.error(error.response.data);
+      toast.error("vote fail");
     }
   };
 

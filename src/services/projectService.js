@@ -60,7 +60,7 @@ export async function projectVote(projectId, userId) {
   console.log(userId);
   console.log(projectId);
 
-  return axios.post(apiEndpoint + `api/v1/project/${projectId}/vote`, userId, options);
+  return axios.post(apiEndpoint + `api/v1/project/${projectId}/vote?userId=${userId}`, userId, options);
 }
 
 export async function uploadLogoProject(projectId, imageFile) {

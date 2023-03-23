@@ -16,6 +16,7 @@ import DatatableJobs from "../../components/datatable/DatatableJobs";
 
 const ProjectDetail = () => {
   const param = useParams();
+  console.log(param);
   const { data } = useFetch(
     `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${param.projectId}`
   );
