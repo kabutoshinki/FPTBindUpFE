@@ -1,37 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
+import * as jobService from "../../services/jobService";
+import useFetch from "../../hooks/useFetch";
 
-export const JobDescription = ({ rating, id, openTabId }) => {
-  const [openTab, setOpenTab] = useState(openTabId);
-
+export const JobDescription = ({ id }) => {
+  // const { data, loading } = useFetch(
+  //   jobService.getJobById(id)
+  // );
+  // const [job, setJob] = useState();
+  // useEffect(() => {
+  //   setJob(data);
+  //   console.log("Jobs: ", data);
+  // }, [data]);
   return (
     <div className="left-0 right-0 z-10 p-[20px] w-[67%] mx-auto">
       <div className="mx-auto flex flex-col justify-between items-start pt-[40px] ">
         <div className="mb-[20px]">
           <Breadcrumbs aria-label="breadcrumb" >
-            <Link underline="hover" color="inherit" href="/">
-              MUI
+            <Link underline="hover" color="inherit" href="/jobs">
+              Jobs
             </Link>
-            <Link
-              underline="hover"
-              color="inherit"
-              href="/material-ui/getting-started/installation/"
-            >
-              Core
-            </Link>
-            <Typography color="text.primary">Breadcrumbs</Typography>
+            <Typography color="text.primary">Data Engineer</Typography>
+            {/* <Typography color="text.primary">{job.name}</Typography> */}
           </Breadcrumbs>
         </div>
         <div className="w-full flex">
           {/* Left */}
           <div className="py-[20px] w-[75%] mr-[20px]">
             <div className="flex items-center">
-              <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">job title</h3>
+              <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">Data Engineer</h3>
+              {/* <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{job.name}</h3> */}
             </div>
             <div>
-              Job description here
+              {/* {job.description} */}
+              Job description is placed here...
             </div>
           </div>
 
@@ -44,6 +48,7 @@ export const JobDescription = ({ rating, id, openTabId }) => {
                   currentTarget.src = "/no_img.png";
                 }} alt="BindUP logo" />
                 <h3 className="font-[500] text-slate-600 text-lg">BindUP Inc.</h3>
+                {/* <h3 className="font-[500] text-slate-600 text-lg">{job.project.name}</h3> */}
               </div>
               <div className="">
                 <div className="flex items-center space-x-[20px] mb-[20px]">

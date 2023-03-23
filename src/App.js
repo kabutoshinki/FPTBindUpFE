@@ -16,6 +16,9 @@ import "react-toastify/dist/ReactToastify.css";
 import ProjectDetail from "./page/dashboard/ProjectDetail";
 import JobDetailManager from "./page/dashboard/JobDetailManager";
 
+import Topics from "./page/topic/Topics";
+import ProjectsOfTopic from "./page/topic/ProjectsOfTopic";
+
 function App() {
   return (
     <BrowserRouter>
@@ -31,6 +34,8 @@ function App() {
         <Route path="/mydetail" element={<EditProfile />} />
         <Route path="/jobs" element={<Jobs />} />
         <Route path="/job/1" element={<JobDetail />} />
+        <Route path="/topics" element={<Topics />} />
+        <Route path="/topic/1/projects" element={<ProjectsOfTopic />} />
         <Route path="/user_dashboard" element={<UserDashboard />} />
         <Route path="/user_dashboard/project/:projectId" element={<ProjectDetail />} />
         <Route path="/user_dashboard/project/job/:jobId" element={<JobDetailManager />} />

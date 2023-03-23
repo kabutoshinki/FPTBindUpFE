@@ -13,7 +13,11 @@ const options = {
 };
 
 export async function getJobs() {
-  return axios.get(apiEndpoint + `api/v1/major/?pageNo=0&pageSize=99&sortBy=id`, options);
+  return axios.get(apiEndpoint + `api/v1/job/?pageNo=0&pageSize=99&sortBy=id`, options);
+}
+
+export async function getJobById(id) {
+  return axios.get(apiEndpoint + `api/v1/job/${id}/detail`, options);
 }
 
 export async function getJobsByProjectId(id) {

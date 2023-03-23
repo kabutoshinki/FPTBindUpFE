@@ -4,12 +4,14 @@ import { Navbar } from "../../components/navbar/Navbar";
 import ProjectList from "../../components/project/ProjectList";
 import { topics } from "../../components/topic/topics";
 import Footer from "../../partials/Footer";
+import { Breadcrumbs, Typography } from "@mui/material";
+import ProjectsOfTopicList from "../../components/topic/ProjectsOfTopicList";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Projects = () => {
+const ProjectsOfTopic = () => {
   var currentOpt = true;
   return (
     <div className="flex flex-col min-h-screen overflow-hidden ">
@@ -18,8 +20,17 @@ const Projects = () => {
       </header>
 
       <div className="w-[65%] pt-[60pt] mx-auto mb-[50px]">
+        <div className="mt-[30px]">
+          <Breadcrumbs aria-label="breadcrumb" >
+            <Link underline="hover" color="inherit" href="/jobs">
+              Topic
+            </Link>
+            <Typography color="text.primary">Tech</Typography>
+            {/* <Typography color="text.primary">{job.name}</Typography> */}
+          </Breadcrumbs>
+        </div>
         <div className="flex ">
-          <div className="w-[25%] border-r-[1px] border-r-slate-200 mt-[60px]">
+          <div className="w-[25%] border-r-[1px] border-r-slate-200 mt-[40px]">
             <div className="sort-project pb-[30px] mr-[40px] border-b-[1px] border-b-slate-200 ">
               <h3 className="mb-[20px] font-[600] text-[0.9rem] text-slate-600 uppercase">Sort project by</h3>
               <div className="flex flex-col space-y-2 text-[1rem]">
@@ -120,7 +131,8 @@ const Projects = () => {
           </div>
           <div className="w-[75%] flex-grow mx-[40px] relative">
             {/* <div className="absolute bg-gradient-to-b from-blue-50 w-full h-[40pt]"></div> */}
-            <ProjectList />
+
+            <ProjectsOfTopicList />
           </div>
         </div>
       </div>
@@ -129,4 +141,4 @@ const Projects = () => {
   );
 };
 
-export default Projects;
+export default ProjectsOfTopic;

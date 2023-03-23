@@ -6,19 +6,20 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
-import * as projectService from "../../services/projectService";
+import * as jobService from "../../services/jobService";
 import { jobData } from "./jobData";
 
 const JobList = () => {
-  const [projects, setProjects] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   // const [numOfPages, setNumOfPages] = useState(0);
   const { data, loading } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=voteQuantity`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/job/?pageNo=${currentPage}&pageSize=5&sortBy=id`
   );
 
   useEffect(() => {
-    setProjects(data);
+    setJobs(data);
+    console.log("Jobs: ", data);
   }, [data]);
 
   const handlePageClick = async (data) => {
@@ -30,7 +31,7 @@ const JobList = () => {
       <div className="mt-[60px] mb-[25px]">
         <div className="flex justify-between items-center">
           <h3 className="text-slate-800 text-3xl font-bold mb-[15px]">🔭 Your favorite jobs may be here!</h3>
-          <button
+          {/* <button
             type="button"
             className="px-[20px] py-[8px] flex items-center justify-center text-white bg-[#00B1FF] hover:bg-[#00aaf3] font-medium rounded text-md "
           >
@@ -58,7 +59,7 @@ const JobList = () => {
               />
             </svg>
             <p>Post a job</p>
-          </button>
+          </button> */}
         </div>
         <p className="text-slate-500">Go look for a position that suits you.</p>
       </div>
@@ -91,7 +92,7 @@ const JobList = () => {
           previousLabel={"<"}
           breakLabel={"..."}
           nextLabel={">"}
-          pageCount={projects?.data?.numOfPages}
+          pageCount={jobs?.data?.numOfPages}
           onPageChange={handlePageClick}
           containerClassName={"inline-flex -space-x-px mb-4"}
           pageLinkClassName={"px-3 py-2  text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
@@ -110,10 +111,13 @@ const JobList = () => {
         <div className="flex bg-white overflow-hidden sm:flex items-center mb-6">
           <div className="flex w-full">
             <ul className="w-full">
+              {/* {jobs?.data?.jobDTOList?.map((item, index) => ( */}
               {jobData.map((item, index) => (
                 <li key={index}>
-                  <Link to={`/job/1`}>
-                    <div className="flex justify-between items-center h-[110px] border-[1px] border-slate-200 rounded px-[20px] py-[15px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-[#e6f7ff] hover:via-white hover:to-white">
+                  {/* <Link to={jobService.getJobById(item.id)}> */}
+                  {/* <Link to={`/job/${item.id}`}> */}
+                  <Link to={"/job/1"}>
+                    <div className="flex justify-between items-center h-[110px] rounded px-[20px] py-[15px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-[#e6f7ff] hover:via-white hover:to-white">
                       <div className="flex items-center h-full">
                         <img
                           className="w-14 h-14 my-auto"
@@ -168,15 +172,12 @@ const JobList = () => {
                       </div>
                       <div className="p-0 m-0 h-full flex flex-col items-end justify-between">
                         <div className="mb-[20px]">
-                          <span className="bg-indigo-50 text-indigo-700 text-xs font-medium mr-2 px-2.5 py-0.5 rounded ">
-                            #engineer
-                          </span>
                           <span className="bg-indigo-50 text-indigo-700 text-xs font-medium px-2.5 py-0.5 rounded ">
-                            #data
+                            Engineer
                           </span>
                         </div>
                         <button className=" bg-white w-[70px] border border-slate-200 group hover:border-blue-600 rounded">
-                          <div className="px-[10px] py-[10px] text-slate-500 group-hover:text-blue-600">
+                          <div className="px-[5px] py-[5px] text-slate-500 group-hover:text-blue-600">
                             <span className="text-[0.8rem] font-semibold block text-center">Apply</span>
                           </div>
                         </button>

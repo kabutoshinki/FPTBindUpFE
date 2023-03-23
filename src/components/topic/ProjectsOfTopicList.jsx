@@ -11,12 +11,12 @@ import { click } from "@testing-library/user-event/dist/click";
 import { toast } from "react-toastify";
 
 
-const ProjectList = () => {
+const ProjectsOfTopicList = ({ id }) => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   // const [numOfPages, setNumOfPages] = useState(0);
   const { data, loading, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=id&statusType=0`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/topic/${id}/projects/?pageNo=${currentPage}&pageSize=5&sortBy=id&statusType=0`
   );
 
   useEffect(() => {
@@ -41,10 +41,11 @@ const ProjectList = () => {
 
   return (
     <div className="mx-auto">
-      <div className=" mt-[60px] mb-[25px]">
-        <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[15px]">Browse more projects!</h3>
+      <div className=" mt-[40px] mb-[25px]">
+        {/* <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[15px]">{data.name}</h3> */}
+        <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[15px]">Tech</h3>
         {/* <p className="text-slate-500">There are <span className="font-[600] text-slate-600"> {projects.data?.length} projects</span> out there!</p> */}
-        <p className="text-slate-500">Discover the best projects of your friends, teammates, or colleagues.</p>
+        <p className="text-slate-500">Hardware or software. Invention or innovation. If someone’s pushing technology forward, you’ll find it here.</p>
       </div>
       <div className="flex items-center justify-between mb-[10px]">
         <div className="relative w-[250px] mr-[40px]">
@@ -138,4 +139,4 @@ const ProjectList = () => {
   );
 };
 
-export default ProjectList;
+export default ProjectsOfTopicList;

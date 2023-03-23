@@ -6,12 +6,12 @@ export const navLink = [
   },
   {
     name: "Jobs",
-    href: "#",
+    href: "/jobs",
     others: [{}],
   },
   {
     name: "Topics",
-    href: "#",
+    href: "/topics",
     others: [{}],
   },
   {
