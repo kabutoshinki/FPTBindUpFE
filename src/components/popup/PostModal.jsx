@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useRef } from "react";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
@@ -6,25 +6,37 @@ import { Editor } from "@tinymce/tinymce-react";
 // import '../..node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import * as projectService from "../../services/projectService";
 import { toast } from "react-toastify";
-import * as authenService from "../../services/authenService";
+
 import Modal from "./Modal";
 
 const initialFormData = {
+  id: "",
   name: "",
   summary: "",
   description: "",
   source: "",
-  voteQuantity: 0,
   milestone: 0,
-  founderId: "",
 };
 
-const PostModal = ({ open, onClose }) => {
+const PostModal = ({ open, onClose, reFresh, data }) => {
   const [formData, setFormData] = useState(initialFormData);
   const [showModal, setShowModal] = useState(false);
   const handleOnClose = (e) => {
     if (e.target.id === "container") onClose();
   };
+
+  useEffect(() => {
+    if (data) {
+      setFormData({
+        id: data.id || "",
+        name: data.name || "",
+        summary: data.summary || "",
+        description: data.description || "",
+        source: data.source || "",
+        milestone: data.milestone || 0,
+      });
+    }
+  }, [data]);
 
   if (localStorage.getItem("user") !== null) {
     initialFormData.founderId = localStorage.getItem("user").replace(/"/g, "");
@@ -48,12 +60,13 @@ const PostModal = ({ open, onClose }) => {
     event.preventDefault();
     try {
       console.log(formData);
-      const res = await projectService.createProject(formData);
-      toast.success("Post Success");
+      const res = await projectService.updateProject(formData);
+      toast.success("Update Success");
       onClose();
+      reFresh();
       console.log(res);
     } catch (err) {
-      toast.warning("Post Fail");
+      toast.error("Update Fail");
       console.log(err);
     }
   };
@@ -167,7 +180,6 @@ const PostModal = ({ open, onClose }) => {
                 name="description"
                 value={formData.description}
                 onEditorChange={handleDescChange}
-                initialValue="<p>Describe your project here...</p>"
                 init={{
                   selector: "textarea",
                   height: 350,

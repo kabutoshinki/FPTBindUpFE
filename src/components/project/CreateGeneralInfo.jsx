@@ -49,6 +49,7 @@ export const CreateGeneralInfo = ({ setOpenTab }) => {
       // console.log(res?.data?.data);
       localStorage.setItem("newProjectId", res?.data?.data);
       setOpenTab(2);
+      window.location.reload();
       document.documentElement.scrollTop = 0;
     } catch (err) {
       toast.warning("Create Project Fail!", {

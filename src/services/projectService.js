@@ -38,7 +38,12 @@ export async function createProject(projectInfo) {
 
 export async function updateProject(projectInfo) {
   console.log(projectInfo);
-  return axios.post(apiEndpoint + `api/v1/project/`, projectInfo, options);
+  return axios.put(
+    apiEndpoint +
+      `api/v1/project/?id=${projectInfo.id}&name=${projectInfo.name}&summary=${projectInfo.summary}&description=${projectInfo.description}&source=${projectInfo.source}&milestone=${projectInfo.milestone}`,
+    projectInfo,
+    options
+  );
 }
 
 export async function uploadImageProject(id, imageFile) {

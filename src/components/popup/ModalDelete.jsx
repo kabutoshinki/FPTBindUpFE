@@ -8,6 +8,7 @@ import * as topicService from "../../services/topicService";
 import * as majorService from "../../services/majorService";
 import * as projectMemberService from "../../services/projectMemberService";
 import * as jobService from "../../services/jobService";
+import * as projectService from "../../services/projectService";
 import { toast } from "react-toastify";
 const style = {
   position: "absolute",
@@ -35,6 +36,8 @@ const ModalDelete = ({ open, onClose, type, title, id, reFresh }) => {
         await projectMemberService.deleteMemberProjectById(id);
       } else if (type === "job") {
         await jobService.deleteJobById(id);
+      } else if (type === "project") {
+        await projectService.deleteProject(id);
       }
       toast.success("Delete Success");
       onClose();

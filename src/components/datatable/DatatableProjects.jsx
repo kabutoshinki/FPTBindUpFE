@@ -5,32 +5,48 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import * as projectService from "../../services/projectService";
+import ModalDelete from "../popup/ModalDelete";
+import PostModal from "../popup/PostModal";
 const DatatableProjects = () => {
   const [projects, setProjects] = useState([]);
+  const [projectsFilter, setProjectsFilter] = useState([]);
+  const [project, setProject] = useState({});
+  const [openDel, setOpenDel] = useState(false);
+  const [openModalUpdate, setOpenModalUpdate] = useState(false);
+  const [idDel, setIdDel] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const { data, reFetch } = useFetch(
-    "http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageSize=99&sortBy=id&statusType=-1"
-  );
-  console.log(data);
+  const userId = localStorage.getItem("user").replace(/"/g, "");
+
+  const ListUserProjects = async () => {
+    const userId = localStorage.getItem("user").replace(/"/g, "");
+    console.log(userId);
+    const { data } = await projectService.getProjectsUser(userId);
+    setProjects(data?.data?.projects);
+  };
+  const onCreateSuccess = () => {
+    ListUserProjects();
+  };
+  useEffect(() => {
+    ListUserProjects();
+  }, []);
 
   useEffect(() => {
-    setProjects(data?.data?.projectDTOList);
-  }, [data]);
+    setProjectsFilter(projects?.filter((project) => project?.status !== "DELETED"));
+  }, [projects]);
 
-  const handleUpdate = async (id) => {
+  const handleDelete = async (projectId) => {
     try {
-      console.log(id);
-      await projectService.changeStatus(id, "PUBLIC");
-      reFetch();
+      setIdDel(projectId);
+      setOpenDel(true);
     } catch (error) {
       console.log(error);
     }
   };
-  const handleDelete = async (id) => {
+
+  const handleUpdate = (row) => {
     try {
-      console.log(id);
-      await projectService.changeStatus(id, "REJECTED");
-      reFetch();
+      setProject(row);
+      setOpenModalUpdate(true);
     } catch (error) {
       console.log(error);
     }
@@ -47,7 +63,7 @@ const DatatableProjects = () => {
             <Link to={"/user_dashboard/project/" + params.row.id} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
             </Link>
-            <div className="updateButton" onClick={() => handleUpdate(params.row.id)}>
+            <div className="updateButton" onClick={() => handleUpdate(params.row)}>
               Update
             </div>
 
@@ -84,10 +100,28 @@ const DatatableProjects = () => {
 
       <DataGrid
         className="datagrid"
-        rows={projects?.filter((project) => project?.name.toLowerCase().includes(searchQuery.toLowerCase())) ?? []}
+        rows={
+          projectsFilter?.filter((project) => project?.name.toLowerCase().includes(searchQuery.toLowerCase())) ?? []
+        }
         columns={projectColumns.concat(actionColumn)}
         pageSize={5}
         rowsPerPageOptions={[5]}
+      />
+
+      <PostModal
+        open={openModalUpdate}
+        onClose={() => setOpenModalUpdate(false)}
+        reFresh={onCreateSuccess}
+        data={project}
+      />
+
+      <ModalDelete
+        open={openDel}
+        onClose={() => setOpenDel(false)}
+        title={"Project"}
+        id={idDel}
+        type={"project"}
+        reFresh={onCreateSuccess}
       />
     </div>
   );
