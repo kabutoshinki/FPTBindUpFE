@@ -1,20 +1,17 @@
 import "./membersDatatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { jobColumns, memberColumns } from "../../datatablesource";
+import { userApplyColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
-import * as jobService from "../../services/jobService";
-import { Button } from "@mui/material";
-import ModalAddJob from "../popup/ModalAddJob";
 import ModalDelete from "../popup/ModalDelete";
 import ModalUpdateJob from "../popup/ModalUpdateJob";
 const DatatableUserApply = ({ id }) => {
   const [jobs, setJobs] = useState([]);
   const { data, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/job/${id}/`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/job/user/?jobId=${id}&pageNo=0&pageSize=99&sortBy=id&ascending=ASC`
   );
-
+  console.log(data);
   const [openDel, setOpenDel] = useState(false);
   const [openModalUpdate, setOpenModalUpdate] = useState(false);
   const [job, setJob] = useState({});
@@ -32,14 +29,14 @@ const DatatableUserApply = ({ id }) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            <Link to={`/user_dashboard/project/job/` + params.row.id} style={{ textDecoration: "none" }}>
+            {/* <Link to={`/user_dashboard/user/` + params.row.id} style={{ textDecoration: "none" }}>
               <div className="viewButton">View</div>
-            </Link>
-            <div className="updateButton" onClick={() => handleUpdate(params.row)}>
-              Update
+            </Link> */}
+            <div className="acceptButton" onClick={() => handleUpdate(params.row)}>
+              Accept
             </div>
             <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>
-              Delete
+              Reject
             </div>
           </div>
         );
@@ -87,7 +84,7 @@ const DatatableUserApply = ({ id }) => {
       <DataGrid
         className="datagrid"
         rows={jobs?.filter((member) => member.name.toLowerCase().includes(searchQuery.toLowerCase())) ?? []}
-        columns={jobColumns.concat(actionColumn)}
+        columns={userApplyColumns.concat(actionColumn)}
         pageSize={5}
         rowsPerPageOptions={[5]}
         // checkboxSelection

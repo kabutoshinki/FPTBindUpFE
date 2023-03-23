@@ -1,18 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./single.scss";
 
 import Sidebar from "../../components/sidebar/Sidebar";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-import { DataGrid } from "@mui/x-data-grid";
-import { memberColumns } from "../../datatablesource";
 import logo from "../../assets/logo.png";
-import * as projectMemberService from "../../services/projectMemberService";
-import DatatableProjects from "../../components/datatable/DatatableProjects";
-import DatatableMembers from "../../components/datatable/DatatableMembers";
-import DatatableChangeLog from "../../components/datatable/DatatableChangeLog";
 import { Navbar } from "../../components/navbar/Navbar";
-import DatatableJobs from "../../components/datatable/DatatableJobs";
 import DatatableUserApply from "../../components/datatable/DatatableUserApply";
 
 const JobDetailManager = () => {
@@ -46,7 +39,7 @@ const JobDetailManager = () => {
         </div>
 
         <div className="bottom">
-          <DatatableUserApply id={param.projectId} />
+          <DatatableUserApply id={param.jobId} />
         </div>
       </div>
     </div>

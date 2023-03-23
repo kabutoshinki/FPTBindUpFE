@@ -208,3 +208,38 @@ export const jobColumns = [
     width: 700,
   },
 ];
+export const userApplyColumns = [
+  // { field: "id", headerName: "ID", width: 250 },
+  {
+    field: "user_image",
+    headerName: "User Image",
+    width: 150,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img className="cellImg" src={params?.row?.avatar || logo} alt="avatar" />
+        </div>
+      );
+    },
+  },
+  {
+    field: "name",
+    headerName: "Name",
+    width: 250,
+  },
+  {
+    field: "headline",
+    headerName: "Headline",
+    width: 200,
+  },
+  {
+    field: "email",
+    headerName: "Email",
+    width: 200,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 150,
+  },
+];
