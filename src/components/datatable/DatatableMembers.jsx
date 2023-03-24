@@ -18,7 +18,7 @@ const DatatableMembers = ({ id }) => {
   const [idDel, setIdDel] = useState("");
 
   const { data, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/projects/${id}`
   );
   const [searchQuery, setSearchQuery] = useState("");
 

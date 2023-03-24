@@ -12,7 +12,7 @@ import ModalUpdateChangeLog from "../popup/ModalUpdateChangeLog";
 
 const DatatableChangeLog = ({ id }) => {
   const { data, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/changelog/?projectId=${id}&paging=false`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/changelogs/?projectId=${id}&paging=false`
   );
 
   const [open, setOpen] = useState(false);

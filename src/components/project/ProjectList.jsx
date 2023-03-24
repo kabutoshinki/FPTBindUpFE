@@ -175,7 +175,6 @@ const ProjectList = ({ selectedMilestones, sortKey }) => {
                                 </span>
                               )}
                             </div>
-
                             <p className="text-[0.9rem] font-normal text-slate-500">{item.summary}</p>
                             <div className="mt-[8px] flex items-center space-x-4 text-[0.9rem] font-normal text-slate-500">
                               {item.topicDTOList?.map((topic, topicIndex) => (
@@ -205,8 +204,9 @@ const ProjectList = ({ selectedMilestones, sortKey }) => {
             }
           </div >
         </div >
+
       )}
-    </div >
+    </div>
   );
 };
 

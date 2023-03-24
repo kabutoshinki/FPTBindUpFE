@@ -13,21 +13,21 @@ const options = {
 };
 
 export async function getTopics(id, currentPage) {
-  return axios.get(apiEndpoint + `api/v1/topic/?pageNo=0&pageSize=99&sortBy=id`, options);
+  return axios.get(apiEndpoint + `api/v1/topics/?pageNo=0&pageSize=99&sortBy=id`, options);
 }
 
 export async function getProjectsByTopicId(id) {
-  return axios.get(apiEndpoint + `api/v1/topic/${id}`, options);
+  return axios.get(apiEndpoint + `api/v1/topics/${id}`, options);
 }
 
 export async function deleteTopicById(id) {
-  return axios.delete(apiEndpoint + `api/v1/topic/${id}`, options);
+  return axios.delete(apiEndpoint + `api/v1/topics/${id}`, options);
 }
 
 export async function addTopic(formData) {
   console.log(formData);
-  return axios.post(apiEndpoint + `/api/v1/topic/`, formData, options);
+  return axios.post(apiEndpoint + `/api/v1/topics`, formData, options);
 }
 export async function updateTopic(formData) {
-  return axios.put(apiEndpoint + `/api/v1/topic/${formData.id}`, formData, options);
+  return axios.put(apiEndpoint + `/api/v1/topics/${formData.id}`, formData, options);
 }

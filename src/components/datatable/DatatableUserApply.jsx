@@ -10,7 +10,7 @@ import * as applicationService from "../../services/applicationService";
 const DatatableUserApply = ({ id }) => {
   const [jobs, setJobs] = useState([]);
   const { data, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/job/user/?jobId=${id}&pageNo=0&pageSize=99&sortBy=id&ascending=ASC`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/jobs/user/?jobId=${id}&pageNo=0&pageSize=99&sortBy=id&ascending=ASC`
   );
   console.log(data);
   const [openDel, setOpenDel] = useState(false);

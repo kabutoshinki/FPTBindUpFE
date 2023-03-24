@@ -14,7 +14,7 @@ const options = {
 
 export async function changeStatusApplication(id, status) {
   return axios.put(
-    apiEndpoint + `api/v1/application/status/?applicationId=${id}&applicationStatus=${status}`,
+    apiEndpoint + `api/v1/applications/status/?applicationId=${id}&applicationStatus=${status}`,
     status,
     options
   );
