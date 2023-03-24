@@ -11,6 +11,13 @@ function classNames(...classes) {
 
 const Projects = () => {
   var currentOpt = true;
+  const [selectedMilestones, setSelectedMilestones] = React.useState({
+    idea: false,
+    upcoming: false,
+    launching: false,
+    finished: false,
+  });
+  console.log(selectedMilestones);
   return (
     <div className="flex flex-col min-h-screen overflow-hidden ">
       <header className="body-font">
@@ -46,8 +53,14 @@ const Projects = () => {
                     <input
                       id="idea-checkbox"
                       type="checkbox"
-                      value=""
+                      checked={selectedMilestones.idea}
                       className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
+                      onChange={(e) =>
+                        setSelectedMilestones({
+                          ...selectedMilestones,
+                          idea: e.target.checked,
+                        })
+                      }
                     />
                     <label
                       htmlFor="idea-checkbox"
@@ -62,7 +75,13 @@ const Projects = () => {
                     <input
                       id="upcoming-checkbox"
                       type="checkbox"
-                      value=""
+                      checked={selectedMilestones.upcoming}
+                      onChange={(e) =>
+                        setSelectedMilestones({
+                          ...selectedMilestones,
+                          upcoming: e.target.checked,
+                        })
+                      }
                       className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
                     />
                     <label
@@ -78,7 +97,13 @@ const Projects = () => {
                     <input
                       id="launching-checkbox"
                       type="checkbox"
-                      value=""
+                      checked={selectedMilestones.launching}
+                      onChange={(e) =>
+                        setSelectedMilestones({
+                          ...selectedMilestones,
+                          launching: e.target.checked,
+                        })
+                      }
                       className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
                     />
                     <label
@@ -94,7 +119,13 @@ const Projects = () => {
                     <input
                       id="finished-checkbox"
                       type="checkbox"
-                      value=""
+                      checked={selectedMilestones.finished}
+                      onChange={(e) =>
+                        setSelectedMilestones({
+                          ...selectedMilestones,
+                          finished: e.target.checked,
+                        })
+                      }
                       className="w-4 h-4 text-blue-600 border-slate-400 rounded focus:ring-transparent"
                     />
                     <label
@@ -120,7 +151,7 @@ const Projects = () => {
           </div>
           <div className="w-[75%] flex-grow mx-[40px] relative">
             {/* <div className="absolute bg-gradient-to-b from-blue-50 w-full h-[40pt]"></div> */}
-            <ProjectList />
+            <ProjectList selectedMilestones={selectedMilestones} />
           </div>
         </div>
       </div>
