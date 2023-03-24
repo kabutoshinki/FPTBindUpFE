@@ -33,9 +33,9 @@ function App() {
         <Route path="/project/1/members" element={<ProjectMember />} />
         <Route path="/mydetail" element={<EditProfile />} />
         <Route path="/jobs" element={<Jobs />} />
-        <Route path="/job/1" element={<JobDetail />} />
+        <Route path="/job/:id" element={<JobDetail />} />
         <Route path="/topics" element={<Topics />} />
-        <Route path="/topic/1/projects" element={<ProjectsOfTopic />} />
+        <Route path="/topic/:id/projects" element={<ProjectsOfTopic />} />
         <Route path="/user_dashboard" element={<UserDashboard />} />
         <Route path="/user_dashboard/project/:projectId" element={<ProjectDetail />} />
         <Route path="/user_dashboard/project/job/:jobId" element={<JobDetailManager />} />

@@ -2,24 +2,6 @@ import React from "react";
 import ImageGallery from "react-image-gallery";
 import { Link } from "react-router-dom";
 
-const images = [
-  {
-    original: "https://picsum.photos/id/1018/1000/600/",
-    thumbnail: "https://picsum.photos/id/1018/1000/600/",
-    sizes: "600x400",
-  },
-  {
-    original: "https://picsum.photos/id/1015/1000/600/",
-    thumbnail: "https://picsum.photos/id/1015/1000/600/",
-    sizes: "600x400",
-  },
-  {
-    original: "https://picsum.photos/id/1019/1000/600/",
-    thumbnail: "https://picsum.photos/id/1019/1000/600/",
-    sizes: "600x400",
-  },
-];
-
 export const ProjectDesc = ({ rating, data }) => {
   // console.log("Image:", data?.data?.images);
   const arr = data?.data?.images;
@@ -62,46 +44,34 @@ export const ProjectDesc = ({ rating, data }) => {
       <div className="mt-[30pt]">
         <h3 className="font-[500] text-slate-700">Related topics</h3>
         <div className="my-[10px] flex justify-start flex-wrap">
-          <button
-            type="button"
-            className="py-2 px-4 mb-[10pt] mr-[10pt] text-sm font-normal text-gray-900 bg-white rounded-full border border-gray-200 hover:border-blue-400 hover:text-blue-700 "
-          >
-            Design Tools
-          </button>
-          <button
-            type="button"
-            className="py-2 px-4 mb-[10pt] mr-[10pt] text-sm font-normal text-gray-900 bg-white rounded-full border border-gray-200 hover:border-blue-400 hover:text-blue-700 "
-          >
-            No-Code
-          </button>
-          <button
-            type="button"
-            className="py-2 px-4 mb-[10pt] mr-[10pt] text-sm font-normal text-gray-900 bg-white rounded-full border border-gray-200 hover:border-blue-400 hover:text-blue-700 "
-          >
-            Graphic Design
-          </button>
-          <button
-            type="button"
-            className="py-2 px-4 mb-[10pt] mr-[10pt] text-sm font-normal text-gray-900 bg-white rounded-full border border-gray-200 hover:border-blue-400 hover:text-blue-700 "
-          >
-            Web Design
-          </button>
+          {data?.data?.topics.map((item, index) => (
+            <Link
+              to={`/topic/${item.id}/projects`}
+              key={index}
+              type="button"
+              className="py-2 px-4 mb-[10pt] mr-[10pt] text-sm font-normal text-gray-900 bg-white rounded-full border border-gray-200 hover:border-blue-400 hover:text-blue-700 "
+            >
+              {item.name}
+            </Link>
+          ))}
         </div>
       </div>
       <div className="mt-[30pt]">
         <h3 className="font-[500] text-slate-700 mb-[15px]">Mentors</h3>
-        <div className="my-[10px] flex justify-start flex-wrap">
-          <div className="flex items-center space-x-4">
-            <img className="w-10 h-10 rounded-full" src="../../assets/user_avatar/ava_1.jpg" onError={({ currentTarget }) => {
-              currentTarget.onerror = null; // prevents looping
-              currentTarget.src = "/no_img.png";
-            }}
-              alt="" />
-            <div className="font-medium ">
-              <div>Jese Leos</div>
-              <div className="text-sm text-gray-500">Lecturer at FPTU</div>
+        <div className="my-[10px] grid grid-cols-3">
+          {data?.data?.mentors.map((item, index) => (
+            <div key={index} className="flex items-center space-x-4">
+              <img className="w-10 h-10 rounded-full" src="../../assets/user_avatar/ava_1.jpg" onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src = "/empty_user.png";
+              }}
+                alt="" />
+              <div className="font-medium ">
+                <div>{item.name} - {item.major}</div>
+                <div className="text-sm text-gray-500">{item.email}</div>
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </>

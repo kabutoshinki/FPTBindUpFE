@@ -25,6 +25,8 @@ const ProjectList = () => {
   const handlePageClick = async (data) => {
     setCurrentPage(data.selected);
   };
+  const voteSuccessId = "vote-success";
+  const voteFailId = "vote-fail"
   const handleVote = async (e, projectId) => {
     e.preventDefault();
     try {
@@ -35,7 +37,9 @@ const ProjectList = () => {
       toast.success("vote success");
     } catch (error) {
       console.log(error);
-      toast.error("vote fail");
+      toast.error("vote fail", {
+        toastId: voteFailId
+      });
     }
   };
 
