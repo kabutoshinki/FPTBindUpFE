@@ -13,7 +13,7 @@ const options = {
 };
 
 export async function getMentors(id, currentPage) {
-  return axios.get(apiEndpoint + `/api/v1/mentor/`, options);
+  return axios.get(apiEndpoint + `/api/v1/mentors`, options);
 }
 
 export async function getListMentorsById(id) {

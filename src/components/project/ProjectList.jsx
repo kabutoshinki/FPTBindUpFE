@@ -10,16 +10,19 @@ import * as projectService from "../../services/projectService";
 import { click } from "@testing-library/user-event/dist/click";
 import { toast } from "react-toastify";
 
-const ProjectList = ({ selectedMilestones, sortMostVoted }) => {
+const ProjectList = ({ selectedMilestones, sortKey }) => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  console.log(searchTerm);
+  const [voteMessage, setVoteMessage] = useState("");
+  const [votedProjectId, setVotedProjectId] = useState();
+
+  // console.log(searchTerm);
   var milestonesApi = "";
   var nameKeyWordApi = "";
-  var sortBy = "created_date";
-  if (sortMostVoted) {
-    sortBy = "voteQuantity";
+  var sortBy = "&sortBy=created_date";
+  if (sortKey === "vote_quantity") {
+    sortBy = "&sortBy=vote_quantity&ascending=DESC";
   }
 
   const milestone = () => {
@@ -46,13 +49,13 @@ const ProjectList = ({ selectedMilestones, sortMostVoted }) => {
   };
 
   const { data, loading, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=${sortBy}&statusType=0&ascending=ASC${nameKeyword()}${milestone()}`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/projects?pageNo=${currentPage}&pageSize=5${sortBy}&statusType=0${nameKeyword()}${milestone()}`
   );
 
-  console.log(data);
+  // console.log(data);
   useEffect(() => {
     setProjects(data);
-    console.log(data?.data);
+    // console.log("Projects: ", data?.data);
   }, [data]);
   const handlePageClick = async (data) => {
     setCurrentPage(data.selected);
@@ -64,11 +67,15 @@ const ProjectList = ({ selectedMilestones, sortMostVoted }) => {
     try {
       const userId = localStorage.getItem("user").replace(/"/g, "");
       console.log(userId);
-      await projectService.projectVote(projectId, userId);
+      await projectService.projectVote(projectId, userId).then((res) => {
+        console.log("Vote message: ", res.data.message);
+        setVoteMessage(res.data.message);
+        setVotedProjectId(projectId)
+      });
+      toast.success(voteMessage + " successfully!");
       reFetch();
-      toast.success("vote success");
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast.error("vote fail", {
         toastId: voteFailId,
       });
@@ -81,7 +88,7 @@ const ProjectList = ({ selectedMilestones, sortMostVoted }) => {
   return (
     <div className="mx-auto">
       <div className=" mt-[60px] mb-[25px]">
-        <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[15px]">Browse more projects!</h3>
+        <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[15px]">🚀 Browse more projects!</h3>
         {/* <p className="text-slate-500">There are <span className="font-[600] text-slate-600"> {projects.data?.length} projects</span> out there!</p> */}
         <p className="text-slate-500">Discover the best projects of your friends, teammates, or colleagues.</p>
       </div>
@@ -134,55 +141,68 @@ const ProjectList = ({ selectedMilestones, sortMostVoted }) => {
       ) : (
         <div className="flex bg-white overflow-hidden sm:flex items-center mb-6">
           <div className="flex w-full">
-            <ul className="w-full">
-              {projects?.data?.projectDTOWithTopicList?.map((item, index) => (
-                <li key={index}>
-                  <Link to={`/project/${item.id}`}>
-                    <div className="flex items-center py-[25px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-blue-50 hover:via-white hover:to-white">
-                      <div>
-                        <img className="w-16 h-16 rounded-md" src={item.logo || img_default} alt="product hunt" />
-                      </div>
-                      <div className="ml-[30px]">
-                        <div className="flex items-center space-x-4">
-                          <h3 className="text-base font-bold text-slate-700 mr-3">{item.name}</h3>
-                          {item.milestone === 0 && (
-                            <span className="bg-orange-100 text-orange-800 fond-medium text-[12px] mr-2 px-2.5 py-0.5">
-                              Idea
-                            </span>
-                          )}
-                          {item.milestone === 1 && (
-                            <span className="bg-sky-100 text-sky-800 fond-medium text-[12px] mr-2 px-2.5 py-0.5">
-                              Upcoming
-                            </span>
-                          )}
-                          {item.milestone === 2 && (
-                            <span className="bg-green-100 text-green-800 fond-medium text-[12px] mr-2 px-2.5 py-0.5">
-                              Launching
-                            </span>
-                          )}
-                        </div>
+            {
+              projects?.data?.projectDTOWithTopicList?.length > 0
+                ? (<ul className="w-full">
+                  {projects?.data?.projectDTOWithTopicList?.map((item, index) => (
+                    <li key={index}>
+                      <Link to={`/project/${item.id}`}>
+                        <div className="flex items-center py-[25px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-blue-50 hover:via-white hover:to-white">
+                          <div>
+                            <img className="w-16 h-16 rounded-md" src={item.logo || img_default} alt="product hunt" />
+                          </div>
+                          <div className="ml-[30px]">
+                            <div className="flex items-center space-x-4">
+                              <h3 className="text-base font-bold text-slate-700 mr-[5px]">{item.name}</h3>
+                              {item.milestone === 0 && (
+                                <span className="bg-orange-100 text-orange-800 fond-medium text-[12px] px-2.5 py-0.5">
+                                  Idea
+                                </span>
+                              )}
+                              {item.milestone === 1 && (
+                                <span className="bg-sky-100 text-sky-800 fond-medium text-[12px] px-2.5 py-0.5">
+                                  Upcoming
+                                </span>
+                              )}
+                              {item.milestone === 2 && (
+                                <span className="bg-green-100 text-green-800 fond-medium text-[12px] px-2.5 py-0.5">
+                                  Launching
+                                </span>
+                              )}
+                              {item.milestone === 3 && (
+                                <span className="bg-slate-100 text-slate-800 fond-medium text-[12px] px-2.5 py-0.5">
+                                  Closing
+                                </span>
+                              )}
+                            </div>
 
-                        <p className="text-[0.9rem] font-normal text-slate-500">{item.summary}</p>
-                        <p className="text-[0.9rem] font-normal text-slate-500">#{item.topic}22</p>
-                      </div >
-                      <button
-                        className="absolute bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded"
-                        onClick={(e) => handleVote(e, item.id)}
-                      >
-                        <div className="flex-col align-center items-center px-[10px] py-2 inset-y-3 text-slate-500 group-hover:text-blue-600">
-                          <svg className="w-[12px] h-[12px] m-auto" viewBox="0 0 26 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.134 0.499999C12.5189 -0.166668 13.4811 -0.166667 13.866 0.5L25.1244 20C25.5093 20.6667 25.0281 21.5 24.2583 21.5H1.74167C0.971868 21.5 0.490744 20.6667 0.875644 20L12.134 0.499999Z" fill="currentColor" />
-                          </svg>
-                          <span className="text-[0.8rem] font-semibold mt-1 block text-center">
-                            {item.voteQuantity}
-                          </span>
-                        </div>
-                      </button>
-                    </div >
-                  </Link >
-                </li >
-              ))}
-            </ul >
+                            <p className="text-[0.9rem] font-normal text-slate-500">{item.summary}</p>
+                            <div className="mt-[8px] flex items-center space-x-4 text-[0.9rem] font-normal text-slate-500">
+                              {item.topicDTOList?.map((topic, topicIndex) => (
+                                <p key={topicIndex}>#{topic.shortName}</p>
+                              ))}
+                            </div>
+                          </div >
+                          <button
+                            className={"absolute text-slate-500 bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded " + ((voteMessage === "Upvoted" && votedProjectId === item.id) ? "border-blue-600 text-blue-600" : "")}
+                            onClick={(e) => handleVote(e, item.id)}
+                          >
+                            <div className="flex-col align-center items-center px-[10px] py-2 inset-y-3 group-hover:text-blue-600">
+                              <svg className="w-[12px] h-[12px] m-auto" viewBox="0 0 26 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.134 0.499999C12.5189 -0.166668 13.4811 -0.166667 13.866 0.5L25.1244 20C25.5093 20.6667 25.0281 21.5 24.2583 21.5H1.74167C0.971868 21.5 0.490744 20.6667 0.875644 20L12.134 0.499999Z" fill="currentColor" />
+                              </svg>
+                              <span className="text-[0.8rem] font-semibold mt-1 block text-center">
+                                {item.voteQuantity}
+                              </span>
+                            </div>
+                          </button>
+                        </div >
+                      </Link >
+                    </li >
+                  ))}
+                </ul >)
+                : (<div className="mx-auto my-[80px] text-[28px] text-slate-300 font-[500]">No projects founded!</div>)
+            }
           </div >
         </div >
       )}

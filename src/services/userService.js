@@ -12,13 +12,13 @@ const options = {
 };
 
 export async function findUserById(id) {
-  return axios.get(apiEndpoint + `/api/v1/user/${id}`, options);
+  return axios.get(apiEndpoint + `/api/v1/users/${id}`, options);
 }
 
 export async function updateUserById(formData) {
-  return axios.put(apiEndpoint + `/api/v1/user/${formData.id}`, formData, options);
+  return axios.put(apiEndpoint + `/api/v1/users/${formData.id}`, formData, options);
 }
 
 export async function userImage(id, formData) {
-  return axios.put(apiEndpoint + `/api/v1/user/${id}/avatar`, formData, options);
+  return axios.put(apiEndpoint + `/api/v1/users/${id}/avatar`, formData, options);
 }

@@ -11,9 +11,8 @@ function classNames(...classes) {
 }
 
 const Projects = () => {
-  var currentOpt = true;
 
-  const [sortMostVoted, setSortMostVoted] = useState(false);
+  const [sortKey, setSortKey] = useState("created_date");
 
   const [selectedMilestones, setSelectedMilestones] = React.useState({
     idea: false,
@@ -37,17 +36,15 @@ const Projects = () => {
               <div className="flex flex-col space-y-2 text-[1rem]">
                 <Link
                   to={"/projects"}
-                  className={classNames(currentOpt ? "font-medium text-[#1939FF]" : "font-normal text-slate-400", "")}
+                  onClick={(e) => setSortKey("created_date") }
+                  className={"font-medium " + (sortKey === "created_date" ? "text-[#1939FF]" : "text-slate-400 font-normal")}
                 >
                   Newest
                 </Link>
-                {(currentOpt = false)}
                 <Link
                   to={"/projects"}
-                  onChange={(e) =>
-                    setSortMostVoted(true)
-                  }
-                  className={classNames(currentOpt ? "font-medium text-[#1939FF]" : "font-normal text-slate-400", "")}
+                  onClick={(e) => setSortKey("vote_quantity") }
+                  className={"font-medium " + (sortKey === "vote_quantity" ? "text-[#1939FF]" : "text-slate-400 font-normal")}
                 >
                   Most Voted
                 </Link>
@@ -159,7 +156,7 @@ const Projects = () => {
           </div>
           <div className="w-[75%] flex-grow mx-[40px] relative">
             {/* <div className="absolute bg-gradient-to-b from-blue-50 w-full h-[40pt]"></div> */}
-            <ProjectList sortMostVoted={sortMostVoted} selectedMilestones={selectedMilestones} />
+            <ProjectList sortKey={sortKey} selectedMilestones={selectedMilestones} />
           </div>
         </div>
       </div>

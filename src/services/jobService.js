@@ -13,23 +13,23 @@ const options = {
 };
 
 export async function getJobs() {
-  return axios.get(apiEndpoint + `api/v1/job/?pageNo=0&pageSize=99&sortBy=id`, options);
+  return axios.get(apiEndpoint + `api/v1/jobs?pageNo=0&pageSize=99&sortBy=id`, options);
 }
 
 export async function getJobById(id) {
-  return axios.get(apiEndpoint + `api/v1/job/${id}/detail`, options);
+  return axios.get(apiEndpoint + `api/v1/jobs/${id}/detail`, options);
 }
 
 export async function getJobsByProjectId(id) {
-  return axios.get(apiEndpoint + `api/v1/job/${id}/`, options);
+  return axios.get(apiEndpoint + `api/v1/jobs/${id}`, options);
 }
 export async function deleteJobById(id) {
-  return axios.delete(apiEndpoint + `api/v1/job/${id}`, options);
+  return axios.delete(apiEndpoint + `api/v1/jobs/${id}`, options);
 }
 
 export async function updateJobById(formData) {
   return axios.put(
-    apiEndpoint + `api/v1/job/?id=${formData.id}&name=${formData.name}&description=${formData.description}`,
+    apiEndpoint + `api/v1/jobs?id=${formData.id}&name=${formData.name}&description=${formData.description}`,
     formData,
     options
   );
@@ -37,5 +37,5 @@ export async function updateJobById(formData) {
 
 export async function addJob(formData) {
   console.log(formData);
-  return axios.post(apiEndpoint + `api/v1/job/`, formData, options);
+  return axios.post(apiEndpoint + `api/v1/jobs`, formData, options);
 }
