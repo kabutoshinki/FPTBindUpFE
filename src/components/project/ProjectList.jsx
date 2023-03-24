@@ -10,21 +10,46 @@ import * as projectService from "../../services/projectService";
 import { click } from "@testing-library/user-event/dist/click";
 import { toast } from "react-toastify";
 
-
-const ProjectList = ({ sortMostVoted }) => {
+const ProjectList = ({ selectedMilestones, sortMostVoted }) => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-
-  var sortByApi = "id";
+  const [searchTerm, setSearchTerm] = useState("");
+  console.log(searchTerm);
+  var milestonesApi = "";
+  var nameKeyWordApi = "";
+  var sortBy = "created_date";
   if (sortMostVoted) {
-    sortByApi = "voteQuantity";
+    sortBy = "voteQuantity";
   }
 
-  // const [numOfPages, setNumOfPages] = useState(0);
+  const milestone = () => {
+    if (selectedMilestones?.idea) {
+      milestonesApi += "&milestoneType=0";
+    }
+    if (selectedMilestones?.upcoming) {
+      milestonesApi += "&milestoneType=1";
+    }
+    if (selectedMilestones?.launching) {
+      milestonesApi += "&milestoneType=2";
+    }
+    if (selectedMilestones?.finished) {
+      milestonesApi += "&milestoneType=3";
+    }
+    return milestonesApi;
+  };
+
+  const nameKeyword = () => {
+    if (searchTerm !== "") {
+      nameKeyWordApi += "&nameKeyWord=" + searchTerm;
+    }
+    return nameKeyWordApi;
+  };
+
   const { data, loading, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=${sortByApi}&statusType=0`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=${sortBy}&statusType=0&ascending=ASC${nameKeyword()}${milestone()}`
   );
 
+  console.log(data);
   useEffect(() => {
     setProjects(data);
     console.log(data?.data);
@@ -33,7 +58,7 @@ const ProjectList = ({ sortMostVoted }) => {
     setCurrentPage(data.selected);
   };
   const voteSuccessId = "vote-success";
-  const voteFailId = "vote-fail"
+  const voteFailId = "vote-fail";
   const handleVote = async (e, projectId) => {
     e.preventDefault();
     try {
@@ -45,11 +70,14 @@ const ProjectList = ({ sortMostVoted }) => {
     } catch (error) {
       console.log(error);
       toast.error("vote fail", {
-        toastId: voteFailId
+        toastId: voteFailId,
       });
     }
   };
 
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
   return (
     <div className="mx-auto">
       <div className=" mt-[60px] mb-[25px]">
@@ -63,6 +91,7 @@ const ProjectList = ({ sortMostVoted }) => {
             className="text-f13 px-[10px] py-[10px] pr-[35px] w-full rounded border border-slate-200 focus:border-grey-500 outline-none placeholder:text-slate-400 transition-colors duration-200 ease-in-out"
             placeholder="Search by name ..."
             type={"text"}
+            onChange={handleSearch}
           />
           <div className="absolute right-[10px] top-1/2 -translate-y-1/2">
             <svg
@@ -80,23 +109,24 @@ const ProjectList = ({ sortMostVoted }) => {
             </svg>
           </div>
         </div>
-
-        <ReactPaginate
-          className=""
-          previousLabel={"<"}
-          breakLabel={"..."}
-          nextLabel={">"}
-          pageCount={projects?.data?.numOfPages}
-          onPageChange={handlePageClick}
-          containerClassName={"inline-flex -space-x-px mb-4"}
-          pageLinkClassName={"px-3 py-2  text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
-          previousLinkClassName={
-            "px-3 py-2 ml-0 tight text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
-          }
-          nextLinkClassName={"px-3 py-2  text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700"}
-          breakLinkClassName={"px-3 py-2 text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
-          activeLinkClassName={"px-3 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"}
-        />
+        {projects?.data?.numOfPages !== 0 ? (
+          <ReactPaginate
+            className=""
+            previousLabel={"<"}
+            breakLabel={"..."}
+            nextLabel={">"}
+            pageCount={projects?.data?.numOfPages}
+            onPageChange={handlePageClick}
+            containerClassName={"inline-flex -space-x-px mb-4"}
+            pageLinkClassName={"px-3 py-2  text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
+            previousLinkClassName={
+              "px-3 py-2 ml-0 tight text-gray-500 bg-white rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
+            }
+            nextLinkClassName={"px-3 py-2  text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700"}
+            breakLinkClassName={"px-3 py-2 text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
+            activeLinkClassName={"px-3 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"}
+          />
+        ) : null}
       </div>
       {loading ? (
         // <Loading className="mx-auto" />
@@ -105,7 +135,7 @@ const ProjectList = ({ sortMostVoted }) => {
         <div className="flex bg-white overflow-hidden sm:flex items-center mb-6">
           <div className="flex w-full">
             <ul className="w-full">
-              {projects?.data?.projectDTOList?.map((item, index) => (
+              {projects?.data?.projectDTOWithTopicList?.map((item, index) => (
                 <li key={index}>
                   <Link to={`/project/${item.id}`}>
                     <div className="flex items-center py-[25px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-blue-50 hover:via-white hover:to-white">
@@ -114,7 +144,7 @@ const ProjectList = ({ sortMostVoted }) => {
                       </div>
                       <div className="ml-[30px]">
                         <div className="flex items-center space-x-4">
-                          <h3 className="text-base font-bold text-slate-700">{item.name}</h3>
+                          <h3 className="text-base font-bold text-slate-700 mr-3">{item.name}</h3>
                           {item.milestone === 0 && (
                             <span className="bg-orange-100 text-orange-800 fond-medium text-[12px] mr-2 px-2.5 py-0.5">
                               Idea
@@ -131,9 +161,10 @@ const ProjectList = ({ sortMostVoted }) => {
                             </span>
                           )}
                         </div>
+
                         <p className="text-[0.9rem] font-normal text-slate-500">{item.summary}</p>
                         <p className="text-[0.9rem] font-normal text-slate-500">#{item.topic}22</p>
-                      </div>
+                      </div >
                       <button
                         className="absolute bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded"
                         onClick={(e) => handleVote(e, item.id)}
@@ -147,15 +178,15 @@ const ProjectList = ({ sortMostVoted }) => {
                           </span>
                         </div>
                       </button>
-                    </div>
-                  </Link>
-                </li>
+                    </div >
+                  </Link >
+                </li >
               ))}
-            </ul>
-          </div>
-        </div>
+            </ul >
+          </div >
+        </div >
       )}
-    </div>
+    </div >
   );
 };
 

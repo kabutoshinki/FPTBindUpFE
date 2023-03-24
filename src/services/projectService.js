@@ -71,7 +71,7 @@ export async function deleteProject(id) {
   return axios.delete(apiEndpoint + `api/v1/project/${id}`, options);
 }
 export async function deleteProjectMentor(id, projectId) {
-  return axios.delete(apiEndpoint + `api/v1/project/${id}/mentor?topicId=${projectId}`, options);
+  return axios.delete(apiEndpoint + `api/v1/project/${id}/mentor?mentorId=${projectId}`, options);
 }
 
 export async function deleteProjectImage(id) {
