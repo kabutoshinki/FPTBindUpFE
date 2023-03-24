@@ -23,7 +23,7 @@ const style = {
   p: 4,
 };
 
-const ModalDelete = ({ open, onClose, type, title, id, reFresh }) => {
+const ModalDelete = ({ open, onClose, type, title, id, reFresh, projectId }) => {
   const handleDelete = async () => {
     try {
       if (type === "changelog") {
@@ -38,6 +38,8 @@ const ModalDelete = ({ open, onClose, type, title, id, reFresh }) => {
         await jobService.deleteJobById(id);
       } else if (type === "project") {
         await projectService.deleteProject(id);
+      } else if (type === "projectMentor") {
+        await projectService.deleteProjectMentor(projectId, id);
       }
       toast.success("Delete Success");
       onClose();

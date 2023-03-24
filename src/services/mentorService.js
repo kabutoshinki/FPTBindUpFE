@@ -16,6 +16,10 @@ export async function getMentors(id, currentPage) {
   return axios.get(apiEndpoint + `/api/v1/mentor/`, options);
 }
 
+export async function getListMentorsById(id) {
+  return axios.get(apiEndpoint + `/api/v1/mentor/project/${id}`, options);
+}
+
 export async function getMentorById(id) {
   return axios.get(apiEndpoint + `api/v1/mentor/${id}`, options);
 }

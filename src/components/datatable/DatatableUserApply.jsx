@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import ModalDelete from "../popup/ModalDelete";
 import ModalUpdateJob from "../popup/ModalUpdateJob";
+import * as applicationService from "../../services/applicationService";
 const DatatableUserApply = ({ id }) => {
   const [jobs, setJobs] = useState([]);
   const { data, reFetch } = useFetch(
@@ -29,34 +30,41 @@ const DatatableUserApply = ({ id }) => {
       renderCell: (params) => {
         return (
           <div className="cellAction">
-            {/* <Link to={`/user_dashboard/user/` + params.row.id} style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link> */}
-            <div className="acceptButton" onClick={() => handleUpdate(params.row)}>
-              Accept
-            </div>
-            <div className="deleteButton" onClick={() => handleDelete(params.row.id)}>
-              Reject
-            </div>
+            {params.row.applicationStatus === "ACCEPTED" ? (
+              <div className="acceptButton disabled">Accept</div>
+            ) : (
+              <div className="acceptButton" onClick={() => handleAccept(params.row.applicationId)}>
+                Accept
+              </div>
+            )}
+
+            {params.row.applicationStatus === "REJECTED" ? (
+              <div className="deleteButton disabled">Reject</div>
+            ) : (
+              <div className="deleteButton" onClick={() => handleDelete(params.row.applicationId)}>
+                Reject
+              </div>
+            )}
           </div>
         );
       },
     },
   ];
 
-  const handleDelete = async (memberId) => {
+  const handleAccept = async (id) => {
     try {
-      setIdDel(memberId);
-      setOpenDel(true);
+      console.log(id);
+      await applicationService.changeStatusApplication(id, "ACCEPTED");
+      reFetch();
     } catch (error) {
       console.log(error);
     }
   };
-
-  const handleUpdate = (row) => {
+  const handleDelete = async (id) => {
     try {
-      setJob(row);
-      setOpenModalUpdate(true);
+      console.log(id);
+      await applicationService.changeStatusApplication(id, "REJECTED");
+      reFetch();
     } catch (error) {
       console.log(error);
     }

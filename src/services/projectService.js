@@ -36,6 +36,11 @@ export async function createProject(projectInfo) {
   return axios.post(apiEndpoint + "api/v1/project/", projectInfo, options);
 }
 
+export async function addMentorProject(projectId, mentorId) {
+  console.log(mentorId);
+  return axios.post(apiEndpoint + `api/v1/project/${projectId}/mentor?mentorId=${mentorId}`, mentorId, options);
+}
+
 export async function updateProject(projectInfo) {
   console.log(projectInfo);
   return axios.put(apiEndpoint + `api/v1/project/?id=${projectInfo.id}`, projectInfo, options);
@@ -52,9 +57,6 @@ export async function changeStatus(projectId, status) {
 }
 
 export async function projectVote(projectId, userId) {
-  console.log(userId);
-  console.log(projectId);
-
   return axios.post(apiEndpoint + `api/v1/project/${projectId}/vote?userId=${userId}`, userId, options);
 }
 
@@ -67,6 +69,9 @@ export async function uploadLogoProject(projectId, imageFile) {
 //status đổi thành DELETE
 export async function deleteProject(id) {
   return axios.delete(apiEndpoint + `api/v1/project/${id}`, options);
+}
+export async function deleteProjectMentor(id, projectId) {
+  return axios.delete(apiEndpoint + `api/v1/project/${id}/mentor?topicId=${projectId}`, options);
 }
 
 export async function deleteProjectImage(id) {

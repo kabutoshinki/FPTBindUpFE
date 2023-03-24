@@ -238,8 +238,11 @@ export const userApplyColumns = [
     width: 200,
   },
   {
-    field: "status",
+    field: "applicationStatus",
     headerName: "Status",
-    width: 150,
+    width: 160,
+    renderCell: (params) => {
+      return <div className={`cellWithStatus ${params?.row?.applicationStatus}`}>{params?.row?.applicationStatus}</div>;
+    },
   },
 ];
