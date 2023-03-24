@@ -11,16 +11,23 @@ import { click } from "@testing-library/user-event/dist/click";
 import { toast } from "react-toastify";
 
 
-const ProjectList = () => {
+const ProjectList = ({ sortMostVoted }) => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+
+  var sortByApi = "id";
+  if (sortMostVoted) {
+    sortByApi = "voteQuantity";
+  }
+
   // const [numOfPages, setNumOfPages] = useState(0);
   const { data, loading, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=id&statusType=0`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=${sortByApi}&statusType=0`
   );
 
   useEffect(() => {
     setProjects(data);
+    console.log(data?.data);
   }, [data]);
   const handlePageClick = async (data) => {
     setCurrentPage(data.selected);
@@ -103,27 +110,37 @@ const ProjectList = () => {
                   <Link to={`/project/${item.id}`}>
                     <div className="flex items-center py-[25px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-blue-50 hover:via-white hover:to-white">
                       <div>
-                        <img className="w-14 h-14" src={item.logo || img_default} alt="product hunt" />
+                        <img className="w-16 h-16 rounded-md" src={item.logo || img_default} alt="product hunt" />
                       </div>
                       <div className="ml-[30px]">
-                        <h3 className="text-base font-bold text-slate-700">{item.name}</h3>
+                        <div className="flex items-center space-x-4">
+                          <h3 className="text-base font-bold text-slate-700">{item.name}</h3>
+                          {item.milestone === 0 && (
+                            <span className="bg-orange-100 text-orange-800 fond-medium text-[12px] mr-2 px-2.5 py-0.5">
+                              Idea
+                            </span>
+                          )}
+                          {item.milestone === 1 && (
+                            <span className="bg-sky-100 text-sky-800 fond-medium text-[12px] mr-2 px-2.5 py-0.5">
+                              Upcoming
+                            </span>
+                          )}
+                          {item.milestone === 2 && (
+                            <span className="bg-green-100 text-green-800 fond-medium text-[12px] mr-2 px-2.5 py-0.5">
+                              Launching
+                            </span>
+                          )}
+                        </div>
                         <p className="text-[0.9rem] font-normal text-slate-500">{item.summary}</p>
+                        <p className="text-[0.9rem] font-normal text-slate-500">#{item.topic}22</p>
                       </div>
                       <button
                         className="absolute bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded"
                         onClick={(e) => handleVote(e, item.id)}
                       >
                         <div className="flex-col align-center items-center px-[10px] py-2 inset-y-3 text-slate-500 group-hover:text-blue-600">
-                          <svg
-                            className="w-[12px] h-[12px] m-auto"
-                            viewBox="0 0 26 22"
-                            fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M12.134 0.499999C12.5189 -0.166668 13.4811 -0.166667 13.866 0.5L25.1244 20C25.5093 20.6667 25.0281 21.5 24.2583 21.5H1.74167C0.971868 21.5 0.490744 20.6667 0.875644 20L12.134 0.499999Z"
-                              fill="currentColor"
-                            />
+                          <svg className="w-[12px] h-[12px] m-auto" viewBox="0 0 26 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.134 0.499999C12.5189 -0.166668 13.4811 -0.166667 13.866 0.5L25.1244 20C25.5093 20.6667 25.0281 21.5 24.2583 21.5H1.74167C0.971868 21.5 0.490744 20.6667 0.875644 20L12.134 0.499999Z" fill="currentColor" />
                           </svg>
                           <span className="text-[0.8rem] font-semibold mt-1 block text-center">
                             {item.voteQuantity}

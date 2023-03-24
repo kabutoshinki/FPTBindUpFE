@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 export const ProjectDesc = ({ rating, data }) => {
   // console.log("Image:", data?.data?.images);
   const arr = data?.data?.images;
+  console.log(data);
   let imagesArr = [];
   if (arr) {
     console.log("url", arr);
@@ -58,17 +59,18 @@ export const ProjectDesc = ({ rating, data }) => {
       </div>
       <div className="mt-[30pt]">
         <h3 className="font-[500] text-slate-700 mb-[15px]">Mentors</h3>
-        <div className="my-[10px] grid grid-cols-3">
+        <div className="my-[10px] grid grid-cols-3 gap-x-5 gap-y-7">
           {data?.data?.mentors.map((item, index) => (
             <div key={index} className="flex items-center space-x-4">
-              <img className="w-10 h-10 rounded-full" src="../../assets/user_avatar/ava_1.jpg" onError={({ currentTarget }) => {
+              <img className="w-8 h-8 rounded-full" src="../../assets/user_avatar/ava_1.jpg" onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
                 currentTarget.src = "/empty_user.png";
               }}
                 alt="" />
-              <div className="font-medium ">
-                <div>{item.name} - {item.major}</div>
-                <div className="text-sm text-gray-500">{item.email}</div>
+              <div >
+                <div className="font-medium">{item.name}</div>
+                <div className="text-[0.7rem] text-slate-500">{item.major}</div>
+                <div className="text-[0.7rem] text-slate-500">{item.email}</div>
               </div>
             </div>
           ))}

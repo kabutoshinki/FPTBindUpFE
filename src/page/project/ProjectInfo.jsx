@@ -10,7 +10,7 @@ const ProjectInfo = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden ">
       <header className="body-font">
-        <Navbar />
+        <Navbar activePage={"Projects"} />
       </header>
 
       <div className="pt-[60pt] flex-grow mx-auto relative w-full">

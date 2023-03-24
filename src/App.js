@@ -27,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/projects" element={<Projects />} />
+        <Route path="/projects/most-voted" element={<Projects />} />
         <Route path="/project/new" element={<CreateProject />} />
         <Route path="/project/:id" element={<ProjectInfo />} />
         <Route path="/project/1/changelog" element={<ProjectChangeLog />} />

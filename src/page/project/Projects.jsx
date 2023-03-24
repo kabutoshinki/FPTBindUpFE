@@ -4,6 +4,7 @@ import { Navbar } from "../../components/navbar/Navbar";
 import ProjectList from "../../components/project/ProjectList";
 import { topics } from "../../components/topic/topics";
 import Footer from "../../partials/Footer";
+import { useState } from "react";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -11,6 +12,7 @@ function classNames(...classes) {
 
 const Projects = () => {
   var currentOpt = true;
+  const [sortMostVoted, setSortMostVoted] = useState("");
   return (
     <div className="flex flex-col min-h-screen overflow-hidden ">
       <header className="body-font">
@@ -24,17 +26,20 @@ const Projects = () => {
               <h3 className="mb-[20px] font-[600] text-[0.9rem] text-slate-600 uppercase">Sort project by</h3>
               <div className="flex flex-col space-y-2 text-[1rem]">
                 <Link
-                  to={"/"}
+                  to={"/projects"}
                   className={classNames(currentOpt ? "font-medium text-[#1939FF]" : "font-normal text-slate-400", "")}
                 >
                   Newest
                 </Link>
                 {(currentOpt = false)}
                 <Link
-                  to={"/"}
+                  to={"/projects"}
+                  onChange={(e) =>
+                    setSortMostVoted("voteQuantity")
+                  }
                   className={classNames(currentOpt ? "font-medium text-[#1939FF]" : "font-normal text-slate-400", "")}
                 >
-                  Most Votes
+                  Most Voted
                 </Link>
               </div>
             </div>
@@ -120,7 +125,7 @@ const Projects = () => {
           </div>
           <div className="w-[75%] flex-grow mx-[40px] relative">
             {/* <div className="absolute bg-gradient-to-b from-blue-50 w-full h-[40pt]"></div> */}
-            <ProjectList />
+            <ProjectList sortMostVoted={sortMostVoted} />
           </div>
         </div>
       </div>

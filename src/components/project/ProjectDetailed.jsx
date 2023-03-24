@@ -28,17 +28,15 @@ export const ProjectDetailed = ({ id, openTabId }) => {
       <div className="mx-auto flex flex-col justify-between items-start pt-[40px] ">
         <div className="w-full flex justify-between">
           <div className="flex items-center">
-            <Link to={"/"} className="mr-5 rounded ">
-              <img
-                className="object-cover rounded-lg h-16 w-16"
-                src={project?.data?.logo || "/no_img.png"}
-                onError={({ currentTarget }) => {
-                  currentTarget.onerror = null; // prevents looping
-                  currentTarget.src = "/no_img.png";
-                }}
-                alt="BindUP logo"
-              />
-            </Link>
+            <img
+              className="object-cover rounded-lg h-16 w-16 mr-[20px]"
+              src={project?.data?.logo || "/no_img.png"}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src = "/no_img.png";
+              }}
+              alt="BindUP logo"
+            />
             <div>
               <div className="flex items-center">
                 <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{project?.data?.name}</h3>

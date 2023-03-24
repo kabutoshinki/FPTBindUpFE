@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import * as projectService from "../../services/projectService";
 import * as userService from "../../services/userService";
 
-export const Navbar = ({ borderNavBar }) => {
+export const Navbar = ({ borderNavBar, activePage }) => {
   // const [authenticate, setAuthenticate] = useState(false || window.localStorage.getItem("authenticate") === "true");
   const [openModal, setOpenModal] = useState(false);
   const [user] = useAuthState(auth);
@@ -73,7 +73,7 @@ export const Navbar = ({ borderNavBar }) => {
                 to={item.href}
                 key={index}
                 className={(({ isActive }) =>
-                  isActive
+                  (isActive || item.name === activePage)
                     ? 'mr-[40px] text-lg font-medium text-[#1939FF] hover:text-[#00aaf3] '
                     : 'mr-[40px] text-lg font-medium text-slate-400  hover:text-[#00aaf3] '
                 )}
