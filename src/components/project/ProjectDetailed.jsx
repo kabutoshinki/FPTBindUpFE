@@ -19,6 +19,7 @@ export const ProjectDetailed = ({ id, openTabId }) => {
   document.documentElement.scrollTop = 0;
   useEffect(() => {
     setProject(data);
+    console.log("Project: ", data);
   }, [data]);
   // console.log("project"); console.log(project);
 
@@ -47,12 +48,12 @@ export const ProjectDetailed = ({ id, openTabId }) => {
                   </span>
                 )}
                 {project?.data?.milestone === 1 && (
-                  <span className="bg-emerald-50 text-emerald-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
+                  <span className="bg-emerald-50 text-blue-700 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-blue-400">
                     Upcoming
                   </span>
                 )}
                 {project?.data?.milestone === 2 && (
-                  <span className="bg-emerald-50 text-emerald-800 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
+                  <span className="bg-emerald-50 text-emerald-700 text-[15px] font-medium mr-2 px-2.5 py-0.5 rounded border border-emerald-400">
                     Launching
                   </span>
                 )}
@@ -140,10 +141,10 @@ export const ProjectDetailed = ({ id, openTabId }) => {
               <ProjectAboutSection data={project} />
             </div>
             <div className={openTab === 2 ? "block" : "hidden"}>
-              <ProjectJob project={project}/>
+              <ProjectJob project={project} />
             </div>
             <div className={openTab === 3 ? "block" : "hidden"}>
-              <ProjectMemberDetail project={project}/>
+              <ProjectMemberDetail project={project} />
             </div>
             <div className={openTab === 4 ? "block" : "hidden"}>
               <ProjectChangelogDetail project={project} />

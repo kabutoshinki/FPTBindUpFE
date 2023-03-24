@@ -14,9 +14,4 @@ export const navLink = [
     href: "/topics",
     others: [{}],
   },
-  {
-    name: "About",
-    href: "#",
-    others: [{}],
-  },
 ];

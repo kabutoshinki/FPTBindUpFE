@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { navLink } from "./navbarLink.js";
 import Modal from "../popup/Modal";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -31,11 +31,14 @@ export const Navbar = ({ borderNavBar }) => {
     return () => window.removeEventListener("scroll", scrollHandler);
   }, [top]);
 
+  // const handleClick = (menuItem) => { 
+  //   setState({ active: menuItem });
+  // }
+
   return (
     <div
-      className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${
-        (!top || borderNavBar) && `bg-white border-b-[1px] border-b-slate-200`
-      }`}
+      className={`bg-white fixed left-0 right-0 z-10 p-[10px] h-[60pt] ${(!top || borderNavBar) && `bg-white border-b-[1px] border-b-slate-200`
+        }`}
     >
       <div className="w-[85%] mx-auto flex justify-between items-center">
         <div className="flex items-center">
@@ -66,13 +69,17 @@ export const Navbar = ({ borderNavBar }) => {
           </div>
           <nav className="flex items-center md:mr-auto ">
             {navLink.map((item, index) => (
-              <Link
+              <NavLink
                 to={item.href}
                 key={index}
-                className="mr-[40px] text-lg font-medium text-gray-400 hover:text-[#1939FF]"
+                className={(({ isActive }) =>
+                  isActive
+                    ? 'mr-[40px] text-lg font-medium text-[#1939FF] hover:text-[#00aaf3] '
+                    : 'mr-[40px] text-lg font-medium text-slate-400  hover:text-[#00aaf3] '
+                )}
               >
                 {item.name}
-              </Link>
+              </NavLink>
             ))}
           </nav>
         </div>
