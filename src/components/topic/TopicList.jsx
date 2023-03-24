@@ -13,7 +13,7 @@ const TopicList = () => {
   const [topics, setTopics] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const { data, loading } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/topic/?pageNo=${currentPage}&pageSize=5&sortBy=id`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/topics/?pageNo=${currentPage}&pageSize=5&sortBy=id`
   );
 
   useEffect(() => {
@@ -41,12 +41,22 @@ const TopicList = () => {
             type={"text"}
           />
           <div className="absolute right-[10px] top-1/2 -translate-y-1/2">
-            <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" className="styles_searchIcon__1g65n" >
-              <path d="M9.383 10.347a5.796 5.796 0 11.965-.964L15 14.036l-.964.964-4.653-4.653zm-3.588-.12a4.432 4.432 0 100-8.863 4.432 4.432 0 000 8.863z" fill="#e0e5eb" fillRule="evenodd"></path>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              xmlns="http://www.w3.org/2000/svg"
+              className="styles_searchIcon__1g65n"
+            >
+              <path
+                d="M9.383 10.347a5.796 5.796 0 11.965-.964L15 14.036l-.964.964-4.653-4.653zm-3.588-.12a4.432 4.432 0 100-8.863 4.432 4.432 0 000 8.863z"
+                fill="#e0e5eb"
+                fillRule="evenodd"
+              ></path>
             </svg>
           </div>
         </div>
-        {topics?.data?.numOfPages > 1 &&
+        {topics?.data?.numOfPages > 1 && (
           <ReactPaginate
             className=""
             previousLabel={"<"}
@@ -62,7 +72,8 @@ const TopicList = () => {
             nextLinkClassName={"px-3 py-2  text-gray-500 bg-white rounded-r-lg hover:bg-gray-100 hover:text-gray-700"}
             breakLinkClassName={"px-3 py-2 text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
             activeLinkClassName={"px-3 py-2 text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700"}
-          />}
+          />
+        )}
       </div>
       {loading ? (
         // <Loading className="mx-auto" />

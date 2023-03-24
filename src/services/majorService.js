@@ -13,21 +13,21 @@ const options = {
 };
 
 export async function getMajors() {
-  return axios.get(apiEndpoint + `api/v1/major/?pageNo=0&pageSize=99&sortBy=id`, options);
+  return axios.get(apiEndpoint + `api/v1/majors/?pageNo=0&pageSize=99&sortBy=id`, options);
 }
 
 export async function getMajorById(id) {
-  return axios.get(apiEndpoint + `api/v1/major/${id}`, options);
+  return axios.get(apiEndpoint + `api/v1/majors/${id}`, options);
 }
 export async function deleteMajorById(id) {
-  return axios.delete(apiEndpoint + `api/v1/major/${id}`, options);
+  return axios.delete(apiEndpoint + `api/v1/majors/${id}`, options);
 }
 
 export async function updateMajorById(formData) {
-  return axios.put(apiEndpoint + `api/v1/major/${formData.id}`, formData, options);
+  return axios.put(apiEndpoint + `api/v1/majors/${formData.id}`, formData, options);
 }
 
 export async function addMajor(formData) {
   console.log(formData);
-  return axios.post(apiEndpoint + `/api/v1/major/`, formData, options);
+  return axios.post(apiEndpoint + `/api/v1/majors/`, formData, options);
 }

@@ -19,7 +19,7 @@ const ProjectDetail = () => {
   const param = useParams();
   console.log(param);
   const { data } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${param.projectId}`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/projects/${param.projectId}`
   );
 
   return (

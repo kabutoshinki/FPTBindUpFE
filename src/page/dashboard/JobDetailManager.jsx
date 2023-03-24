@@ -11,7 +11,7 @@ import DatatableUserApply from "../../components/datatable/DatatableUserApply";
 const JobDetailManager = () => {
   const param = useParams();
   const { data } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/job/${param.jobId}/detail`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/jobs/${param.jobId}/detail`
   );
   console.log(data);
   return (

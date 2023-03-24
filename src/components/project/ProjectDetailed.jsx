@@ -13,7 +13,7 @@ import ProjectJob from "./ProjectJob";
 export const ProjectDetailed = ({ id, openTabId }) => {
   const [openTab, setOpenTab] = useState(openTabId || 1);
   const [project, setProject] = useState([]);
-  const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/${id}`);
+  const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/projects/${id}`);
   // console.log(data);
 
   document.documentElement.scrollTop = 0;
@@ -106,29 +106,33 @@ export const ProjectDetailed = ({ id, openTabId }) => {
         <div className="mt-[30pt] flex space-x-[50px] text-lg font-[500] w-full">
           <div
             onClick={() => setOpenTab(1)}
-            className={` ${openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 1 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span className="">About</span>
           </div>
           <div
             onClick={() => setOpenTab(2)}
-            className={` ${openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 2 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Jobs</span>
           </div>
           <div
             onClick={() => setOpenTab(3)}
-            className={` ${openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 3 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Members</span>
           </div>
           <div
             onClick={() => setOpenTab(4)}
-            className={` ${openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
-              } cursor-pointer inline-block `}
+            className={` ${
+              openTab === 4 ? "text-blue-600 border-b-2 border-blue-400" : "text-gray-400"
+            } cursor-pointer inline-block `}
           >
             <span>Changelog</span>
           </div>

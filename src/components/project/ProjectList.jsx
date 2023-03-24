@@ -46,7 +46,7 @@ const ProjectList = ({ selectedMilestones, sortMostVoted }) => {
   };
 
   const { data, loading, reFetch } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=${sortBy}&statusType=0&ascending=ASC${nameKeyword()}${milestone()}`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/projects/?pageNo=${currentPage}&pageSize=5&sortBy=${sortBy}&statusType=0&ascending=ASC${nameKeyword()}${milestone()}`
   );
 
   console.log(data);
@@ -164,29 +164,37 @@ const ProjectList = ({ selectedMilestones, sortMostVoted }) => {
 
                         <p className="text-[0.9rem] font-normal text-slate-500">{item.summary}</p>
                         <p className="text-[0.9rem] font-normal text-slate-500">#{item.topic}22</p>
-                      </div >
+                      </div>
                       <button
                         className="absolute bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded"
                         onClick={(e) => handleVote(e, item.id)}
                       >
                         <div className="flex-col align-center items-center px-[10px] py-2 inset-y-3 text-slate-500 group-hover:text-blue-600">
-                          <svg className="w-[12px] h-[12px] m-auto" viewBox="0 0 26 22" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.134 0.499999C12.5189 -0.166668 13.4811 -0.166667 13.866 0.5L25.1244 20C25.5093 20.6667 25.0281 21.5 24.2583 21.5H1.74167C0.971868 21.5 0.490744 20.6667 0.875644 20L12.134 0.499999Z" fill="currentColor" />
+                          <svg
+                            className="w-[12px] h-[12px] m-auto"
+                            viewBox="0 0 26 22"
+                            fill="currentColor"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M12.134 0.499999C12.5189 -0.166668 13.4811 -0.166667 13.866 0.5L25.1244 20C25.5093 20.6667 25.0281 21.5 24.2583 21.5H1.74167C0.971868 21.5 0.490744 20.6667 0.875644 20L12.134 0.499999Z"
+                              fill="currentColor"
+                            />
                           </svg>
                           <span className="text-[0.8rem] font-semibold mt-1 block text-center">
                             {item.voteQuantity}
                           </span>
                         </div>
                       </button>
-                    </div >
-                  </Link >
-                </li >
+                    </div>
+                  </Link>
+                </li>
               ))}
-            </ul >
-          </div >
-        </div >
+            </ul>
+          </div>
+        </div>
       )}
-    </div >
+    </div>
   );
 };
 

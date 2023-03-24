@@ -12,68 +12,68 @@ const options = {
 };
 
 export function getProjects(currentPage) {
-  return axios.get(apiEndpoint + `api/v1/project/?pageNo=${currentPage}&pageSize=5&sortBy=voteQuantity`);
+  return axios.get(apiEndpoint + `api/v1/projects/?pageNo=${currentPage}&pageSize=5&sortBy=voteQuantity`);
 }
 
 export function getProjectsUser(id) {
-  return axios.get(apiEndpoint + `api/v1/user/${id}`);
+  return axios.get(apiEndpoint + `api/v1/users/${id}`);
 }
 
 export async function getProjectById(id) {
   console.log(id);
-  const { data } = await axios.get(apiEndpoint + `api/v1/project/${id}`);
+  const { data } = await axios.get(apiEndpoint + `api/v1/projects/${id}`);
   return data;
 }
 
 export async function getImageProject(id) {
   console.log(id);
-  const { data } = await axios.get(apiEndpoint + `api/v1/project/${id}/image/`);
+  const { data } = await axios.get(apiEndpoint + `api/v1/projects/${id}/image/`);
   return data;
 }
 
 export async function createProject(projectInfo) {
   console.log(projectInfo);
-  return axios.post(apiEndpoint + "api/v1/project/", projectInfo, options);
+  return axios.post(apiEndpoint + "api/v1/projects/", projectInfo, options);
 }
 
 export async function addMentorProject(projectId, mentorId) {
   console.log(mentorId);
-  return axios.post(apiEndpoint + `api/v1/project/${projectId}/mentor?mentorId=${mentorId}`, mentorId, options);
+  return axios.post(apiEndpoint + `api/v1/projects/${projectId}/mentor?mentorId=${mentorId}`, mentorId, options);
 }
 
 export async function updateProject(projectInfo) {
   console.log(projectInfo);
-  return axios.put(apiEndpoint + `api/v1/project/?id=${projectInfo.id}`, projectInfo, options);
+  return axios.put(apiEndpoint + `api/v1/projects/?id=${projectInfo.id}`, projectInfo, options);
 }
 
 export async function uploadImageProject(id, imageFile) {
   console.log(id);
-  return axios.post(apiEndpoint + `api/v1/project/${id}/image/`, imageFile, options);
+  return axios.post(apiEndpoint + `api/v1/projects/${id}/image/`, imageFile, options);
 }
 
 export async function changeStatus(projectId, status) {
   console.log(options);
-  return axios.put(apiEndpoint + `api/v1/project/${projectId}?projectStatus=${status}`, status, options);
+  return axios.put(apiEndpoint + `api/v1/projects/${projectId}?projectStatus=${status}`, status, options);
 }
 
 export async function projectVote(projectId, userId) {
-  return axios.post(apiEndpoint + `api/v1/project/${projectId}/vote?userId=${userId}`, userId, options);
+  return axios.post(apiEndpoint + `api/v1/projects/${projectId}/vote?userId=${userId}`, userId, options);
 }
 
 export async function uploadLogoProject(projectId, imageFile) {
   console.log(options);
   console.log(projectId);
-  return axios.post(apiEndpoint + `api/v1/project/${projectId}/logo/`, imageFile, options);
+  return axios.post(apiEndpoint + `api/v1/projects/${projectId}/logo/`, imageFile, options);
 }
 
 //status đổi thành DELETE
 export async function deleteProject(id) {
-  return axios.delete(apiEndpoint + `api/v1/project/${id}`, options);
+  return axios.delete(apiEndpoint + `api/v1/projects/${id}`, options);
 }
 export async function deleteProjectMentor(id, projectId) {
-  return axios.delete(apiEndpoint + `api/v1/project/${id}/mentor?mentorId=${projectId}`, options);
+  return axios.delete(apiEndpoint + `api/v1/projects/${id}/mentor?mentorId=${projectId}`, options);
 }
 
 export async function deleteProjectImage(id) {
-  return axios.delete(apiEndpoint + `api/v1/project/{projectId}/image/${id}`, options);
+  return axios.delete(apiEndpoint + `api/v1/projects/{projectId}/image/${id}`, options);
 }
