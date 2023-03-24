@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import LinearProgress from "@mui/material/LinearProgress";
 import * as projectService from "../../services/projectService";
+import * as userService from "../../services/userService";
 import { click } from "@testing-library/user-event/dist/click";
 import { toast } from "react-toastify";
 
@@ -15,7 +16,7 @@ const ProjectList = ({ selectedMilestones, sortKey }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
   const [voteMessage, setVoteMessage] = useState("");
-  const [votedProjectId, setVotedProjectId] = useState();
+  const [upvotedProject, setUpvotedProject] = useState([])
 
   // console.log(searchTerm);
   var milestonesApi = "";
@@ -51,11 +52,18 @@ const ProjectList = ({ selectedMilestones, sortKey }) => {
   const { data, loading, reFetch } = useFetch(
     `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/projects?pageNo=${currentPage}&pageSize=5${sortBy}&statusType=0${nameKeyword()}${milestone()}`
   );
+  var upvoted = []
+  const User = async () => {
+    const userId = localStorage.getItem("user").replace(/"/g, "");
+    const { data } = await userService.findUserById(userId);
+    for (var project of data?.data?.votes) upvoted.push(project.id);
+    setUpvotedProject(upvoted);
+  };
 
-  // console.log(data);
   useEffect(() => {
     setProjects(data);
-    // console.log("Projects: ", data?.data);
+    User();
+    console.log("Upvoted: ", upvoted);
   }, [data]);
   const handlePageClick = async (data) => {
     setCurrentPage(data.selected);
@@ -70,7 +78,18 @@ const ProjectList = ({ selectedMilestones, sortKey }) => {
       await projectService.projectVote(projectId, userId).then((res) => {
         console.log("Vote message: ", res.data.message);
         setVoteMessage(res.data.message);
-        setVotedProjectId(projectId)
+
+        if (upvotedProject.includes(projectId)) {
+          var newUpvoted = []
+          for (let prj in upvotedProject) {
+            if (prj === projectId) continue;
+            newUpvoted.push(prj)
+          }
+          setUpvotedProject(newUpvoted);
+        } else {
+          upvotedProject.push(projectId);
+          setUpvotedProject(upvotedProject);
+        }
       });
       toast.success(voteMessage + " successfully!");
       reFetch();
@@ -183,7 +202,7 @@ const ProjectList = ({ selectedMilestones, sortKey }) => {
                             </div>
                           </div >
                           <button
-                            className={"absolute text-slate-500 bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded " + ((voteMessage === "Upvoted" && votedProjectId === item.id) ? "border-blue-600 text-blue-600" : "")}
+                            className={"absolute text-slate-500 bg-white w-[70px] my-auto right-[35px] border border-slate-200 group hover:border-blue-600 rounded " + ((upvotedProject.includes(item.id)) ? "border-blue-600 text-blue-600" : "")}
                             onClick={(e) => handleVote(e, item.id)}
                           >
                             <div className="flex-col align-center items-center px-[10px] py-2 inset-y-3 group-hover:text-blue-600">

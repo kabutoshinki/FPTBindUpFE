@@ -3,13 +3,36 @@ import { Link } from "react-router-dom";
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import * as jobService from "../../services/jobService";
+import * as projectService from "../../services/projectService";
 import useFetch from "../../hooks/useFetch";
 
 export const JobDescription = ({ id }) => {
-  // const { data, loading } = useFetch(
-  //   jobService.getJobById(id)
-  // );
+  const [job, setJob] = useState();
+  const [project, setProject] = useState();
+
+  const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/jobs/${id}/detail`);
+
+  const Project = async () => {
+    console.log("project id: ", data?.data?.projectId);
+    const { dt } = await projectService.getProjectById(data?.data?.projectId);
+    console.log("Project data:", dt);
+    setProject(dt?.data);
+  };
+
+  useEffect(() => {
+    setJob(data);
+    Project();
+  }, [data]);
+
+  console.log("Jobs: ", data?.data);
+  console.log("project: ", project);
+
+
+
   // const [job, setJob] = useState();
+  // const { data } = useFetch(`http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/projects/${id}`);
+
+  // document.documentElement.scrollTop = 0;
   // useEffect(() => {
   //   setJob(data);
   //   console.log("Jobs: ", data);
@@ -19,29 +42,28 @@ export const JobDescription = ({ id }) => {
       <div className="mx-auto flex flex-col justify-between items-start pt-[40px] ">
         <div className="mb-[20px]">
           <Breadcrumbs aria-label="breadcrumb" >
-            <Link underline="hover" color="inherit" href="/jobs">
+            <Link underline="hover" color="inherit" to="/jobs">
               Jobs
             </Link>
-            <Typography color="text.primary">Data Engineer</Typography>
-            {/* <Typography color="text.primary">{job.name}</Typography> */}
+            {/* <Typography color="text.primary">Data Engineer</Typography> */}
+            <Typography color="text.primary">{job?.data?.name}</Typography>
           </Breadcrumbs>
         </div>
         <div className="w-full flex">
           {/* Left */}
           <div className="py-[20px] w-[75%] mr-[20px]">
             <div className="flex items-center">
-              <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">Data Engineer</h3>
+              <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{job?.data?.name}</h3>
               {/* <h3 className="mr-[20px] text-slate-800 text-3xl font-bold mb-[6px]">{job.name}</h3> */}
             </div>
             <div>
-              {/* {job.description} */}
-              Job description is placed here...
+              {job?.data?.description}
             </div>
           </div>
 
           {/* Right */}
           <div className="py-[20px] mt-4 float-right">
-            <div className="w-[250px] h-[300px] p-[20px] shadow border border-slate-300 rounded-md flex flex-col justify-center items-center">
+            <div className="w-[250px] h-fit p-[20px] shadow border border-slate-300 rounded-md flex flex-col justify-center items-center">
               <div className="w-full flex flex-col items-center border-b border-b-slate-300 pb-[20px] mb-[20px]">
                 <img className="object-cover rounded-full h-16 w-16 mb-[10px]" src="/no_img.png" onError={({ currentTarget }) => {
                   currentTarget.onerror = null; // prevents looping
@@ -51,19 +73,13 @@ export const JobDescription = ({ id }) => {
                 {/* <h3 className="font-[500] text-slate-600 text-lg">{job.project.name}</h3> */}
               </div>
               <div className="">
-                <div className="flex items-center space-x-[20px] mb-[20px]">
+                <div className="flex items-center justify-center mb-[20px]">
                   <p className="text-[0.8rem] font-[500] text-slate-400 flex items-center">
                     <svg className="w-4 h-4 mr-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 8V12L15 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                       <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
                     </svg>
-                    20/03/2023
-                  </p>
-                  <p className="text-[0.8rem] font-[500] text-slate-400 flex items-center">
-                    <svg className="w-4 h-4 mr-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11 11H6.2C5.07989 11 4.51984 11 4.09202 11.218C3.71569 11.4097 3.40973 11.7157 3.21799 12.092C3 12.5198 3 13.0799 3 14.2V21M21 21V6.2C21 5.0799 21 4.51984 20.782 4.09202C20.5903 3.71569 20.2843 3.40973 19.908 3.21799C19.4802 3 18.9201 3 17.8 3H14.2C13.0799 3 12.5198 3 12.092 3.21799C11.7157 3.40973 11.4097 3.71569 11.218 4.09202C11 4.51984 11 5.0799 11 6.2V21M22 21H2M14.5 7H17.5M14.5 11H17.5M14.5 15H17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    Thu Duc City
+                    {job?.data?.dueDate}
                   </p>
                 </div>
                 <button type="button" className="w-full flex items-center justify-center text-white bg-blue-700 hover:bg-blue-800 font-[500] rounded text-[1rem] px-5 py-2.5 mr-2 mb-2">

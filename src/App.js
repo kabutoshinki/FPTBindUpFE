@@ -29,12 +29,12 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/most-voted" element={<Projects />} />
         <Route path="/project/new" element={<CreateProject />} />
-        <Route path="/projects/:id" element={<ProjectInfo />} />
+        <Route path="/project/:id" element={<ProjectInfo />} />
         <Route path="/project/1/changelog" element={<ProjectChangeLog />} />
         <Route path="/project/1/members" element={<ProjectMember />} />
         <Route path="/mydetail" element={<EditProfile />} />
         <Route path="/jobs" element={<Jobs />} />
-        <Route path="/jobs/:id" element={<JobDetail />} />
+        <Route path="/job/:id" element={<JobDetail />} />
         <Route path="/topics" element={<Topics />} />
         <Route path="/topic/:id/projects" element={<ProjectsOfTopic />} />
         <Route path="/user_dashboard" element={<UserDashboard />} />
