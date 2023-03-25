@@ -10,7 +10,7 @@ const ListProjects = () => {
       <Sidebar />
       <div className="listContainer">
         {/* <DashboardNavbar /> */}
-        <Navbar />
+        <Navbar borderNavBar={true}/>
         <DatatableProjects />
       </div>
     </div>

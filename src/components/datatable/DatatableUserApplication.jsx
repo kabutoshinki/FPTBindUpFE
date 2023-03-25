@@ -8,7 +8,7 @@ import ModalDelete from "../popup/ModalDelete";
 import ModalUpdateJob from "../popup/ModalUpdateJob";
 import * as applicationService from "../../services/applicationService";
 
-const DatatableUserApply = ({ id }) => {
+const DatatableUserApplication = ({ id }) => {
   const [jobs, setJobs] = useState([]);
   const { data, reFetch } = useFetch(
     `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/jobs/user/?jobId=${id}&pageNo=0&pageSize=99&sortBy=id&ascending=ASC`
@@ -96,7 +96,7 @@ const DatatableUserApply = ({ id }) => {
         columns={userApplyColumns.concat(actionColumn)}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        // checkboxSelection
+      // checkboxSelection
       />
 
       <ModalUpdateJob open={openModalUpdate} onClose={() => setOpenModalUpdate(false)} reFresh={reFetch} data={job} />
@@ -113,4 +113,4 @@ const DatatableUserApply = ({ id }) => {
   );
 };
 
-export default DatatableUserApply;
+export default DatatableUserApplication;

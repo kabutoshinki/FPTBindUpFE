@@ -26,7 +26,7 @@ const ProjectDetail = () => {
     <div className="single">
       <Sidebar />
       <div className="singleContainer">
-        <Navbar />
+        <Navbar borderNavBar={true}/>
         <div className="top" style={{ marginTop: "80px" }}>
           <div className="left">
             <h1 className="title">Project Information</h1>

@@ -8,10 +8,10 @@ import logo from "../../assets/logo.png";
 import { Navbar } from "../../components/navbar/Navbar";
 import DatatableUserApply from "../../components/datatable/DatatableUserApply";
 
-const JobDetailManager = () => {
+const UserApplication = () => {
   const param = useParams();
   const { data } = useFetch(
-    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/jobs/${param.jobId}/detail`
+    `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/applications/user?userId=${param.userId}`
   );
   console.log(data);
   return (
@@ -46,4 +46,4 @@ const JobDetailManager = () => {
   );
 };
 
-export default JobDetailManager;
+export default UserApplication;

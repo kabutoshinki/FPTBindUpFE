@@ -18,6 +18,7 @@ import JobDetailManager from "./page/dashboard/JobDetailManager";
 
 import Topics from "./page/topic/Topics";
 import ProjectsOfTopic from "./page/topic/ProjectsOfTopic";
+import UserApplication from "./page/dashboard/UserApplication";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/user_dashboard" element={<UserDashboard />} />
         <Route path="/user_dashboard/project/:projectId" element={<ProjectDetail />} />
         <Route path="/user_dashboard/project/job/:jobId" element={<JobDetailManager />} />
+        <Route path="/user_dashboard/applications" element={<UserApplication />} />
       </Routes>
     </BrowserRouter>
   );
