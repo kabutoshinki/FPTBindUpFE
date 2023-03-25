@@ -167,13 +167,7 @@ const PostModal = ({ open, onClose, reFresh, data }) => {
               <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
                 Description
               </label>
-              {/* <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
-              ></textarea> */}
+
               <Editor
                 apiKey="n4wo29pfipl3fr4n3e29mh6yokcj1nt0cigd7rz76twvvswg"
                 id="description"

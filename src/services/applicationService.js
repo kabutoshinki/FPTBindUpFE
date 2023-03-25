@@ -20,7 +20,9 @@ export async function changeStatusApplication(id, status) {
   );
 }
 
-export async function addMajor(formData) {
-  console.log(formData);
-  return axios.post(apiEndpoint + `/api/v1/major/`, formData, options);
+export async function apply(formData) {
+  return axios.post(apiEndpoint + `/api/v1/applications/`, formData, options);
+}
+export async function getApplicationUser(userId) {
+  return axios.get(apiEndpoint + `/api/v1/applications/user?userId=${userId}`, options);
 }

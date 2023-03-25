@@ -41,7 +41,7 @@ function App() {
         <Route path="/user_dashboard" element={<UserDashboard />} />
         <Route path="/user_dashboard/project/:projectId" element={<ProjectDetail />} />
         <Route path="/user_dashboard/project/job/:jobId" element={<JobDetailManager />} />
-        <Route path="/user_dashboard/applications" element={<UserApplication />} />
+        <Route path="/user_application" element={<UserApplication />} />
       </Routes>
     </BrowserRouter>
   );
