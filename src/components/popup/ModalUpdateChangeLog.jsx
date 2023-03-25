@@ -6,12 +6,14 @@ import Modal from "@mui/material/Modal";
 import { toast } from "react-toastify";
 import { TextField } from "@mui/material";
 import * as changelogService from "../../services/changeLogService";
+import { Editor } from "@tinymce/tinymce-react";
+
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 1000,
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -52,7 +54,10 @@ const ModalUpdateChangeLog = ({ open, onClose, data, reFresh }) => {
       toast.error("Update Fail");
     }
   };
-
+  const handleDescChange = (content, editor) => {
+    console.log("desc:", content);
+    setFormData({ ...formData, ["description"]: content });
+  };
   return (
     <div>
       <Modal
@@ -76,24 +81,64 @@ const ModalUpdateChangeLog = ({ open, onClose, data, reFresh }) => {
               Update Change Log
             </Typography>
 
-            <TextField
-              label="title"
-              sx={{ mb: 3, width: "100%" }}
-              name="title"
-              value={formData?.title}
-              onChange={handleInputChange}
-              required
-            />
-            <TextField
-              label="description"
-              sx={{ mb: 3, width: "100%" }}
-              name="description"
-              value={formData?.description}
-              onChange={handleInputChange}
-              required
-            />
+            <div className="mb-4 w-full">
+              <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
+                Title
+              </label>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-indigo-200"
+              />
+            </div>
+            <div className="col-span-3 h-full">
+              <label htmlFor="description" className="block text-gray-700 font-bold mb-2">
+                Description
+              </label>
 
-            <div>
+              <Editor
+                apiKey="n4wo29pfipl3fr4n3e29mh6yokcj1nt0cigd7rz76twvvswg"
+                id="description"
+                name="description"
+                value={formData.description}
+                onEditorChange={handleDescChange}
+                init={{
+                  selector: "textarea",
+                  height: 350,
+                  menubar: false,
+                  resize: false,
+                  plugins: [
+                    "advlist",
+                    "autolink",
+                    "lists",
+                    "link",
+                    "image",
+                    "charmap",
+                    "preview",
+                    "anchor",
+                    "searchreplace",
+                    "visualblocks",
+                    "code",
+                    "fullscreen",
+                    "insertdatetime",
+                    "media",
+                    "table",
+                    "code",
+                  ],
+                  toolbar:
+                    "undo redo | blocks | " +
+                    "bold italic forecolor | alignleft aligncenter " +
+                    "alignright alignjustify | bullist numlist outdent indent | " +
+                    "removeformat | help",
+                  content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                }}
+              />
+            </div>
+
+            <div className="mt-3">
               <Button
                 variant="contained"
                 sx={{ me: 3 }}

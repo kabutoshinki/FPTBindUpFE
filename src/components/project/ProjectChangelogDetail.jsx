@@ -73,7 +73,7 @@ export const ProjectChangelogDetail = ({ project }) => {
                 </time>
                 <h3 className="text-lg font-semibold text-gray-900">{changelog.title}</h3>
                 <div className="text-base font-normal text-gray-500">
-                  <ReadMore>{changelog.description}</ReadMore>
+                  <div className="" dangerouslySetInnerHTML={{ __html: changelog?.description }} />
                 </div>
               </li>
             ))

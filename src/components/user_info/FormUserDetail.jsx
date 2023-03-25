@@ -88,6 +88,12 @@ const FormUserDetail = ({ user, onSuccess }) => {
           <div className="flex">
             <div>
               <img className="rounded w-[100px] h-[100px]" src={imageURL || user?.avatar || logo} alt="error" />
+              <button
+                onClick={handleButtonClickAPI}
+                className="text-slate-500 mt-3 mb-3 border border-slate-500 hover:text-blue-600 hover:border-blue-500 font-semibold py-2 px-[2rem] rounded"
+              >
+                Save
+              </button>
             </div>
             <div className="mt-2 ml-3">
               <div className="flex flex-col">

@@ -120,6 +120,7 @@ export const changelogColumns = [
     field: "description",
     headerName: "Description",
     width: 650,
+    renderCell: (params) => <div dangerouslySetInnerHTML={{ __html: params.value }} />,
   },
   {
     field: "createdDate",

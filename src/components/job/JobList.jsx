@@ -31,15 +31,15 @@ const JobList = ({ checkDueDate, sortKey }) => {
   };
 
   const order = () => {
-    if (checkDueDate?.desc) orderParam = "&ascending=DESC"
-    if (checkDueDate?.asc) orderParam = "&ascending=ASC"
+    if (checkDueDate?.desc) orderParam = "&ascending=DESC";
+    if (checkDueDate?.asc) orderParam = "&ascending=ASC";
     return orderParam;
-  }
+  };
 
   const { data, loading } = useFetch(
     `http://fhunt-env.eba-pr2amuxm.ap-southeast-1.elasticbeanstalk.com/api/v1/jobs?pageNo=${currentPage}&pageSize=5&${sortBy()}${order()}${nameKeyword()}`
   );
-
+  console.log(data);
   useEffect(() => {
     setJobs(data);
     console.log("Jobs: ", data);
@@ -48,7 +48,6 @@ const JobList = ({ checkDueDate, sortKey }) => {
   const handlePageClick = async (data) => {
     setCurrentPage(data.selected);
   };
-
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
@@ -71,8 +70,18 @@ const JobList = ({ checkDueDate, sortKey }) => {
             onChange={handleSearch}
           />
           <div className="absolute right-[10px] top-1/2 -translate-y-1/2">
-            <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" className="styles_searchIcon__1g65n">
-              <path d="M9.383 10.347a5.796 5.796 0 11.965-.964L15 14.036l-.964.964-4.653-4.653zm-3.588-.12a4.432 4.432 0 100-8.863 4.432 4.432 0 000 8.863z" fill="#e0e5eb" fillRule="evenodd" ></path>
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              xmlns="http://www.w3.org/2000/svg"
+              className="styles_searchIcon__1g65n"
+            >
+              <path
+                d="M9.383 10.347a5.796 5.796 0 11.965-.964L15 14.036l-.964.964-4.653-4.653zm-3.588-.12a4.432 4.432 0 100-8.863 4.432 4.432 0 000 8.863z"
+                fill="#e0e5eb"
+                fillRule="evenodd"
+              ></path>
             </svg>
           </div>
         </div>
@@ -82,7 +91,7 @@ const JobList = ({ checkDueDate, sortKey }) => {
           previousLabel={"<"}
           breakLabel={"..."}
           nextLabel={">"}
-          pageCount={jobs?.data?.numOfPages}
+          pageCount={jobs?.data?.pageSize}
           onPageChange={handlePageClick}
           containerClassName={"inline-flex -space-x-px mb-4"}
           pageLinkClassName={"px-3 py-2  text-gray-500 bg-white hover:bg-gray-100 hover:text-gray-700"}
@@ -100,13 +109,13 @@ const JobList = ({ checkDueDate, sortKey }) => {
       ) : (
         <div className="flex bg-white overflow-hidden sm:flex items-center mb-6">
           <div className="flex w-full">
-            {jobs?.data?.jobDTOList?.length > 0 ?
-              (<ul className="w-full">
-                {jobs?.data?.jobDTOList?.map((item, index) => (
+            {jobs?.data?.jobDTOWithProjectList?.length > 0 ? (
+              <ul className="w-full">
+                {jobs?.data?.jobDTOWithProjectList?.map((item, index) => (
                   <li key={index}>
                     {/* <Link to={jobService.getJobById(item.id)}> */}
                     <Link to={`/job/${item.id}`}>
-                    {/* <Link to={"/job/1"}> */}
+                      {/* <Link to={"/job/1"}> */}
                       <div className="flex justify-between items-center h-[110px] rounded pr-[20px] py-[15px] mb-[20px] relative hover:bg-gradient-to-bl hover:from-[#e6f7ff] hover:via-white hover:to-white">
                         <div className="flex items-center h-full">
                           <img
@@ -116,12 +125,22 @@ const JobList = ({ checkDueDate, sortKey }) => {
                           />
                           <div className="ml-[30px] h-full flex flex-col justify-between">
                             {/* vote quantity of project is placed in the bracket */}
-                            <p className="text-[0.9rem] font-[500] text-slate-500">{item.name}</p>
-                            <h3 className="text-[1.3rem] font-bold text-slate-700">{item.description}</h3>
+                            <p className="text-[0.9rem] font-[500] text-slate-500">{item.projectName}</p>
+                            <h3 className="text-[1.3rem] font-bold text-slate-700">{item.name}</h3>
                             <div className="flex items-center space-x-[20px]">
                               <p className="text-[0.8rem] font-[500] text-slate-400 flex items-center">
-                                <svg className="w-4 h-4 mr-[5px]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" >
-                                  <path d="M12 8V12L15 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                                <svg
+                                  className="w-4 h-4 mr-[5px]"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                >
+                                  <path
+                                    d="M12 8V12L15 15"
+                                    stroke="currentColor"
+                                    strokeWidth="1.8"
+                                    strokeLinecap="round"
+                                  />
                                   <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
                                 </svg>
                                 <p className="mb-[1px]">{item.dueDate}</p>
@@ -140,8 +159,10 @@ const JobList = ({ checkDueDate, sortKey }) => {
                     </Link>
                   </li>
                 ))}
-              </ul>)
-              : (<div className="mx-auto my-[80px] text-[28px] text-slate-300 font-[500]">No jobs founded!</div>)}
+              </ul>
+            ) : (
+              <div className="mx-auto my-[80px] text-[28px] text-slate-300 font-[500]">No jobs founded!</div>
+            )}
           </div>
         </div>
       )}

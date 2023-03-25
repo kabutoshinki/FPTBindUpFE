@@ -36,6 +36,11 @@ export async function createProject(projectInfo) {
   return axios.post(apiEndpoint + "api/v1/projects", projectInfo, options);
 }
 
+export async function addTopicProject(projectId, topicId) {
+  const topic = topicId[0];
+  return axios.post(apiEndpoint + `api/v1/projects/${projectId}/topic?topicIds=${topic}`, topicId, options);
+}
+
 export async function addMentorProject(projectId, mentorId) {
   console.log(mentorId);
   return axios.post(apiEndpoint + `api/v1/projects/${projectId}/mentor?mentorId=${mentorId}`, mentorId, options);
