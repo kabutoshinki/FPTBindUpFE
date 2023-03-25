@@ -4,7 +4,7 @@ import * as projectMemberService from "../../services/projectMemberService";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export const CreateMember = () => {
+export const CreateMember = ({ setOpenTab }) => {
   const [openModal, setOpenModal] = useState(false);
   const [members, setMembers] = useState([]);
 
@@ -85,14 +85,18 @@ export const CreateMember = () => {
       </div>
 
       <div className="flex items-center justify-between">
-        <Link to={"/project/" + localStorage.getItem("newProjectId")}>
+        {/* <Link to={"/project/" + localStorage.getItem("newProjectId")}> */}
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            onClick={() => {
+              setOpenTab(4);
+              document.documentElement.scrollTop = 0;
+            }}
           >
-            View my project
+            Next step: Add topics & mentors
           </button>
-        </Link>
+        {/* </Link> */}
       </div>
     </div>
   );

@@ -61,7 +61,7 @@ export const BodyCreateProject = () => {
           <CreateImage setOpenTab={setOpenTab}/>
         </div>
         <div className={openTab === 3 ? "block" : "hidden"}>
-          <CreateMember />
+          <CreateMember setOpenTab={setOpenTab}/>
         </div>
         <div className={openTab === 4 ? "block" : "hidden"}>
           <CreateExtras />

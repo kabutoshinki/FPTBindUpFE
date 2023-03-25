@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { Editor } from "@tinymce/tinymce-react";
 import * as projectService from "../../services/projectService";
 import { toast } from "react-toastify";
-import * as authenService from "../../services/authenService";
 
 const initialFormData = {
   name: "",
@@ -49,7 +47,7 @@ export const CreateGeneralInfo = ({ setOpenTab }) => {
       // console.log(res?.data?.data);
       localStorage.setItem("newProjectId", res?.data?.data);
       setOpenTab(2);
-      window.location.reload();
+      // window.location.reload();
       document.documentElement.scrollTop = 0;
     } catch (err) {
       toast.warning("Create Project Fail!", {
